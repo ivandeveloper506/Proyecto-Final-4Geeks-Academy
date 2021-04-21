@@ -47,7 +47,9 @@ def register():
     user_image = data_request["user_image"],
     email = data_request["email"],
     password = data_request["password"],
-    active = data_request["active"])
+    active = data_request["active"],
+    creation_date = datetime.datetime.now(),
+    update_date = datetime.datetime.now())
 
     try:
         db.session.add(user)

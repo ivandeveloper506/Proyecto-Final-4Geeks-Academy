@@ -5,6 +5,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from api.routes_user import routes_user
 from api.routes_auth import routes_auth
+from api.routes_person_medicine import routes_person_medicine
 
 def setup_admin(app):
     app.secret_key = os.environ.get('FLASK_APP_KEY', 'sample key')
@@ -16,6 +17,7 @@ def setup_admin(app):
 
     app.register_blueprint(routes_user)
     app.register_blueprint(routes_auth)
+    app.register_blueprint(routes_person_medicine)
 
     # Add your models here, for example this is how we add a the User model to the admin
     admin.add_view(ModelView(User, db.session))

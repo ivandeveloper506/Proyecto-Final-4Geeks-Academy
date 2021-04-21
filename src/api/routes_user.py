@@ -46,7 +46,9 @@ def store():
     user_image = data_request["user_image"],
     email = data_request["email"],
     password = data_request["password"],
-    active = data_request["active"])
+    active = data_request["active"],
+    creation_date = datetime.datetime.now(),
+    update_date = datetime.datetime.now())
 
     try:
         db.session.add(user)
@@ -73,6 +75,7 @@ def update(id):
     user.second_surname = data_request["second_surname"]
     user.user_image = data_request["user_image"]
     user.password = data_request["password"]
+    user.update_date = datetime.datetime.now()
 
     try: 
         db.session.commit()

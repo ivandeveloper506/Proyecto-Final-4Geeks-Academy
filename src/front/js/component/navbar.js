@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/index.scss";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light bg-warning">
+		<nav className="navbar navbar-expand-lg navbar-light navbar-class">
 			<div className="container-fluid">
 				<a className="navbar-brand" href="/">
 					Por qué QR+
@@ -22,30 +23,30 @@ export const Navbar = () => {
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 						<li className="nav-item">
 							<a className="nav-link active" aria-current="page" href="/login">
-								Ingresar
+								Inicio
 							</a>
 						</li>
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<a className="nav-link" href="/singin">
 								Registrarse
 							</a>
-						</li>
-						<li className="nav-item">
+						</li> */}
+						{/* <li className="nav-item">
 							<a className="nav-link" href="whyqr">
 								Porqué QR?
 							</a>
-						</li>
+						</li> */}
 						<li className="nav-item">
-							<a className="nav-link" href="/aboutUs">
-								Acerca de
+							<a className="nav-link" href="/aboutUs" style={{ float: "right" }}>
+								Quienes somos
 							</a>
 						</li>
 					</ul>
 				</div>
 
-				<span className="navbar-text" style={{ float: "right" }}>
+				{/* <span className="navbar-text" style={{ float: "right" }}>
 					QR+
-				</span>
+				</span> */}
 			</div>
 		</nav>
 	);

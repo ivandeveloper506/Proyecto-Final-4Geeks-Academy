@@ -32,13 +32,14 @@ class User(db.Model):
         }
 # FIN - Modelo para la tabla [User] - FIN
 
+
 # INICIO - Modelo para la tabla [PersonMedicine] - INICIO
 class PersonMedicine(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(1000), nullable=False)
     frequency = db.Column(db.String(1000), nullable=False)
-    observation = db.Column(db.String(100))
-    # TODO: Pendiente agregar referencia al modelo person
+    observation = db.Column(db.String(1000))
+     # TODO: Pendiente agregar referencia a la columna person_id del modelo person
     user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     creation_date = db.Column(db.DateTime, nullable=False)
     update_date = db.Column(db.DateTime, nullable=False)
@@ -52,10 +53,38 @@ class PersonMedicine(db.Model):
             "description": self.description,
             "frequency": self.frequency,
             "observation": self.observation,
+             # TODO: Pendiente agregar referencia a la columna person_id del modelo person
             "user_creation_id": self.user_creation_id,
             "creation_date": self.creation_date,
             "update_date": self.update_date
         }
+# FIN - Modelo para la tabla [PersonMedicine] - FIN
+
+
+# INICIO - Modelo para la tabla [PersonVaccine] - INICIO
+class PersonVaccine(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(1000), nullable=False)
+    application_date = db.Column(db.Date, nullable=False)
+    # TODO: Pendiente agregar referencia a la columna person_id del modelo person
+    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    creation_date = db.Column(db.DateTime, nullable=False)
+    update_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return '<PersonVaccine %r>' % self.description
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "description": self.description,
+            "application_date": self.application_date,
+             # TODO: Pendiente agregar referencia a la columna person_id del modelo person
+            "user_creation_id": self.user_creation_id,
+            "creation_date": self.creation_date,
+            "update_date": self.update_date
+        }
+
 # FIN - Modelo para la tabla [User] - FIN
 
 # INICIO - Modelo para la tabla [Person] - INICIO
@@ -92,3 +121,5 @@ class Person(db.Model):
             "update_date": self.update_date
         }
 # FIN - Modelo para la tabla [User] - FIN
+# FIN - Modelo para la tabla [PersonVaccine] - FIN
+

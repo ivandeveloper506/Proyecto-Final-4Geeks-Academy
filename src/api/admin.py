@@ -7,6 +7,8 @@ from api.routes_user import routes_user
 from api.routes_auth import routes_auth
 from api.routes_person_medicine import routes_person_medicine
 from api.routes_person import routes_person
+from api.routes_person_vaccine import routes_person_vaccine
+
 
 def setup_admin(app):
     app.secret_key = os.environ.get('FLASK_APP_KEY', 'sample key')
@@ -20,6 +22,8 @@ def setup_admin(app):
     app.register_blueprint(routes_auth)
     app.register_blueprint(routes_person_medicine)
     app.register_blueprint(routes_person)
+    app.register_blueprint(routes_person_vaccine)
+
 
     # Add your models here, for example this is how we add a the User model to the admin
     admin.add_view(ModelView(User, db.session))

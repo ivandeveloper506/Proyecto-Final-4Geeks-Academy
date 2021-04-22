@@ -57,3 +57,38 @@ class PersonMedicine(db.Model):
             "update_date": self.update_date
         }
 # FIN - Modelo para la tabla [User] - FIN
+
+# INICIO - Modelo para la tabla [Person] - INICIO
+class Person(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    first_surname = db.Column(db.String(100), nullable=False)
+    second_surname = db.Column(db.String(100))
+    known_as = db.Column(db.String(100))
+    telephone_number = db.Column(db.String(15),nullable=False)
+    user_image = db.Column(db.String(2000))
+    emergency_contact = db.Column(db.String(255),nullable=False)
+    emergency_phone = db.Column(db.String(15),nullable=False)
+    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
+    creation_date = db.Column(db.DateTime, nullable=False)
+    update_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return '<Person %r>' % self.name
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "first_surname": self.first_surname,
+            "second_surname": self.second_surname,
+            "known_as": self.known_as,
+            "telephone_number": self.telephone_number,
+            "user_image": self.user_image,
+            "emergency_contact": self.emergency_contact,
+            "emergency_phone": self.emergency_phone,
+            "user_creation_id": self.user_creation_id,
+            "creation_date": self.creation_date,
+            "update_date": self.update_date
+        }
+# FIN - Modelo para la tabla [User] - FIN

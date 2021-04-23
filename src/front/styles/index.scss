@@ -1,9 +1,19 @@
+body{
+    background: url('.././img/img-home-bg.jpg') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .main-div-class{
     background: white;
     text-align: center;
     justify-content: center;
     align-content: center;
-    margin-top: 100px;
+    margin-top: 30px;
+    background: rgba(255,255,255, 0);
 }
 
 .main-footer-class{
@@ -14,4 +24,20 @@
     text-align: center;
     justify-content: center;
     align-content: center;
+}
+
+.navbar-class{
+    background: rgb(161,123,79)
+}
+
+.navbar-item-logo-class{
+    color: white !important;
+    margin: 5px 15px 5px 15px;
+    font-size: 25px;
+}
+
+.navbar-item-class{
+    color: white !important;
+    margin: 0px 15px 0px 15px;
+    font-size: 20px;
 }

@@ -10,7 +10,7 @@ export const Footer = () => (
 					</p>
 				</div>
 				<div className="col">
-					<p>Diseñado por QR+Services</p>
+					<p>Diseñado por QR+Service</p>
 				</div>
 			</div>
 			{/* </div> */}

@@ -2,30 +2,30 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import imgHomeRigthBg from "../../img/img-home-rigth-bg.jpg";
+import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="container-fluid main-div-class">
-			{/* <div className="d-flex justify-content-center"> */}
 			<div className="row">
-				<div className="col-md-8 home-left-class m-2 p-0">
-					<h1>Bienvenido a QR+Services</h1>
-					<h1>Conozca todo lo que ponemos a su disposición registrandose en nuestra aplicación</h1>
+				<div className="container home-title-class">
+					<h1>Bienvenido a QR+Service</h1>
+					<p>Regístrese y conozca el servicio que ponemos a su disposición</p>
 				</div>
-				<div className="col-md home-rigth-class m-2 p-0">
-					<img
-						className="cardImage"
-						src={imgHomeRigthBg}
-						alt="Image home rigth"
-						width="100%"
-						height="500px"
-					/>
-					<div className="home-rigth-top-class">Soy QR</div>
+
+				<div className="col-md-8 home-left-class m-2 p-0">
+					<div className="home-left-top-class"></div>
 				</div>
 			</div>
-			{/* </div> */}
+
+			<div className="home-button-action-class">
+				<NavLink to="register">
+					<Button variant="btn btn-warning btn-lg">Quiero registrarme</Button>
+				</NavLink>
+			</div>
 		</div>
 	);
 };

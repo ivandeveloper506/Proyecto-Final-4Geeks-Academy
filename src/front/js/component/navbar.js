@@ -9,29 +9,29 @@ import { Link, NavLink } from "react-router-dom";
 
 export const NavbarMain = () => {
 	return (
-		<Navbar className="fixed-top" bg="light" expand="lg">
-			<Navbar.Brand href="/">QR+Services</Navbar.Brand>
+		<Navbar expand="lg">
+			<Navbar.Brand className="navbar-item-logo-class" href="/">
+				QR+Service
+			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="mr-auto">
-					<NavLink className="m-3" to="/">
+					<NavLink className="navbar-item-class" to="/">
 						Inicio
 					</NavLink>
-					<NavLink className="m-3" to="about-us">
+					<NavLink className="navbar-item-class" to="about-us">
 						Quiénes somos
 					</NavLink>
-					<NavLink className="m-3" to="services">
+					<NavLink className="navbar-item-class" to="services">
 						Servicios
 					</NavLink>
-					<NavLink className="m-3" to="contact">
+					<NavLink className="navbar-item-class" to="contact">
 						Contáctanos
 					</NavLink>
 				</Nav>
-				<Form inline>
-					<Nav.Link href="login">
-						<Button variant="danger">Iniciar sesión</Button>
-					</Nav.Link>
-				</Form>
+				<NavLink to="login">
+					<Button variant="danger">Iniciar sesión</Button>
+				</NavLink>
 			</Navbar.Collapse>
 		</Navbar>
 	);

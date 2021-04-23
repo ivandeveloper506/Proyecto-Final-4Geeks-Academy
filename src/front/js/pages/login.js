@@ -15,7 +15,6 @@ export default function Login() {
 	};
 
 	return (
-        	// <div className="container-fluid main-div-class">
 		<div className="container-fluid container-login-main-class">
 			<div className="row d-flex flex-row align-items-center justify-content-center">
 				<div className="col" />
@@ -76,7 +75,7 @@ export default function Login() {
 								<div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
 									<Link to="/recover">
 										<h6>
-											<span className="text-warning">¡Deseo recuperar mi contraseña!</span>
+											<span className="text-warning">¡Necesito recuperar mi contraseña!</span>
 										</h6>
 									</Link>
 								</div>
@@ -87,6 +86,5 @@ export default function Login() {
 				<div className="col" />
 			</div>
 		</div>
-        {/* </div> */}
 	);
 }

@@ -23,7 +23,7 @@ export const Navbar = () => {
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 						<li className="nav-item">
 							<a className="nav-link active" aria-current="page" href="/login">
-								Inicio
+								Iniciar Sesión
 							</a>
 						</li>
 						<li className="nav-item">
@@ -31,11 +31,6 @@ export const Navbar = () => {
 								Registrarse
 							</a>
 						</li>
-						{/* <li className="nav-item">
-							<a className="nav-link" href="whyqr">
-								Porqué QR?
-							</a>
-						</li> */}
 						<li className="nav-item">
 							<a className="nav-link" href="/aboutUs" style={{ float: "right" }}>
 								Quienes somos

@@ -30,7 +30,6 @@ export const Home = () => {
 						Quiero registrarme
 					</Button>
 				</NavLink>
-				{/* <div className="home-left-topqr-class">QR</div> */}
 			</div>
 		</div>
 	);

@@ -26,11 +26,11 @@ export const Navbar = () => {
 								Inicio
 							</a>
 						</li>
-						{/* <li className="nav-item">
+						<li className="nav-item">
 							<a className="nav-link" href="/singin">
 								Registrarse
 							</a>
-						</li> */}
+						</li>
 						{/* <li className="nav-item">
 							<a className="nav-link" href="whyqr">
 								Porqué QR?

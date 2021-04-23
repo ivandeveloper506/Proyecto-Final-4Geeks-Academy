@@ -7,7 +7,7 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="w-100" style={{ display: "flex", justifyContent: "center" }}>
+		<div className="w-100 login-class">
 			<form>
 				<h3>Ingreso al sistema</h3>
 

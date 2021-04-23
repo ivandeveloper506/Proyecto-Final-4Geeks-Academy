@@ -84,8 +84,8 @@ class PersonVaccine(db.Model):
             "creation_date": self.creation_date,
             "update_date": self.update_date
         }
+# FIN - Modelo para la tabla [PersonVaccine] - FIN
 
-# FIN - Modelo para la tabla [User] - FIN
 
 # INICIO - Modelo para la tabla [Person] - INICIO
 class Person(db.Model):
@@ -120,6 +120,26 @@ class Person(db.Model):
             "creation_date": self.creation_date,
             "update_date": self.update_date
         }
-# FIN - Modelo para la tabla [User] - FIN
-# FIN - Modelo para la tabla [PersonVaccine] - FIN
+# FIN - Modelo para la tabla [Person] - FIN
+
+# INICIO - Modelo para la tabla [Person_qr] - INICIO
+class Person_qr(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(2000), nullable=False)
+    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
+    creation_date = db.Column(db.DateTime, nullable=False)
+    update_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return '<Person_qr %r>' % self.url
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "url": self.url,
+            "user_creation_id": self.user_creation_id,
+            "creation_date": self.creation_date,
+            "update_date": self.update_date
+        }
+# FIN - Modelo para la tabla [Person_qr] - FIN
 

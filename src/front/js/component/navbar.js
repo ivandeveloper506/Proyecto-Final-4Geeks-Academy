@@ -10,9 +10,9 @@ import { Link, NavLink } from "react-router-dom";
 export const NavbarMain = () => {
 	return (
 		<Navbar expand="lg">
-			<Navbar.Brand className="navbar-item-logo-class" href="/">
+			<NavLink className="navbar-item-logo-class" to="/">
 				QR+Service
-			</Navbar.Brand>
+			</NavLink>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="mr-auto">

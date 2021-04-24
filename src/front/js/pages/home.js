@@ -24,12 +24,14 @@ export const Home = () => {
 				</div>
 			</div>
 
-			<div className="home-button-action-class">
-				<NavLink to="register">
-					<Button className="button-register-class" variant="btn btn-warning btn-lg">
-						Quiero registrarme
-					</Button>
-				</NavLink>
+			<div className="col-md-12">
+				<div className="home-button-action-class">
+					<NavLink to="register">
+						<Button className="button-register-class" variant="btn btn-warning btn-lg">
+							Quiero registrarme <i className="fas fa-pen"></i>
+						</Button>
+					</NavLink>
+				</div>
 			</div>
 		</div>
 	);

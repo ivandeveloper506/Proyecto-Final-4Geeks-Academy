@@ -18,9 +18,9 @@ export default function Login() {
 		<div className="container-fluid container-login-main-class">
 			<div className="row d-flex flex-row align-items-center justify-content-center">
 				<div className="col" />
-				<div className="col-5 login-main-class">
+				<div className="col-md-6 login-main-class">
 					<div className="row d-flex flex-row align-items-center justify-content-center mt-3">
-						<h1 className="text-white">Iniciar sesión</h1>
+						<h2 className="text-white">Iniciar sesión</h2>
 					</div>
 					<div>
 						<form onSubmit={handleLogin}>
@@ -75,7 +75,7 @@ export default function Login() {
 								<div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
 									<Link to="/recover">
 										<h6>
-											<span className="text-warning">¡Necesito recuperar mi contraseña!</span>
+											<span className="text-warning">¡Deseo recuperar mi contraseña!</span>
 										</h6>
 									</Link>
 								</div>

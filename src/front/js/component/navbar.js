@@ -13,8 +13,8 @@ export const NavbarMain = () => {
 			<NavLink className="navbar-item-logo-class" to="/">
 				QR+Service
 			</NavLink>
-			<Navbar.Toggle className="bg-white" aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav">
+			<Navbar.Toggle className="bg-white" />
+			<Navbar.Collapse>
 				<Nav className="mr-auto">
 					<NavLink className="navbar-item-class" to="/">
 						<i className="fas fa-home"></i> Inicio

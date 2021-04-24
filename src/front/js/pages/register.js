@@ -31,9 +31,9 @@ export default function Register() {
 		<div className="container-fluid container-register-main-class">
 			<div className="row d-flex flex-row align-items-center justify-content-center">
 				<div className="col" />
-				<div className="col-5 register-main-class">
+				<div className="col-md-6 register-main-class">
 					<div className="row d-flex flex-row align-items-center justify-content-center mt-3">
-						<h1 className="text-white">Registro nuevo usuario</h1>
+						<h2 className="text-white">Registro nuevo usuario</h2>
 					</div>
 					<div>
 						<form onSubmit={handleRegister}>

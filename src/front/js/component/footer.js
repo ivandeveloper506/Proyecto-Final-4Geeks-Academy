@@ -11,10 +11,9 @@ export const Footer = () => (
 						<span>
 							<h2>QR+Service</h2>
 						</span>{" "}
-						Un QR es su enlace físico. Para que escribir direciones web en su smartphone, mejor escanee un
-						QR y listo. Es una acción rápida y sencilla. Un QR es fácil de crear y existen diferentes
-						versiones, tipos, así como los hay estáticos y dinámicos. Inclusive un QR puede hasta sufrir
-						daños y aún funcionar. No lo piense más, QR+Service es su mejor opción.
+						Un QR es su enlace físico. Es una acción rápida y sencilla. Un QR es fácil de crear y existen
+						diferentes versiones y tipos, así como los hay estáticos y dinámicos. Inclusive un QR puede
+						hasta sufrir daños y aún funcionar. No lo piense más, QR+Service es su mejor opción.
 					</p>
 				</div>
 				<div className="footer-center col-md-4 col-sm-6">
@@ -40,13 +39,13 @@ export const Footer = () => (
 						{""}
 						QR+Service
 					</h2>
-					<p className="name"> QR+Service &copy; 2021</p>
+					<p className="name"> derechos reservados&copy; 2021</p>
 					<div>
 						<img
-							src="https://www.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/core_market_full/generator/dist/generator/assets/images/websiteQRCode_noFrame.png"
+							src="https://i.imgur.com/0Vy3kHL.jpg"
 							className="img-fluid"
-							width="100px"
-							height="100px"
+							width="80px"
+							height="80px"
 							alt=""
 						/>
 					</div>

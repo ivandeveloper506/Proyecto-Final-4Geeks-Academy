@@ -8,7 +8,10 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
 from api.models import db
-from api.routes import api
+
+# TODO: Validar en el Frontend
+# from api.routes import api
+
 from api.admin import setup_admin
 #from models import Person
 
@@ -34,7 +37,10 @@ CORS(app)
 setup_admin(app)
 
 # Add all endpoints form the API with a "api" prefix
-app.register_blueprint(api, url_prefix='/api')
+
+# TODO: Cuando lleguemos al Frontend se debe validar esta línea para exponer todos los endpoints desde aqui
+# app.register_blueprint(api, url_prefix='/api')
+
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)

@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
-	</footer>
+	<div className="container-fluid main-footer-class">
+		<footer>
+			<div className="d-flex justify-content-center">
+				<div className="col">
+					<p>
+						Copyright © 2021 - <i>QR+Services</i>
+					</p>
+				</div>
+				<div className="col">
+					<p>Diseñado por QR+Service</p>
+				</div>
+			</div>
+			{/* </div> */}
+		</footer>
+	</div>
 );

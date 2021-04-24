@@ -1,30 +1,38 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
-import { Link } from "react-router-dom";
+import "../../styles/home-card.scss";
+import imgHomeQR from "../../img/img-qr-home-bg.jpg";
+import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">{store.message || "Loading message from the backend..."}</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
-			<Link to="/about-us">
-				<button type="button" className="btn btn-primary">
-					aboutus
-				</button>
-			</Link>
+		<div className="container-fluid main-div-class">
+			<div className="row">
+				<div className="container home-title-class">
+					<h1>Bienvenido a QR+Service</h1>
+					<p>Regístrese y conozca el servicio que ponemos a su disposición</p>
+				</div>
+
+				<div className="col-md-8 home-left-class m-2 p-0">
+					<div className="home-left-top-class">
+						<img className="img-qr-home-class" src={imgHomeQR} alt="Image QR" />
+					</div>
+				</div>
+			</div>
+
+			<div className="col-md-12">
+				<div className="home-button-action-class">
+					<NavLink to="register">
+						<Button className="button-register-class" variant="btn btn-warning btn-lg">
+							Quiero registrarme <i className="fas fa-pen"></i>
+						</Button>
+					</NavLink>
+				</div>
+			</div>
 		</div>
 	);
 };

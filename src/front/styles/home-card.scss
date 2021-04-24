@@ -1,0 +1,36 @@
+.home-left-class{
+    height: 300px;
+}
+
+.home-left-top-class{
+    margin-left: 10px;
+    position: relative;
+    // top: -200px;
+    height: 350px;
+    width: 267px;
+    border-radius: 7px;
+    display: none;
+    background:  rgba(13,56,88, 0.7);
+}
+
+.img-qr-home-class{
+    height: 350px;
+    width: 267px;
+    border-radius: 7px;
+    opacity: 0.4;
+}
+
+/* ESTILOS MEDIA QUERY */
+@media (min-width: 992px) {
+    .home-left-top-class {
+        display: block;
+        top: -1px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-left-top-class {
+        display: block;
+        top: -70px;
+    }
+}

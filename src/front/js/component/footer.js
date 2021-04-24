@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import "../../styles/footer";
 
 export const Footer = () => (
 	<div className="container-fluid main-footer-class">
 		<footer>
-			<div className="row">
+			<div className="">
 				<div className="footer-left col-md-4 col-sm-6">
 					<p className="about">
 						<span> About the company</span> Ut congue augue non tellus bibendum, in varius tellus
@@ -31,7 +32,7 @@ export const Footer = () => (
 						</div>
 						<div className="footer-right col-md-4 col-sm-6">
 							<h2>
-								{" "}
+								{""}
 								Company
 								<span> logo</span>
 							</h2>

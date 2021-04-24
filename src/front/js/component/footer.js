@@ -8,11 +8,13 @@ export const Footer = () => (
 			<div className="row">
 				<div className="footer-left col-md-4 col-sm-6">
 					<p className="about">
-						<span> About the company</span> Ut congue augue non tellus bibendum, in varius tellus
-						condimentum. In scelerisque nibh tortor, sed rhoncus odio condimentum in. Sed sed est ut sapien
-						ultrices eleifend. Integer tellus est, vehicula eu lectus tincidunt, ultricies feugiat leo.
-						Suspendisse tellus elit, pharetra in hendrerit ut, aliquam quis augue. Nam ut nibh mollis,
-						tristique ante sed, viverra massa.
+						<span>
+							<h2>QR+Service</h2>
+						</span>{" "}
+						Un QR es su enlace físico. Para que escribir direciones web en su smartphone, mejor escanee un
+						QR y listo. Es una acción rápida y sencilla. Un QR es fácil de crear y existen diferentes
+						versiones, tipos, así como los hay estáticos y dinámicos. Inclusive un QR puede hasta sufrir
+						daños y aún funcionar. No lo piense más, QR+Service es su mejor opción.
 					</p>
 				</div>
 				<div className="footer-center col-md-4 col-sm-6">

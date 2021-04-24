@@ -6,6 +6,8 @@ import { Button } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import AvatarLoginUser from "./avatar-login-user";
 
 export const NavbarMain = () => {
 	return (
@@ -29,9 +31,10 @@ export const NavbarMain = () => {
 						<i className="fas fa-at"></i> Contáctanos
 					</NavLink>
 				</Nav>
-				<NavLink to="login">
+				{/* <NavLink to="login">
 					<Button variant="danger">Iniciar sesión</Button>
-				</NavLink>
+				</NavLink> */}
+				<AvatarLoginUser />
 			</Navbar.Collapse>
 		</Navbar>
 	);

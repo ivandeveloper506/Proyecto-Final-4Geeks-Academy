@@ -21,7 +21,7 @@ export default function Register() {
 			user_image: "",
 			email: email,
 			password: password,
-			is_active: true
+			active: true
 		};
 
 		actions.register(userBody);
@@ -50,7 +50,7 @@ export default function Register() {
 								/>
 							</div>
 							<div className="m-3">
-								<label className="form-label text-white">Primer Apellido</label>
+								<label className="form-label text-white">Primer apellido</label>
 								<input
 									type="firstSurname"
 									className="form-control"
@@ -62,7 +62,7 @@ export default function Register() {
 								/>
 							</div>
 							<div className="m-3">
-								<label className="form-label text-white">Segundo Apellido</label>
+								<label className="form-label text-white">Segundo apellido</label>
 								<input
 									type="secondSurname"
 									className="form-control"

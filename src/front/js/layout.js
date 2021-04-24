@@ -10,6 +10,7 @@ import AboutUs from "./pages/about-us";
 import Services from "./pages/services";
 import Contact from "./pages/contact";
 import Recover from "./pages/recover";
+import Dashboard from "./pages/dashboard";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -26,6 +27,7 @@ const Layout = () => {
 					<Route exact path="/about-us" component={AboutUs} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/contact" component={Contact} />
+					<Route exact path="/dashboard" component={Dashboard} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>

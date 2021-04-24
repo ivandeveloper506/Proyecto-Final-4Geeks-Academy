@@ -37,3 +37,39 @@ body{
     margin: 0px 15px 0px 15px;
     font-size: 20px;
 }
+
+.dropdown-avatar-class{
+    width: 250px;
+}
+
+.avatar-image-menu-class{
+    width: 45px;
+    height: 45px;
+}
+
+.avatar-image-info-class{
+    width: 85px;
+    height: 85px;
+}
+
+.avatar-button-menu-class{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+    // color: #fff;
+    background-color: Transparent;
+    border: none;
+}
+
+.btn-primary {
+    // color: #fff;
+    background-color: Transparent;
+    border: none;
+}

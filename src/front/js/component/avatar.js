@@ -32,29 +32,8 @@ export default function Avatar() {
 	};
 
 	return (
-		<div>
-			<Dropdown>
-				<Dropdown.Toggle className="avatar-button-menu-class">
-					<img
-						className="avatar-image-menu-class rounded-circle"
-						src={
-							store.userProfile.user_image ||
-							store.userProfile.user_image === "" ||
-							store.userProfile.user_image === undefined ||
-							store.userProfile.user_image === null
-								? NoImageUser
-								: store.userProfile.user_image
-						}
-						alt="Image profile"
-					/>
-				</Dropdown.Toggle>
-
-				<Dropdown.Menu>
-					<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-					<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-					<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-				</Dropdown.Menu>
-			</Dropdown>
-		</div>
+		<NavLink onClick={() => logout()} to="login">
+			<Button variant="success">Cerrar sesión</Button>
+		</NavLink>
 	);
 }

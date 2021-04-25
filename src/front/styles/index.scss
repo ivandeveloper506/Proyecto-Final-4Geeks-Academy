@@ -52,7 +52,7 @@ body{
     height: 85px;
 }
 
-.avatar-button-menu-class{
+.avatar-toggle-menu-class{
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
@@ -60,16 +60,10 @@ body{
     overflow: hidden;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active,
-.btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
-    // color: #fff;
+.avatar-dropdown-menu-class :hover{
     background-color: Transparent;
+    background-repeat:no-repeat;
     border: none;
-}
-
-.btn-primary {
-    // color: #fff;
-    background-color: Transparent;
-    border: none;
+    cursor:pointer;
+    overflow: hidden;
 }

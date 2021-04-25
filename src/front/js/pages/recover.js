@@ -22,6 +22,12 @@ export default function Recover() {
 						<label htmlFor="example2">Nombre</label>
 						<input type="text" id="example2" className="form-control form-control-lg" />
 					</div>
+					<div className="container-fluid text-white text-center">
+						<h6>
+							Para que reciba su clave de recuperación, ingrese el correo asociado a su cuenta. Luego
+							cliquee el botón <h4>ENVIAR</h4>
+						</h6>
+					</div>
 				</form>
 			</div>
 		</div>

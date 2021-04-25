@@ -53,9 +53,12 @@ export default function AboutUs() {
 				</div>
 				<div className="row justify-content-center info-text">
 					<div className="col-lg text-center">
-						<h5>QR +</h5>
-						<p>4Geeks Academy</p>
+						<h5>QR en HD</h5>
 					</div>
+				</div>
+
+				<div className="container text-center">
+					<h2 className="item-title">Explora los casos de uso del código QR en HD que te proporcionamos</h2>
 				</div>
 			</section>
 		</div>

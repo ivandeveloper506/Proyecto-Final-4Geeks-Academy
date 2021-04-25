@@ -17,16 +17,16 @@ export const NavbarMain = () => {
 			<Navbar.Collapse>
 				<Nav className="mr-auto">
 					<NavLink className="navbar-item-class" to="/">
-						<i className="fas fa-home"></i> Inicio
+						<i className="fas fa-home" /> Inicio
 					</NavLink>
 					<NavLink className="navbar-item-class" to="about-us">
-						<i className="fas fa-users"></i> Quiénes somos
+						<i className="fas fa-users" /> Quiénes somos
 					</NavLink>
 					<NavLink className="navbar-item-class" to="services">
-						<i className="fas fa-qrcode"></i> Servicios
+						<i className="fas fa-qrcode" /> Servicios
 					</NavLink>
 					<NavLink className="navbar-item-class" to="contact">
-						<i className="fas fa-at"></i> Contáctanos
+						<i className="fas fa-at" /> Contáctanos
 					</NavLink>
 				</Nav>
 				<NavLink to="login">

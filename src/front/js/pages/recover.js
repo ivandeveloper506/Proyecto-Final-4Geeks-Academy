@@ -11,9 +11,11 @@ export default function Recover() {
 			<div className="container-fluid text-white row-class">
 				<h1 className="">Recuperar contraseña</h1>
 				<p className="font-italic">
-					Por favor ingrese el correo electrónico asociado a su
+					Por favor ingrese el correo electrónico asociado a su cuenta.
 					<br></br>
-					cuenta, seguidamente presione el botón recuperar contraseña
+					Seguidamente presione el botón recuperar contraseña.
+					<br></br>
+					Le estaremos enviando un correo electrónico con una contraseña temporal.
 				</p>
 			</div>
 			<div className=" col-md-4 col-sm-6" />

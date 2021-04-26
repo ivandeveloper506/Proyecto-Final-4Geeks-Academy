@@ -14,6 +14,7 @@ export default function Register() {
 	const handleRegister = e => {
 		e.preventDefault();
 
+		// Se manda a crear el usuario
 		const userBody = {
 			name: name,
 			first_surname: firstSurname,

@@ -28,7 +28,7 @@ export const NavbarMain = () => {
 						<i className="fas fa-qrcode"></i> Servicios
 					</NavLink>
 					<NavLink className="navbar-item-class" to="contact">
-						<i className="fas fa-at"></i> Contáctanos
+						<i className="fas fa-envelope"></i> Contáctenos
 					</NavLink>
 				</Nav>
 				{/* <NavLink to="login">

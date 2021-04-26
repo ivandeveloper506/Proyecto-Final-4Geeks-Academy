@@ -8,25 +8,26 @@ export default function Recover() {
 
 	return (
 		<div className="row">
-			<div className="container-fluid text-white ">
-				<h1>Recuperar su contraseña</h1>
+			<div className="container-fluid text-white recover-class">
+				<h1 className=" recover-class">Recuperar contraseña</h1>
+				<p className="recover-class font-italic">
+					Por favor ingrese el correo electrónico asociado a su
+					<br></br>
+					cuenta, seguidamente presione el botón recuperar contraseña
+				</p>
 			</div>
 			<div className=" col-md-4 col-sm-6" />
 			<div className=" col-md-4 col-sm-6">
 				<form>
-					<div className="form-group">
+					<div className="container-fluid text-white">
 						<label htmlFor="example1">Correo electrónico</label>
 						<input type="text" id="example1" className="form-control form-control-lg" />
 					</div>
-					<div className="form-group">
-						<label htmlFor="example2">Nombre</label>
-						<input type="text" id="example2" className="form-control form-control-lg" />
-					</div>
-					<div className="container-fluid text-white text-center">
-						<h6>
-							Para que reciba su clave de recuperación, ingrese el correo asociado a su cuenta. Luego
-							cliquee el botón <h4>ENVIAR</h4>
-						</h6>
+					<div className="container-fluid text-white"></div>
+					<div className="m-3">
+						<button type="submit" className="btn btn-danger btn-block">
+							Recuperar contraseña
+						</button>
 					</div>
 				</form>
 			</div>

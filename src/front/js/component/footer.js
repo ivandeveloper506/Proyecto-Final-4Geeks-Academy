@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Image from "react-bootstrap/Image";
 import "../../styles/footer.scss";
 import { Link, NavLink } from "react-router-dom";
+import { QRCode } from "react-qrcode-logo";
+import imgQRFooter from "../../img/img-qr-footer.jpg";
 
 export const Footer = () => (
 	<div className="container-fluid main-footer-class">
@@ -61,12 +63,16 @@ export const Footer = () => (
 					</div>
 					<div className="row">
 						<div className="col">
-							<img
-								src="https://i.imgur.com/0Vy3kHL.jpg"
-								className="img-fluid"
-								width="80px"
-								height="80px"
-								alt=""
+							<QRCode
+								value="QR+Service. ¡Su mejor elección!"
+								size="100"
+								ecLevel="H"
+								qrStyle="dots"
+								logoImage={imgQRFooter}
+								logoHeight="50"
+								logoWidth="50"
+								logoOpacity="0.6"
+								enableCORS="true"
 							/>
 						</div>
 					</div>

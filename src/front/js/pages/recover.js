@@ -8,9 +8,9 @@ export default function Recover() {
 
 	return (
 		<div className="row">
-			<div className="container-fluid text-white recover-class">
-				<h1 className=" recover-class">Recuperar contraseña</h1>
-				<p className="recover-class font-italic">
+			<div className="container-fluid text-white row-class">
+				<h1 className="">Recuperar contraseña</h1>
+				<p className="font-italic">
 					Por favor ingrese el correo electrónico asociado a su
 					<br></br>
 					cuenta, seguidamente presione el botón recuperar contraseña

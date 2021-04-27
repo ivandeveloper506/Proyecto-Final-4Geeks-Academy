@@ -95,7 +95,7 @@ def delete(id):
         db.session.delete(person)
         db.session.commit()
         
-        return jsonify('La persona fue eliminada.'), 200
+        return jsonify('La persona fue eliminada satisfactoriamente.'), 200
     
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400

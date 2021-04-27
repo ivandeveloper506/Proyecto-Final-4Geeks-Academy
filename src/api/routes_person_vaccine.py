@@ -36,6 +36,7 @@ def store():
 
     person_vaccine = PersonVaccine(description = data_request["description"],
     application_date = data_request["application_date"],
+    person_id = data_request["person_id"],
     user_creation_id = data_request["user_creation_id"],
     creation_date = datetime.datetime.now(),
     update_date = datetime.datetime.now())

@@ -33,60 +33,6 @@ class User(db.Model):
 # FIN - Modelo para la tabla [User] - FIN
 
 
-# INICIO - Modelo para la tabla [PersonMedicine] - INICIO
-class PersonMedicine(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(1000), nullable=False)
-    frequency = db.Column(db.String(1000), nullable=False)
-    observation = db.Column(db.String(1000))
-     # TODO: Pendiente agregar referencia a la columna person_id del modelo person
-    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    creation_date = db.Column(db.DateTime, nullable=False)
-    update_date = db.Column(db.DateTime, nullable=False)
-
-    def __repr__(self):
-        return '<PersonMedicine %r>' % self.description
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "description": self.description,
-            "frequency": self.frequency,
-            "observation": self.observation,
-             # TODO: Pendiente agregar referencia a la columna person_id del modelo person
-            "user_creation_id": self.user_creation_id,
-            "creation_date": self.creation_date,
-            "update_date": self.update_date
-        }
-# FIN - Modelo para la tabla [PersonMedicine] - FIN
-
-
-# INICIO - Modelo para la tabla [PersonVaccine] - INICIO
-class PersonVaccine(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(1000), nullable=False)
-    application_date = db.Column(db.Date, nullable=False)
-    # TODO: Pendiente agregar referencia a la columna person_id del modelo person
-    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    creation_date = db.Column(db.DateTime, nullable=False)
-    update_date = db.Column(db.DateTime, nullable=False)
-
-    def __repr__(self):
-        return '<PersonVaccine %r>' % self.description
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "description": self.description,
-            "application_date": self.application_date,
-             # TODO: Pendiente agregar referencia a la columna person_id del modelo person
-            "user_creation_id": self.user_creation_id,
-            "creation_date": self.creation_date,
-            "update_date": self.update_date
-        }
-# FIN - Modelo para la tabla [PersonVaccine] - FIN
-
-
 # INICIO - Modelo para la tabla [Person] - INICIO
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -122,24 +68,80 @@ class Person(db.Model):
         }
 # FIN - Modelo para la tabla [Person] - FIN
 
-# INICIO - Modelo para la tabla [Person_qr] - INICIO
-class Person_qr(db.Model):
+
+# INICIO - Modelo para la tabla [PersonMedicine] - INICIO
+class PersonMedicine(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(2000), nullable=False)
-    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
+    description = db.Column(db.String(1000), nullable=False)
+    frequency = db.Column(db.String(1000), nullable=False)
+    observation = db.Column(db.String(1000))
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'),nullable=False)
+    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False)
     update_date = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
-        return '<Person_qr %r>' % self.url
+        return '<PersonMedicine %r>' % self.description
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "description": self.description,
+            "frequency": self.frequency,
+            "observation": self.observation,
+            "person_id": self.person_id,
+            "user_creation_id": self.user_creation_id,
+            "creation_date": self.creation_date,
+            "update_date": self.update_date
+        }
+# FIN - Modelo para la tabla [PersonMedicine] - FIN
+
+
+# INICIO - Modelo para la tabla [PersonVaccine] - INICIO
+class PersonVaccine(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(1000), nullable=False)
+    application_date = db.Column(db.Date, nullable=False)
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'),nullable=False)
+    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False)
+    update_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return '<PersonVaccine %r>' % self.description
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "description": self.description,
+            "application_date": self.application_date,
+            "person_id": self.person_id,
+            "user_creation_id": self.user_creation_id,
+            "creation_date": self.creation_date,
+            "update_date": self.update_date
+        }
+# FIN - Modelo para la tabla [PersonVaccine] - FIN
+
+
+# INICIO - Modelo para la tabla [PersonQR] - INICIO
+class PersonQr(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(2000), nullable=False)
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'),nullable=False)
+    user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False)
+    update_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return '<PersonQr %r>' % self.url
 
     def serialize(self):
         return {
             "id": self.id,
             "url": self.url,
+            "person_id": self.person_id,
             "user_creation_id": self.user_creation_id,
             "creation_date": self.creation_date,
             "update_date": self.update_date
         }
-# FIN - Modelo para la tabla [Person_qr] - FIN
-
+# FIN - Modelo para la tabla [PersonQR] - FIN

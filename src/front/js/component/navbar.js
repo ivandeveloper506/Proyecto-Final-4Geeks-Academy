@@ -1,25 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Context } from "../store/appContext";
 import { NavDropdown } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { FormControl } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
-import { Link, NavLink }useHistory from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import AvatarLoginUser from "./avatar-login-user";
 
 export const NavbarMain = () => {
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
 
-	// useEffect(() => {
-	// 	if (store.userLogged) {
-	// 		history.push(store.activeOption);
-	// 	} else {
-	// 		history.push("/");
-	// 	}
-	// });
+	useEffect(() => {
+		if (store.userLogged) {
+			history.push(store.activeOption);
+		} else {
+			history.push("/");
+		}
+	});
 
 	return (
 		<Navbar expand="lg">

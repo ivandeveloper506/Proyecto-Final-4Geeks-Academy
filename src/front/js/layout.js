@@ -31,6 +31,7 @@ const Layout = () => {
 					<Route>
 						<h1>Not found!</h1>
 					</Route>
+					{/* <Route exact path="*" component={NotFoundPage} /> */}
 				</Switch>
 				<Footer />
 			</BrowserRouter>

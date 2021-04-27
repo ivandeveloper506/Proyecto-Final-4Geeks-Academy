@@ -1,4 +1,4 @@
-const baseURLApi = "https://3001-lavender-falcon-4o5qoovp.ws-us03.gitpod.io/api/";
+const baseURLApi = "https://3001-sapphire-thrush-60qtoeig.ws-us03.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -62,21 +62,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (response.status === 201) {
 							alert("SUCCESS - Usuario registrado satisfactoriamente.");
 
-							// Se manda a crear la persona con los mismos datos del usuario que se registra
-							// Siempre será la primera persona en el panel admin del usuario que se registra.
-							// const personBody = {
-							// 	name: name,
-							// 	first_surname: firstSurname,
-							// 	second_surname: secondSurname,
-							// 	known_as: null,
-							// 	telephone_number: null,
-							// 	emergency_contact: null,
-							// 	emergency_phone: null,
-							// 	user_creation_id: userProfile.id
-							// };
-
-							// actions.personStore(personBody);
-
 							// Se logró registrar correctamente, se llama inmediatamente a que se loguee de una vez
 							getActions().login(userBody.email, userBody.password);
 
@@ -139,7 +124,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ activeOption: option });
 			},
 			logout: () => {
+				localStorage.setItem("x-access-token", null);
+
 				setStore({ userLogged: false });
+
+				// Se configura la opción del home
+				getActions().activeOption("/");
 			}
 		}
 	};

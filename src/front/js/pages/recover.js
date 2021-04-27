@@ -16,10 +16,10 @@ export default function Recover() {
 	};
 
 	return (
-		<div className="container-fluid container-login-main-class">
+		<div className="container-fluid container-recover-main-class">
 			<div className="row d-flex flex-row align-items-center justify-content-center">
 				<div className="col" />
-				<div className="col-md-6 login-main-class">
+				<div className="col-md-6 recover-main-class">
 					<div className="row d-flex flex-row align-items-center justify-content-center mt-3">
 						<h2 className="text-white">Recuperar contraseña</h2>
 					</div>
@@ -42,6 +42,13 @@ export default function Recover() {
 								<button type="submit" className="btn btn-danger btn-block">
 									Recuperar contraseña
 								</button>
+							</div>
+							<div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
+								<h6>
+									<span className="text-warning">
+										Digite el correo asociado a la cuenta para recibir su contraseña de recuperación
+									</span>
+								</h6>
 							</div>
 						</form>
 					</div>

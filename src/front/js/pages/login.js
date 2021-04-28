@@ -75,7 +75,7 @@ export default function Login() {
 								<div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
 									<Link to="/recover">
 										<h6>
-											<span className="text-warning">¡Deseo recuperar mi contraseña!</span>
+											<span className="text-warning">¿Olvido su contraseña?</span>
 										</h6>
 									</Link>
 								</div>

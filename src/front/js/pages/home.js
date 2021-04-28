@@ -13,7 +13,7 @@ export const Home = () => {
 		<div className="container-fluid main-div-class">
 			<div className="row">
 				<div className="container home-title-class">
-					<h1>Bienvenido a QR+Service</h1>
+					<h1>QR+Service</h1>
 					<p>Regístrese y conozca el servicio que ponemos a su disposición</p>
 				</div>
 

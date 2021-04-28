@@ -1,4 +1,4 @@
-const baseURLApi = "https://3001-sapphire-thrush-60qtoeig.ws-us03.gitpod.io/api/";
+const baseURLApi = "https://3001-apricot-ermine-sr28honh.ws-us03.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {

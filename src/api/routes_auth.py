@@ -2,7 +2,7 @@ import os
 import flask
 import datetime
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Person
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -53,6 +53,24 @@ def register():
 
     try:
         db.session.add(user)
+        db.session.commit()
+
+        # Se crea una persona con los mismos datos del usuario que se esta registrando
+        userInfo = User.serialize(user)
+
+        person = Person(name = data_request["name"],
+        first_surname = data_request["first_surname"],
+        second_surname = data_request["second_surname"],
+        known_as = "",
+        telephone_number = "",
+        user_image = "",
+        emergency_contact = "",
+        emergency_phone = "",
+        user_creation_id = userInfo["id"],
+        creation_date = datetime.datetime.now(),
+        update_date = datetime.datetime.now())
+
+        db.session.add(person)
         db.session.commit()
         
         return jsonify(User.serialize(user)), 201

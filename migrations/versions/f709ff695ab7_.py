@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4f5dd373abb2
+Revision ID: f709ff695ab7
 Revises: 
-Create Date: 2021-04-24 01:23:30.672667
+Create Date: 2021-04-26 04:38:40.973332
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4f5dd373abb2'
+revision = 'f709ff695ab7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -53,18 +53,22 @@ def upgrade():
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('frequency', sa.String(length=1000), nullable=False),
     sa.Column('observation', sa.String(length=1000), nullable=True),
-    sa.Column('user_creation_id', sa.Integer(), nullable=True),
+    sa.Column('person_id', sa.Integer(), nullable=False),
+    sa.Column('user_creation_id', sa.Integer(), nullable=False),
     sa.Column('creation_date', sa.DateTime(), nullable=False),
     sa.Column('update_date', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['person_id'], ['person.id'], ),
     sa.ForeignKeyConstraint(['user_creation_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('person_qr',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=2000), nullable=False),
-    sa.Column('user_creation_id', sa.Integer(), nullable=True),
+    sa.Column('person_id', sa.Integer(), nullable=False),
+    sa.Column('user_creation_id', sa.Integer(), nullable=False),
     sa.Column('creation_date', sa.DateTime(), nullable=False),
     sa.Column('update_date', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['person_id'], ['person.id'], ),
     sa.ForeignKeyConstraint(['user_creation_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -72,9 +76,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('application_date', sa.Date(), nullable=False),
-    sa.Column('user_creation_id', sa.Integer(), nullable=True),
+    sa.Column('person_id', sa.Integer(), nullable=False),
+    sa.Column('user_creation_id', sa.Integer(), nullable=False),
     sa.Column('creation_date', sa.DateTime(), nullable=False),
     sa.Column('update_date', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['person_id'], ['person.id'], ),
     sa.ForeignKeyConstraint(['user_creation_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

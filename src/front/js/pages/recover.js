@@ -11,8 +11,11 @@ export default function Recover() {
 	const handleRecover = e => {
 		e.preventDefault();
 
-		// actions.login(email, password);
-		alert("Ingreso a recperar contraseña");
+		const userBody = {
+			email: email
+		};
+		actions.recoveryPass(userBody);
+		alert("Ingreso a recuperar contraseña");
 	};
 
 	return (

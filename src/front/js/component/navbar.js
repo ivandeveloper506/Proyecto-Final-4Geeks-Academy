@@ -25,19 +25,19 @@ export const NavbarMain = () => {
 		<div className="text-white">
 			{store.userLogged ? (
 				<Navbar expand="lg">
-					<NavLink className="navbar-item-logo-class" to="/">
+					<NavLink className="navbar-item-logo-class" to="/dashboard">
 						QR+Service
 					</NavLink>
 					<Navbar.Toggle className="bg-white" />
 					<Navbar.Collapse>
 						<Nav className="mr-auto">
-							<NavLink className="navbar-item-class" to="person">
+							<NavLink className="navbar-item-class" to="/dashboard/person">
 								<i className="fas fa-users"></i> Personas
 							</NavLink>
-							<NavLink className="navbar-item-class" to="person-info">
+							<NavLink className="navbar-item-class" to="/dashboard/person-information">
 								<i className="fas fa-address-book"></i> Información Personas
 							</NavLink>
-							<NavLink className="navbar-item-class" to="person-generate-qr">
+							<NavLink className="navbar-item-class" to="/dashboard/person-generate-qr">
 								<i className="fas fa-qrcode"></i> Generar QR
 							</NavLink>
 						</Nav>
@@ -52,16 +52,16 @@ export const NavbarMain = () => {
 					<Navbar.Toggle className="bg-white" />
 					<Navbar.Collapse>
 						<Nav className="mr-auto">
-							<NavLink className="navbar-item-class" to="/">
+							<NavLink className="navbar-item-class" to="/home">
 								<i className="fas fa-home"></i> Inicio
 							</NavLink>
-							<NavLink className="navbar-item-class" to="about-us">
+							<NavLink className="navbar-item-class" to="/about-us">
 								<i className="fas fa-users"></i> Quiénes somos
 							</NavLink>
-							<NavLink className="navbar-item-class" to="services">
+							<NavLink className="navbar-item-class" to="/services">
 								<i className="fas fa-boxes"></i> Servicios
 							</NavLink>
-							<NavLink className="navbar-item-class" to="contact">
+							<NavLink className="navbar-item-class" to="/contact">
 								<i className="fas fa-envelope"></i> Contáctenos
 							</NavLink>
 						</Nav>

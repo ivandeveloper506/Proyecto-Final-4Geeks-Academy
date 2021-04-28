@@ -129,7 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ userLogged: false });
 
 				// Se configura la opción del home
-				getActions().activeOption("/");
+				getActions().activeOption("/home");
 			}
 		}
 	};

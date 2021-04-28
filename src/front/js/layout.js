@@ -11,6 +11,9 @@ import Services from "./pages/services";
 import Contact from "./pages/contact";
 import Recover from "./pages/recover";
 import Dashboard from "./pages/dashboard";
+import Person from "./pages/person";
+import PersonInformation from "./pages/person-information";
+import PersonGenerateQr from "./pages/person-generate-qr";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -21,6 +24,7 @@ const Layout = () => {
 				<NavbarMain />
 				<Switch>
 					<Route exact path="/" component={Home} />
+					<Route exact path="/home" component={Home} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/recover" component={Recover} />
@@ -28,6 +32,9 @@ const Layout = () => {
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/contact" component={Contact} />
 					<Route exact path="/dashboard" component={Dashboard} />
+					<Route exact path="/dashboard/person" component={Person} />
+					<Route exact path="/dashboard/person-information" component={PersonInformation} />
+					<Route exact path="/dashboard/person-generate-qr" component={PersonGenerateQr} />
 					<Route>
 						<h1>Not found!</h1>
 					</Route>

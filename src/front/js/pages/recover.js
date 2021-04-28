@@ -14,8 +14,14 @@ export default function Recover() {
 		const userBody = {
 			email: email
 		};
+<<<<<<< HEAD
 		actions.recoveryPass(userBody);
 		alert("Ingreso a recuperar contraseña");
+=======
+
+		actions.recoveryPass(userBody);
+		alert("Ingreso a recperar contraseña");
+>>>>>>> 1b852d45fe09ba879cac3269b2466cbe711bf876
 	};
 
 	return (

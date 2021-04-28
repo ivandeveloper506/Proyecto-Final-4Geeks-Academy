@@ -37,6 +37,7 @@ def store():
     person_medicine = PersonMedicine(description = data_request["description"],
     frequency = data_request["frequency"],
     observation = data_request["observation"],
+    person_id = data_request["person_id"],
     user_creation_id = data_request["user_creation_id"],
     creation_date = datetime.datetime.now(),
     update_date = datetime.datetime.now())

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/register.scss";
@@ -10,6 +10,7 @@ export default function Register() {
 	const [secondSurname, setSecondSurname] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const inputNameRef = useRef(null);
 
 	const handleRegister = e => {
 		e.preventDefault();
@@ -28,6 +29,10 @@ export default function Register() {
 		actions.register(userBody);
 	};
 
+	useEffect(() => {
+		inputNameRef.current.focus();
+	}, []);
+
 	return (
 		<div className="container-fluid container-register-main-class">
 			<div className="row d-flex flex-row align-items-center justify-content-center">
@@ -41,6 +46,7 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Nombre</label>
 								<input
+									ref={inputNameRef}
 									type="name"
 									className="form-control"
 									id="inputName"

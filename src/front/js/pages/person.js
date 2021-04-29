@@ -12,8 +12,7 @@ export default function Person() {
 
 	return (
 		<div className="container">
-			<div class{/* Name="col-md-5 dashboard-main-title-left-clas-leftgistro y Mantenimiento de Personas</div>
- */}			<div className="row dashboard-main-table-class">
+			<div className="row dashboard-main-table-class">
 				<div className="col">
 					<Table striped bordered hover size="sm" className="mt-3 bg-white">
 						<thead>
@@ -87,6 +86,5 @@ export default function Person() {
 				</div>
 			</div>
 		</div>
-		// </div>
 	);
 }

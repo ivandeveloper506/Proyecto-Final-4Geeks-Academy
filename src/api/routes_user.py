@@ -57,7 +57,7 @@ def store():
         return jsonify(User.serialize(user)), 201
     
     except AssertionError as exception_message: 
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+        return jsonify(message='Error: {}. '.format(exception_message)), 400
 
 # [PUT] - Ruta para modificar un [user]
 @routes_user.route('/api/users/<int:id>', methods=['PUT'])

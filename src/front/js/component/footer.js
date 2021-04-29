@@ -15,7 +15,7 @@ export const Footer = () => (
 							<h3>Acerca de</h3>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row p-2">
 						<div className="col">
 							<p>
 								Un QR es su enlace físico. Es una acción rápida y sencilla. Un QR es fácil de crear y
@@ -33,7 +33,7 @@ export const Footer = () => (
 							<h3>Contáctenos</h3>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row p-2">
 						<div className="col social-media-class">
 							<p>
 								<i className="fa fa-map-marker" /> Torre Mercedes San José, Costa Rica
@@ -61,7 +61,7 @@ export const Footer = () => (
 							<h3>QR+Service</h3>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row p-2">
 						<div className="col">
 							<QRCode
 								value="QR+Service. ¡Su mejor elección!"

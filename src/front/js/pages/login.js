@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/login.scss";
@@ -7,12 +7,17 @@ export default function Login() {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const inputEmailRef = useRef(null);
 
 	const handleLogin = e => {
 		e.preventDefault();
 
 		actions.login(email, password);
 	};
+
+	useEffect(() => {
+		inputEmailRef.current.focus();
+	}, []);
 
 	return (
 		<div className="container-fluid container-login-main-class">
@@ -27,6 +32,7 @@ export default function Login() {
 							<div className="m-3">
 								<label className="form-label text-white">Email</label>
 								<input
+									ref={inputEmailRef}
 									type="email"
 									className="form-control"
 									id="exampleInputEmail1"

@@ -51,7 +51,7 @@ export default function Register() {
 								<label className="form-label text-white">Nombre</label>
 								<input
 									ref={inputNameRef}
-									type="name"
+									type="text"
 									className="form-control"
 									id="inputName"
 									placeholder="Ingrese su nombre..."
@@ -63,7 +63,7 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Primer apellido</label>
 								<input
-									type="firstSurname"
+									type="text"
 									className="form-control"
 									id="firstSurname"
 									placeholder="Ingrese su primer apellido..."
@@ -75,7 +75,7 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Segundo apellido</label>
 								<input
-									type="secondSurname"
+									type="text"
 									className="form-control"
 									id="secondSurname"
 									placeholder="Ingrese su segundo apellido..."
@@ -86,7 +86,7 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Fecha nacimiento</label>
 								<input
-									type="birthDate"
+									type="date"
 									className="form-control"
 									id="birthDate"
 									placeholder="Ingrese su fecha de nacimiento..."
@@ -97,7 +97,7 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Número teléfono</label>
 								<input
-									type="telephoneNumber"
+									type="number"
 									className="form-control"
 									id="telephoneNumber"
 									placeholder="Ingrese su número de teléfono..."

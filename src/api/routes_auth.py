@@ -78,6 +78,30 @@ def register():
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
 
+# [POST] - Ruta para recuperar contraseña de un [user]
+@routes_auth.route('/api/users/recoveryPass', methods=['POST'])
+def recoveryPass():
+    data_request = request.get_json()
+
+    #user = User.query.filter_by(email=data_request["email"]).first()
+    
+    # Se valida que exista el funcionario con el correo ingresado.
+    
+    #if user:
+        #return jsonify({"msg": "Se esta enviando la solicitud de recuperación de contraseña"}),200
+    #else
+        #return jsonify({"msg": "Correo incorrecto o usuario no nregistrado"}), 401
+
+    user = User(
+    email = data_request["email"])
+
+    try:
+        db.session.commit()        
+        #return jsonify(User.serialize(user)), 201
+    
+    except AssertionError as exception_message: 
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
 # [PUT] - Ruta para modificar el activo de un [user]
 @routes_auth.route('/api/users/active/<int:id>', methods=['PUT'])
 @jwt_required()

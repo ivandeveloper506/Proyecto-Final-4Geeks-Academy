@@ -1,0 +1,134 @@
+/* Jumbotron */
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-weight: 200px
+}
+
+.container h1 {
+   font-size: 80px;
+   color: white;
+}
+
+/* Workingspace */
+.workingspace {
+    margin-top: 120px;
+    text-align: center;
+}
+
+.workingspace img {
+    margin-bottom: 20px;
+}
+
+.workingspace h2 {
+    font-size: 52px;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+
+.workingspace h2 span {
+    font-weight: 500;
+}
+
+.workingspace p {
+    font-size: 25px;
+    color:white;
+    font-weight: 200;
+}
+
+
+
+/* Testimonial */
+.testimonial {
+    margin-top: 130px;
+}
+
+.testimonial p {
+    font-size: 2.4em;
+    text-align: center;
+    font-weight: 200;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.testimonial img {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    border-radius: 50%;
+    filter: grayscale(1);
+}
+
+.testimonial .img-main {
+    width: 300px;
+    height: 300px;
+    margin-top: -5px;
+    filter: grayscale(0);
+}
+
+
+.testimonial .info-text h5 {
+    font-size: 40px;
+    font-weight: bold;
+
+    }
+
+ .row .info-text
+ {
+
+    text-align: center;
+  border-top-style: inherit;
+}
+  
+    
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+/* The circles on the timeline */
+
+
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 30%;
+}
+
+
+/* The actual content */
+.content {
+  padding: 20px 30px;
+  background-color: gray;
+  position: relative;
+  border-radius: 6px;
+}

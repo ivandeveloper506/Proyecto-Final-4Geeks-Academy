@@ -8,6 +8,8 @@ class User(db.Model):
     name = db.Column(db.String(100), nullable=False)
     first_surname = db.Column(db.String(100), nullable=False)
     second_surname = db.Column(db.String(100))
+    birth_date = db.Column(db.Date, nullable=False)
+    telephone_number = db.Column(db.String(15),nullable=False)
     user_image = db.Column(db.String(2000))
     email = db.Column(db.String(250), unique=True)
     password = db.Column(db.String(80), unique=False, nullable=False)
@@ -24,6 +26,9 @@ class User(db.Model):
             "name": self.name,
             "first_surname": self.first_surname,
             "second_surname": self.second_surname,
+            "birth_date": self.birth_date,
+            "telephone_number": self.telephone_number,
+            "full_name": self.name + " " + self.first_surname + " " + self.second_surname,
             "user_image": self.user_image,
             "email": self.email,
             "active": self.active,
@@ -40,6 +45,7 @@ class Person(db.Model):
     first_surname = db.Column(db.String(100), nullable=False)
     second_surname = db.Column(db.String(100))
     known_as = db.Column(db.String(100))
+    birth_date = db.Column(db.Date, nullable=False)
     telephone_number = db.Column(db.String(15),nullable=False)
     user_image = db.Column(db.String(2000))
     emergency_contact = db.Column(db.String(255),nullable=False)
@@ -58,7 +64,9 @@ class Person(db.Model):
             "first_surname": self.first_surname,
             "second_surname": self.second_surname,
             "known_as": self.known_as,
+            "birth_date": self.birth_date,
             "telephone_number": self.telephone_number,
+            "full_name": self.name + " " + self.first_surname + " " + self.second_surname,
             "user_image": self.user_image,
             "emergency_contact": self.emergency_contact,
             "emergency_phone": self.emergency_phone,

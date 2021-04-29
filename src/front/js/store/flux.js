@@ -58,11 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						if (response.status === 201) {
-							ShowAlert(
-								`${userBody.name} ${userBody.first_surname} ${userBody.second_surname}`,
-								"Su registro fue procesado exitosamente!",
-								2000
-							);
+							ShowAlert(userBody.full_name, "Su registro fue procesado exitosamente!", 2000);
 
 							// Se logró registrar correctamente, se llama inmediatamente a que se loguee de una vez
 							getActions().login(userBody.email, userBody.password);
@@ -94,11 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ userProfile: data });
 
-						ShowAlert(
-							`${data.name} ${data.first_surname} ${data.second_surname}`,
-							"¡Sesión iniciada exitosamente!",
-							2000
-						);
+						ShowAlert(data.full_name, "¡Sesión iniciada exitosamente!", 2000);
 					})
 					.catch(error => {
 						alert("DANGER - Ha ocurrido un error al tratar de recuperar los datos del usuario.");

@@ -8,6 +8,8 @@ export default function Register() {
 	const [name, setName] = useState("");
 	const [firstSurname, setFirstSurname] = useState("");
 	const [secondSurname, setSecondSurname] = useState("");
+	const [birthDate, setBirthDate] = useState("");
+	const [telephoneNumber, setTelephoneNumber] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const inputNameRef = useRef(null);
@@ -20,6 +22,8 @@ export default function Register() {
 			name: name,
 			first_surname: firstSurname,
 			second_surname: secondSurname,
+			birth_date: birthDate,
+			telephone_number: telephoneNumber,
 			user_image: "",
 			email: email,
 			password: password,
@@ -77,6 +81,28 @@ export default function Register() {
 									placeholder="Ingrese su segundo apellido..."
 									value={secondSurname}
 									onChange={e => setSecondSurname(e.target.value)}
+								/>
+							</div>
+							<div className="m-3">
+								<label className="form-label text-white">Fecha nacimiento</label>
+								<input
+									type="birthDate"
+									className="form-control"
+									id="birthDate"
+									placeholder="Ingrese su fecha de nacimiento..."
+									value={birthDate}
+									onChange={e => setBirthDate(e.target.value)}
+								/>
+							</div>
+							<div className="m-3">
+								<label className="form-label text-white">Número teléfono</label>
+								<input
+									type="telephoneNumber"
+									className="form-control"
+									id="telephoneNumber"
+									placeholder="Ingrese su número de teléfono..."
+									value={telephoneNumber}
+									onChange={e => setTelephoneNumber(e.target.value)}
 								/>
 							</div>
 							<div className="m-3">

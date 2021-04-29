@@ -1,5 +1,4 @@
 .main-services-class{
-    background: rgba(255, 255, 255, 0.4);
     color: black;
     margin-top: 50px;
     padding: 15px 0px 15px 0px;
@@ -11,7 +10,7 @@
 .main-services-class h2{
     margin-top: 20px;
     margin-bottom: 20px;
-    color: brown;
+    color:white;
 }
 
 .PlaceButton{
@@ -21,10 +20,16 @@
     align-content: center;
 }
 
+.principal-text-class{
+    background:  rgba(247, 240, 240, 0.8);
+}
+.second-text-class{
+    background:  rgba(247, 240, 240, 0.8);
+}
 .principal-text-class p{
     font-size: 18px;
     text-align: justify;
-    color: brown;
+    color:rgb(96,74,50);
 }
 
 .principal-text-class strong{
@@ -34,10 +39,28 @@
 .second-text-class ul{
     font-size: 18px;
     text-align: justify;
-    color: brown;
+    color:rgb(96,74,50);
+    
 }
 
 .card{
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.class-principal-imgService{
+    height: 250px;
+    width: 250px;
+    border-radius: 7px;
+}
+
+.class-second-imgService{
+    height: 250px;
+    width: 250px;
+    border-radius: 7px;
+}
+.class-third-imgService{
+    height: 250px;
+    width: 250px;
+    border-radius: 7px;
 }

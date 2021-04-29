@@ -3,7 +3,11 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Container, Row, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import LogoService1 from "../../img/LogoService1.png";
+import LogoService2 from "../../img/LogoService2.png";
+import LogoService3 from "../../img/LogoService3.png";
 import "../../styles/services.scss";
+// import { ReactComponent as Logo } from "../../img/img-service1.svg";
 
 export default function Services() {
 	const { store, actions } = useContext(Context);
@@ -24,11 +28,16 @@ export default function Services() {
 							</div>
 						</div>
 					</div>
-					<div className="col-md-6">col 2</div>
+					<div className="col-md-6">
+						<img className="class-principal-imgService" src={LogoService2} />
+					</div>
 				</div>
 				<h2>Ventajas de usar QR+Service</h2>
 				<div className="row">
-					<div className="col-md-6">col1</div>
+					<div className="col-md-6">
+						<img className="class-second-imgService" src={LogoService1} />
+						<img className="class-third-imgService" src={LogoService3} />
+					</div>
 					<div className="col-md-6">
 						<div className="card second-text-class">
 							<div className="card-body">

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/register.scss";
@@ -8,8 +8,11 @@ export default function Register() {
 	const [name, setName] = useState("");
 	const [firstSurname, setFirstSurname] = useState("");
 	const [secondSurname, setSecondSurname] = useState("");
+	const [birthDate, setBirthDate] = useState("");
+	const [telephoneNumber, setTelephoneNumber] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const inputNameRef = useRef(null);
 
 	const handleRegister = e => {
 		e.preventDefault();
@@ -19,6 +22,8 @@ export default function Register() {
 			name: name,
 			first_surname: firstSurname,
 			second_surname: secondSurname,
+			birth_date: birthDate,
+			telephone_number: telephoneNumber,
 			user_image: "",
 			email: email,
 			password: password,
@@ -27,6 +32,10 @@ export default function Register() {
 
 		actions.register(userBody);
 	};
+
+	useEffect(() => {
+		inputNameRef.current.focus();
+	}, []);
 
 	return (
 		<div className="container-fluid container-register-main-class">
@@ -41,7 +50,8 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Nombre</label>
 								<input
-									type="name"
+									ref={inputNameRef}
+									type="text"
 									className="form-control"
 									id="inputName"
 									placeholder="Ingrese su nombre..."
@@ -53,7 +63,7 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Primer apellido</label>
 								<input
-									type="firstSurname"
+									type="text"
 									className="form-control"
 									id="firstSurname"
 									placeholder="Ingrese su primer apellido..."
@@ -65,12 +75,34 @@ export default function Register() {
 							<div className="m-3">
 								<label className="form-label text-white">Segundo apellido</label>
 								<input
-									type="secondSurname"
+									type="text"
 									className="form-control"
 									id="secondSurname"
 									placeholder="Ingrese su segundo apellido..."
 									value={secondSurname}
 									onChange={e => setSecondSurname(e.target.value)}
+								/>
+							</div>
+							<div className="m-3">
+								<label className="form-label text-white">Fecha nacimiento</label>
+								<input
+									type="date"
+									className="form-control"
+									id="birthDate"
+									placeholder="Ingrese su fecha de nacimiento..."
+									value={birthDate}
+									onChange={e => setBirthDate(e.target.value)}
+								/>
+							</div>
+							<div className="m-3">
+								<label className="form-label text-white">Número teléfono</label>
+								<input
+									type="number"
+									className="form-control"
+									id="telephoneNumber"
+									placeholder="Ingrese su número de teléfono..."
+									value={telephoneNumber}
+									onChange={e => setTelephoneNumber(e.target.value)}
 								/>
 							</div>
 							<div className="m-3">

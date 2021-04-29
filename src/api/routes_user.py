@@ -43,6 +43,8 @@ def store():
     user = User(name = data_request["name"],
     first_surname = data_request["first_surname"],
     second_surname = data_request["second_surname"],
+    birth_date = data_request["birth_date"],
+    telephone_number = data_request["telephone_number"],
     user_image = data_request["user_image"],
     email = data_request["email"],
     password = data_request["password"],
@@ -57,7 +59,7 @@ def store():
         return jsonify(User.serialize(user)), 201
     
     except AssertionError as exception_message: 
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+        return jsonify(message='Error: {}. '.format(exception_message)), 400
 
 # [PUT] - Ruta para modificar un [user]
 @routes_user.route('/api/users/<int:id>', methods=['PUT'])
@@ -73,6 +75,8 @@ def update(id):
     user.name = data_request["name"]
     user.first_surname = data_request["first_surname"]
     user.second_surname = data_request["second_surname"]
+    user.birth_date = data_request["birth_date"]
+    user.telephone_number = data_request["telephone_number"]
     user.user_image = data_request["user_image"]
     user.password = data_request["password"]
     user.update_date = datetime.datetime.now()

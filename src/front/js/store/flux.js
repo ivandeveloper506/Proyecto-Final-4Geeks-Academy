@@ -1,4 +1,6 @@
-const baseURLApi = "https://3001-apricot-ermine-sr28honh.ws-us03.gitpod.io/api/";
+import { ShowAlert } from "../component/alert";
+
+const baseURLApi = "https://3001-fuchsia-toad-5yhypfdu.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -26,11 +28,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (response.status === 200) {
 							setStore({ userLogged: true });
 
-							alert("SUCCESS - Se logró iniciar sesión.");
-
 							return response.json();
 						} else {
-							alert("DANGER - Ha ocurrido un error y no se pudo iniciar sesión");
+							// alert("DANGER - Ha ocurrido un error y no se pudo iniciar sesión");
+							// alert(error);
 						}
 					})
 					.then(data => {
@@ -41,12 +42,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						// Se configura la opción del home
 						getActions().activeOption("/dashboard");
-
-						console.log("*** actions [login] ***");
-						console.log(data);
 					})
 					.catch(error => {
-						alert("DANGER - Ha ocurrido un error y no se pudo iniciar sesión");
+						// alert("DANGER - Ha ocurrido un error y no se pudo iniciar sesión");
 						console.log(error);
 					});
 			},
@@ -60,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						if (response.status === 201) {
-							alert("SUCCESS - Usuario registrado satisfactoriamente.");
+							ShowAlert(userBody.full_name, "Su registro fue procesado exitosamente!", 2000);
 
 							// Se logró registrar correctamente, se llama inmediatamente a que se loguee de una vez
 							getActions().login(userBody.email, userBody.password);
@@ -92,8 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ userProfile: data });
 
-						console.log("*** actions [getProfileUser] ***");
-						console.log(data);
+						ShowAlert(data.full_name, "¡Sesión iniciada exitosamente!", 2000);
 					})
 					.catch(error => {
 						alert("DANGER - Ha ocurrido un error al tratar de recuperar los datos del usuario.");
@@ -130,6 +127,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				// Se configura la opción del home
 				getActions().activeOption("/home");
+
+				ShowAlert("", "¡Sesión cerrada exitosamente!", 2000);
 			}
 		}
 	};

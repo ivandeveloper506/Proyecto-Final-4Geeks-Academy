@@ -33,7 +33,7 @@
 }
 
 .workingspace p {
-    font-size: 18px;
+    font-size: 25px;
     color:white;
     font-weight: 200;
 }
@@ -68,8 +68,67 @@
     filter: grayscale(0);
 }
 
+
 .testimonial .info-text h5 {
     font-size: 40px;
     font-weight: bold;
+
+    }
+
+ .row .info-text
+ {
+
+    text-align: center;
+  border-top-style: inherit;
+}
+  
+    
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+/* The circles on the timeline */
+
+
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 30%;
+}
+
+
+/* The actual content */
+.content {
+  padding: 20px 30px;
+  background-color: gray;
+  position: relative;
+  border-radius: 6px;
+}

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/index.scss";
-// import "../../styles/services.scss";
+import imgAboutUs1 from "../../img/img-about-us-1.png";
 
 export default function AboutUs() {
 	const { store, actions } = useContext(Context);
@@ -17,7 +17,9 @@ export default function AboutUs() {
 				</div>
 				<div className="row mt-5">
 					<div className="col-md-6 text-white">
-						<h1>Va una imagen</h1>
+						<div className="img-card-class">
+							<img src={imgAboutUs1} alt="Image Services 1" />
+						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="card-class">
@@ -33,7 +35,7 @@ export default function AboutUs() {
 					</div>
 				</div>
 
-				<div className="row mt-5">
+				{/* <div className="row mt-5">
 					<div className="col-md-6">
 						<div className="card-class">
 							<p>
@@ -53,7 +55,7 @@ export default function AboutUs() {
 					<div className="col-md-6 text-white">
 						<h1>Va una imagen</h1>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

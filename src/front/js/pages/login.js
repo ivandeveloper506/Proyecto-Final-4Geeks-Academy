@@ -21,7 +21,7 @@ export default function Login() {
 
 	return (
 		<div className="container-fluid container-login-main-class">
-			<div className="row d-flex flex-row align-items-center justify-content-center">
+			<div className="form-row d-flex flex-row align-items-center justify-content-center">
 				<div className="col" />
 				<div className="col-sm-9 col-md-6 login-main-class">
 					<div className="row d-flex flex-row align-items-center justify-content-center mt-3">

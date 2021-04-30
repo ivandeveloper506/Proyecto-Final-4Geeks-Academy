@@ -85,6 +85,11 @@ body{
 }
 // FIN - Clases generales para Card
 
+.line-class{
+    background: rgb(192,192,192);
+}
+
+
 /* ESTILOS MEDIA QUERY */
 @media (min-width: 1200px) {
     .title-page-class h1 {

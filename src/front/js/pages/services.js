@@ -31,11 +31,11 @@ export default function Conctat() {
 					</div>
 					<div className="col-md-6">
 						<div className="card-class">
+							<h2 className="p-3">QR+Services</h2>
 							<p>
-								<strong>Qr+Service</strong> es una aplicación que te permite registrar tus datos
-								personales, la lista de medicamentos y un registro de control de vacunas. Información
-								que permitirá generar un Código QR para tener de forma digitalizada tan importante
-								información.
+								Es una aplicación que te permite registrar tus datos personales, la lista de
+								medicamentos y un registro de control de vacunas. Información que permitirá generar un
+								Código QR para tener de forma digitalizada tan importante información.
 							</p>
 						</div>
 					</div>

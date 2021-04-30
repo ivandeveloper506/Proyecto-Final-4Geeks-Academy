@@ -24,12 +24,17 @@ export default function AboutUs() {
 					<div className="col-md-6">
 						<div className="card-class">
 							<p>
-								Un código QR es un código de barras bidimensional cuadrada que puede almacenar los datos
+								{/* Un código QR es un código de barras bidimensional cuadrada que puede almacenar los datos
 								codificados. Hoy en día, los códigos QR se pueden ver en folletos, carteles, revistas,
 								etc. Usted puede detectar fácilmente estos códigos de barras de dos dimensiones a tu
 								alrededor. Nuestra empresa le proporciona el código de barras con la información que
 								usted necesite. Solo debe registrarse, completar la información y el código se creara,
-								si así de sencillo
+								si así de sencillo */}
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis ipsam consequatur
+								cumque non ea. Vel itaque esse ipsa voluptas quis facere adipisci fugit repudiandae
+								atque. Non porro nihil totam ab incidunt, corrupti possimus ut fugiat. Qui repellat
+								velit, hic similique, consectetur, nesciunt voluptatem atque ipsa optio in minus
+								provident animi!
 							</p>
 						</div>
 					</div>

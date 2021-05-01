@@ -21,12 +21,13 @@ export default function Login() {
 
 	return (
 		<div className="container-fluid container-login-main-class">
-			<div className="row d-flex flex-row align-items-center justify-content-center">
+			<div className="form-row d-flex flex-row align-items-center justify-content-center">
 				<div className="col" />
-				<div className="col-md-6 login-main-class">
+				<div className="col-sm-9 col-md-6 login-main-class">
 					<div className="row d-flex flex-row align-items-center justify-content-center mt-3">
 						<h2 className="text-white">Iniciar sesión</h2>
 					</div>
+					<hr className="line-class" />
 					<div>
 						<form onSubmit={handleLogin}>
 							<div className="m-3">

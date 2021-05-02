@@ -115,3 +115,66 @@ export default function PrimarySearchAppBar() {
 		</div>
 	);
 }
+
+// import React from "react";
+// import Paper from "@material-ui/core/Paper";
+// import InputBase from "@material-ui/core/InputBase";
+// import IconButton from "@material-ui/core/IconButton";
+// import SearchIcon from "@material-ui/icons/Search";
+
+// import { fade, makeStyles } from "@material-ui/core/styles";
+// import AppBar from "@material-ui/core/AppBar";
+// import Toolbar from "@material-ui/core/Toolbar";
+// import AddIcon from "@material-ui/icons/Add";
+// import Fab from "@material-ui/core/Fab";
+// import { green } from "@material-ui/core/colors";
+// import Tooltip from "@material-ui/core/Tooltip";
+
+// const useStyles = makeStyles(theme => ({
+// 	root: {
+// 		padding: "10px 4px",
+// 		display: "flex",
+// 		alignItems: "center",
+// 		width: 700
+// 	},
+// 	input: {
+// 		marginLeft: theme.spacing(1),
+// 		flex: 1
+// 	},
+// 	iconButton: {
+// 		padding: 2
+// 	}
+// }));
+
+// export default function CustomizedInputBase() {
+// 	const classes = useStyles();
+
+// 	const handleAdd = (event, name) => {
+// 		alert("Agregar Persona!");
+// 	};
+
+// 	return (
+// 		<AppBar position="static">
+// 			<Paper component="form" className={classes.root}>
+// 				<InputBase
+// 					className={classes.input}
+// 					placeholder="Buscar personas..."
+// 					inputProps={{ "aria-label": "Buscar personas" }}
+// 				/>
+// 				<IconButton type="submit" className={classes.iconButton} aria-label="search">
+// 					<SearchIcon />
+// 				</IconButton>
+// 			</Paper>
+// 			<Tooltip title="Agregar persona" aria-label="Agregar persona">
+// 				<Fab
+// 					style={{
+// 						background: green[500],
+// 						color: "white"
+// 					}}
+// 					onClick={() => handleAdd()}>
+// 					<AddIcon />
+// 				</Fab>
+// 			</Tooltip>
+// 		</AppBar>
+// 	);
+// }

@@ -28,6 +28,19 @@ def indexPerson(id):
 
     return jsonify(Person.serialize(person)), 200
 
+# [GET] - Ruta para obtener un [Person]
+@routes_person.route('/api/person/users/<int:id>', methods=['GET'])
+@jwt_required()
+def indexPersonUser(id):
+    data_request = request.get_json()
+
+    results = Person.query.filter_by(user_creation_id=id)
+
+    if results is None:
+        raise APIException('No existen personas para el usuario con el id especificado.',status_code=403)
+
+    return jsonify(list(map(lambda x: x.serialize(), results))), 200
+
 # [POST] - Ruta para crear un [Person]
 @routes_person.route('/api/person', methods=['POST'])
 @jwt_required()
@@ -38,7 +51,9 @@ def store():
     first_surname = data_request["first_surname"],
     second_surname = data_request["second_surname"],
     known_as = data_request["known_as"],
+    birth_date = data_request["birth_date"],
     telephone_number = data_request["telephone_number"],
+    user_image = data_request["user_image"],
     emergency_contact = data_request["emergency_contact"],
     emergency_phone = data_request["emergency_phone"],
     user_creation_id = data_request["user_creation_id"],
@@ -69,7 +84,9 @@ def update(id):
     person.first_surname = data_request["first_surname"]
     person.second_surname = data_request["second_surname"]
     person.known_as = data_request["known_as"]
+    person.birth_date = data_request["birth_date"]
     person.telephone_number = data_request["telephone_number"]
+    person.user_image = data_request["user_image"]
     person.emergency_contact = data_request["emergency_contact"]
     person.emergency_phone = data_request["emergency_phone"]
     person.update_date = datetime.datetime.now()

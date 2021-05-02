@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -19,12 +19,7 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import InputSearch from "./input-search";
-
-function createData(full_name, emergency_phone, emergency_contact, telephone_number) {
-	return { full_name, emergency_phone, emergency_contact, telephone_number };
-}
-
-const rows = [];
+// import PersonDetail from "./person-detail";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -105,13 +100,14 @@ EnhancedTableHead.propTypes = {
 	onSelectAllClick: PropTypes.func.isRequired,
 	order: PropTypes.oneOf(["asc", "desc"]).isRequired,
 	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired
+	rowCount: PropTypes.number.isRequired,
+	personId: PropTypes.personId
 };
 
 const EnhancedTableToolbar = props => {
 	return (
 		<div>
-			<h2>Listado de Personas</h2>
+			<h2 className="title-mant-class">Listado de Personas</h2>
 			<InputSearch />
 		</div>
 	);
@@ -148,16 +144,6 @@ const useStyles = makeStyles(theme => ({
 export default function EnhancedTable() {
 	const { store, actions } = useContext(Context);
 
-	// Se cargan los datos de las personas
-	store.persons.forEach(function(person) {
-		rows.push(
-			createData(person.full_name, person.telephone_number, person.emergency_phone, person.emergency_contact)
-		);
-	});
-
-	console.log("*** rows ***");
-	console.log(rows);
-
 	const classes = useStyles();
 	const [order, setOrder] = React.useState("asc");
 	const [orderBy, setOrderBy] = React.useState("calories");
@@ -170,15 +156,6 @@ export default function EnhancedTable() {
 		const isAsc = orderBy === property && order === "asc";
 		setOrder(isAsc ? "desc" : "asc");
 		setOrderBy(property);
-	};
-
-	const handleSelectAllClick = event => {
-		if (event.target.checked) {
-			const newSelecteds = rows.map(n => n.name);
-			setSelected(newSelecteds);
-			return;
-		}
-		setSelected([]);
 	};
 
 	const handleDoubleClick = (event, name) => {
@@ -208,7 +185,7 @@ export default function EnhancedTable() {
 
 	const isSelected = name => selected.indexOf(name) !== -1;
 
-	const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.persons.length - page * rowsPerPage);
 
 	return (
 		<div className={classes.root}>
@@ -225,12 +202,11 @@ export default function EnhancedTable() {
 							numSelected={selected.length}
 							order={order}
 							orderBy={orderBy}
-							onSelectAllClick={handleSelectAllClick}
 							onRequestSort={handleRequestSort}
-							rowCount={rows.length}
+							rowCount={store.persons.length}
 						/>
 						<TableBody>
-							{stableSort(rows, getComparator(order, orderBy))
+							{stableSort(store.persons, getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
 									const isItemSelected = isSelected(row.name);
@@ -241,7 +217,7 @@ export default function EnhancedTable() {
 											hover
 											onDoubleClick={event => handleDoubleClick(event, row.name)}
 											tabIndex={-1}
-											key={row.name}>
+											key={index}>
 											<TableCell component="th" id={labelId} scope="row" padding="20">
 												{row.full_name}
 											</TableCell>
@@ -250,12 +226,16 @@ export default function EnhancedTable() {
 											<TableCell align="right">{row.emergency_contact}</TableCell>
 											<TableCell>
 												<Tooltip title="Editar registro">
-													<IconButton
-														className="text-warning"
-														aria-label="Editar persona"
-														onClick={event => handleEdit(event, row.name)}>
-														<EditIcon />
-													</IconButton>
+													{/* <NavLink to={`/dashboard/person/detail/${props.personId}`}> */}
+													<NavLink to={`/dashboard/person/detail/${index}`}>
+														<IconButton
+															className="text-warning"
+															aria-label="Editar persona"
+															// onClick={event => handleEdit(event, row.name)}
+														>
+															<EditIcon />
+														</IconButton>
+													</NavLink>
 												</Tooltip>
 												<Tooltip title="Eliminar registro">
 													<IconButton
@@ -280,7 +260,7 @@ export default function EnhancedTable() {
 				<TablePagination
 					rowsPerPageOptions={[5, 10, 25]}
 					component="div"
-					count={rows.length}
+					count={store.persons.length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onChangePage={handleChangePage}

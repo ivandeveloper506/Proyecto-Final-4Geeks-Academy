@@ -41,8 +41,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// Se obtienen los datos del usuario conectado.
 						getActions().getProfileUser(data.user_id);
 
-						// Se obtienen los datos de las personas
-						getActions().getPerson();
+						console.log("*** login ***");
+						console.log(data);
+
+						// // Se obtienen los datos de las personas
+						getActions().getPerson(data.user_id);
 
 						// Se configura la opción del home
 						getActions().activeOption("/dashboard");
@@ -149,6 +152,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			getPerson: async userID => {
+				// await fetch(`${baseURLApi}person/users/${userID}`, {
 				await fetch(`${baseURLApi}person`, {
 					method: "GET",
 					headers: {

@@ -6,6 +6,8 @@ import imgHomeQR from "../../img/img-qr-home-bg.jpg";
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
+import imgSubscribe from "../../img/img-subscriber.png";
+
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 

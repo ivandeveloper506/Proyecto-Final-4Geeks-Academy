@@ -8,6 +8,7 @@ import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import AvatarLoginUser from "./avatar-login-user";
+import { QRCode } from "react-qrcode-logo";
 
 export const NavbarMain = () => {
 	const { store, actions } = useContext(Context);
@@ -21,12 +22,26 @@ export const NavbarMain = () => {
 		}
 	});
 
+	const AppLogo = () => {
+		return (
+			<QRCode
+				value="QR+Service"
+				size="55"
+				ecLevel="M"
+				qrStyle="dots"
+				quietZone="3"
+				logoOpacity="3"
+				enableCORS="true"
+			/>
+		);
+	};
+
 	return (
 		<div className="text-white">
 			{store.userLogged ? (
 				<Navbar expand="lg">
 					<NavLink className="navbar-item-logo-class" to="/dashboard">
-						QR+Service
+						<AppLogo />
 					</NavLink>
 					<Navbar.Toggle className="bg-white" />
 					<Navbar.Collapse>
@@ -47,7 +62,7 @@ export const NavbarMain = () => {
 			) : (
 				<Navbar expand="lg">
 					<NavLink className="navbar-item-logo-class" to="/">
-						QR+Service
+						<AppLogo />
 					</NavLink>
 					<Navbar.Toggle className="bg-white" />
 					<Navbar.Collapse>

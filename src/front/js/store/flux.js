@@ -1,6 +1,6 @@
 import { ShowAlert } from "../component/alert";
 
-const baseURLApi = "https://3001-emerald-salmon-qax1pn6e.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-amethyst-slug-hq7o4pzk.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -45,7 +45,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => {
 						// alert("DANGER - Ha ocurrido un error y no se pudo iniciar sesión");
-						console.log(error);
+						// console.log(error);
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error y no se pudo iniciar sesión.",
+							false,
+							true,
+							2000
+						);
 					});
 			},
 			register: async userBody => {
@@ -58,7 +67,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						if (response.status === 201) {
-							ShowAlert(userBody.full_name, "Su registro fue procesado exitosamente!", 2000);
+							ShowAlert(
+								"top-end",
+								"success",
+								userBody.full_name,
+								"Su cuenta fue creada exitosamente!",
+								false,
+								true,
+								2000
+							);
 
 							// Se logró registrar correctamente, se llama inmediatamente a que se loguee de una vez
 							getActions().login(userBody.email, userBody.password);
@@ -69,7 +86,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.catch(error => {
-						alert("DANGER[error] - Ha ocurrido un error al tratar crear el usuario.");
+						// alert("DANGER[error] - Ha ocurrido un error al tratar crear el usuario.");
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de crear la cuenta.",
+							false,
+							true,
+							2000
+						);
 					});
 			},
 			getProfileUser: async userID => {
@@ -90,7 +116,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ userProfile: data });
 
-						ShowAlert(data.full_name, "¡Sesión iniciada exitosamente!", 2000);
+						ShowAlert(
+							"top-end",
+							"success",
+							data.full_name,
+							"¡Sesión iniciada exitosamente!",
+							false,
+							true,
+							2000
+						);
 					})
 					.catch(error => {
 						alert("DANGER - Ha ocurrido un error al tratar de recuperar los datos del usuario.");
@@ -128,7 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// Se configura la opción del home
 				getActions().activeOption("/home");
 
-				ShowAlert("", "¡Sesión cerrada exitosamente!", 2000);
+				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
 			}
 		}
 	};

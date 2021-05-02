@@ -11,7 +11,7 @@ import Services from "./pages/services";
 import Contact from "./pages/contact";
 import Recover from "./pages/recover";
 import Dashboard from "./pages/dashboard";
-import Person from "./pages/person";
+import Person from "./pages/person/person";
 import PersonInformation from "./pages/person-information";
 import PersonGenerateQr from "./pages/person-generate-qr";
 

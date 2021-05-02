@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			message: null,
 			userProfile: [],
+			persons: [],
 			userLogged: false,
 			activeOption: ""
 		},
@@ -40,12 +41,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// Se obtienen los datos del usuario conectado.
 						getActions().getProfileUser(data.user_id);
 
+						// Se obtienen los datos de las personas
+						getActions().getPerson();
+
 						// Se configura la opción del home
 						getActions().activeOption("/dashboard");
 					})
 					.catch(error => {
-						// alert("DANGER - Ha ocurrido un error y no se pudo iniciar sesión");
-						// console.log(error);
 						ShowAlert(
 							"top-end",
 							"error",
@@ -110,7 +112,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (response.status === 200) {
 							return response.json();
 						} else {
-							alert("DANGER - Ha ocurrido un error al tratar de recuperar los datos del usuario.");
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ha ocurrido un error al tratar de recuperar los datos del perfil del usuario.",
+								false,
+								true,
+								2000
+							);
 						}
 					})
 					.then(data => {
@@ -127,7 +137,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					})
 					.catch(error => {
-						alert("DANGER - Ha ocurrido un error al tratar de recuperar los datos del usuario.");
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de recuperar los datos del perfil del usuario.",
+							false,
+							true,
+							2000
+						);
+					});
+			},
+			getPerson: async userID => {
+				await fetch(`${baseURLApi}person`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ha ocurrido un error al tratar de recuperar los datos de las personas.",
+								false,
+								true,
+								2000
+							);
+						}
+					})
+					.then(data => {
+						setStore({ persons: data });
+
+						console.log("*** getPerson ***");
+						console.log(data);
+					})
+					.catch(error => {
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de recuperar los datos de las personas.",
+							false,
+							true,
+							2000
+						);
 					});
 			},
 			personStore: async personBody => {
@@ -144,11 +203,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 							return response.json();
 						} else {
-							alert("DANGER[response] - Ha ocurrido un error al tratar crear la persona.");
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ha ocurrido un error al tratar de crear la persona.",
+								true,
+								true,
+								2000
+							);
 						}
 					})
 					.catch(error => {
-						alert("DANGER[error] - Ha ocurrido un error al tratar crear la persona.");
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de crear la persona.",
+							true,
+							true,
+							2000
+						);
 					});
 			},
 			activeOption: option => {

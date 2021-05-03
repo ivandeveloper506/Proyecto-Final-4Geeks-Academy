@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useContext, useState, useRef, useEffect } from "react";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -21,19 +21,46 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const handleBack = (event, name) => {
-	alert("Regresar");
-};
-
-const handleSave = (event, name) => {
-	alert("Salvando datos");
-};
-
 export default function PersonDetail() {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 	const personId = parseInt(params.id);
 	const classes = useStyles();
+
+	const [name, setName] = useState("");
+	const [firstSurname, setFirstSurname] = useState("");
+	const [secondSurname, setSecondSurname] = useState("");
+	const [knownAs, setKnownAs] = useState("");
+	const [birthDate, setBirthDate] = useState("");
+	const [telephoneNumber, setTelephoneNumber] = useState("");
+	const [userImage, setUserImage] = useState("");
+	const [emergencyContact, setEmergencyContact] = useState("");
+	const [emergencyPhone, setEmergencyPhone] = useState("");
+	const inputNameRef = useRef("");
+
+	const handleSave = e => {
+		// e.preventDefault();
+
+		// Se manda a crear el usuario
+		const personBody = {
+			name: name,
+			first_surname: firstSurname,
+			second_surname: secondSurname,
+			known_as: knownAs,
+			birth_date: birthDate,
+			telephone_number: telephoneNumber,
+			user_image: userImage,
+			emergency_contact: emergencyContact,
+			emergency_phone: emergencyPhone,
+			user_creation_id: store.userProfile.id
+		};
+
+		actions.personStore(personBody);
+	};
+
+	useEffect(() => {
+		inputNameRef.current.focus();
+	}, []);
 
 	return (
 		<div className="container container-detail-class">
@@ -59,18 +86,20 @@ export default function PersonDetail() {
 					</Tooltip>
 
 					<Tooltip title="Regresar" aria-label="Regresar">
-						<Button
-							style={{
-								background: "#0D6EFD",
-								color: "white"
-							}}
-							onClick={() => handleBack()}
-							variant="contained"
-							size="small"
-							className={classes.button}
-							startIcon={<ArrowBackIcon />}>
-							Regresar
-						</Button>
+						<NavLink to="/dashboard/person/">
+							<Button
+								style={{
+									background: "#0D6EFD",
+									color: "white"
+								}}
+								type="submit"
+								variant="contained"
+								size="small"
+								className={classes.button}
+								startIcon={<ArrowBackIcon />}>
+								Regresar
+							</Button>
+						</NavLink>
 					</Tooltip>
 				</div>
 			</div>
@@ -83,7 +112,9 @@ export default function PersonDetail() {
 						<div>
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
-									value={item.name}
+									onChange={e => setName(e.target.value)}
+									// value={item.name}
+									ref={inputNameRef}
 									required="true"
 									type="text"
 									id="name"
@@ -92,7 +123,8 @@ export default function PersonDetail() {
 									placeholder="Ingrese el nombre..."
 								/>
 								<TextField
-									value={item.first_surname}
+									onChange={e => setFirstSurname(e.target.value)}
+									// value={item.first_surname}
 									required="true"
 									type="text"
 									id="firstSurname"
@@ -101,7 +133,8 @@ export default function PersonDetail() {
 									placeholder="Ingrese el primer apellido..."
 								/>
 								<TextField
-									value={item.second_surname}
+									onChange={e => setSecondSurname(e.target.value)}
+									// value={item.second_surname}
 									type="text"
 									id="secondSurname"
 									label="Segundo apellido"
@@ -111,7 +144,8 @@ export default function PersonDetail() {
 							</form>
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
-									value={item.known_as}
+									onChange={e => setKnownAs(e.target.value)}
+									// value={item.known_as}
 									required="true"
 									type="text"
 									id="knownAs"
@@ -120,7 +154,8 @@ export default function PersonDetail() {
 									placeholder="Ingrese el conocido como..."
 								/>
 								<TextField
-									value={item.birth_date}
+									onChange={e => setBirthDate(e.target.value)}
+									// value={item.birth_date}
 									required="true"
 									type="date"
 									id="birthDate"
@@ -129,7 +164,8 @@ export default function PersonDetail() {
 									placeholder="Ingrese la fecha nacimiento..."
 								/>
 								<TextField
-									value={item.telephone_number}
+									onChange={e => setTelephoneNumber(e.target.value)}
+									// value={item.telephone_number}
 									type="number"
 									id="telephoneNumber"
 									label="Número de teléfono"
@@ -139,7 +175,8 @@ export default function PersonDetail() {
 							</form>
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
-									value={item.emergency_contact}
+									onChange={e => setEmergencyContact(e.target.value)}
+									// value={item.emergency_contact}
 									required="true"
 									type="text"
 									id="emergencyContact"
@@ -148,7 +185,8 @@ export default function PersonDetail() {
 									placeholder="Ingrese el nombre del contacto de emergencia..."
 								/>
 								<TextField
-									value={item.emergency_phone}
+									onChange={e => setEmergencyPhone(e.target.value)}
+									// value={item.emergency_phone}
 									required="true"
 									type="text"
 									id="emergencyPhone"
@@ -159,6 +197,7 @@ export default function PersonDetail() {
 							</form>
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
+									onChange={e => setUserImage(e.target.value)}
 									type="text"
 									id="userImage"
 									label="Foto"

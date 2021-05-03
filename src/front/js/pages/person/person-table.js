@@ -225,13 +225,10 @@ export default function EnhancedTable() {
 											<TableCell align="right">{row.emergency_contact}</TableCell>
 											<TableCell>
 												<Tooltip title="Editar registro">
-													{/* <NavLink to={`/dashboard/person/detail/${props.personId}`}> */}
 													<NavLink to={`/dashboard/person/detail/${index}`}>
 														<IconButton
 															className="text-warning"
-															aria-label="Editar persona"
-															// onClick={event => handleEdit(event, row.name)}
-														>
+															aria-label="Editar persona">
 															<EditIcon />
 														</IconButton>
 													</NavLink>

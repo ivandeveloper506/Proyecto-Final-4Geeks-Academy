@@ -198,12 +198,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "POST",
 					body: JSON.stringify(personBody),
 					headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
 					}
 				})
 					.then(response => {
 						if (response.status === 201) {
-							alert("SUCCESS - Persona registrada satisfactoriamente.");
+							ShowAlert("top-end", "success", "", "¡La persona ha sido exitosamente!", false, true, 2000);
 
 							return response.json();
 						} else {

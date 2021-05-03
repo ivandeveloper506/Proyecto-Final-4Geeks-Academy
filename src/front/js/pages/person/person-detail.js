@@ -21,6 +21,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+const handleBack = (event, name) => {
+	alert("Regresar");
+};
+
+const handleSave = (event, name) => {
+	alert("Salvando datos");
+};
+
 export default function PersonDetail() {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
@@ -41,7 +49,7 @@ export default function PersonDetail() {
 								background: "#28A745",
 								color: "white"
 							}}
-							//  onClick={() => handleAdd}
+							onClick={() => handleSave()}
 							variant="contained"
 							size="small"
 							className={classes.button}
@@ -56,7 +64,7 @@ export default function PersonDetail() {
 								background: "#0D6EFD",
 								color: "white"
 							}}
-							//  onClick={() => handleAdd}
+							onClick={() => handleBack()}
 							variant="contained"
 							size="small"
 							className={classes.button}

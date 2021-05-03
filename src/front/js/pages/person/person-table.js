@@ -159,20 +159,10 @@ export default function EnhancedTable() {
 		setOrderBy(property);
 	};
 
-	const handleDelete = (event, name) => {
-		Swal.fire({
-			title: "¿Está seguro que desea eliminar el registro?",
-			text: "Esta acción no se podrá revertir y se eliminara toda la información asociada a la persona.",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "¡Si, eliminarlo!"
-		}).then(result => {
-			if (result.isConfirmed) {
-				Swal.fire("Eliminado!", "La persona ha sido eliminada exitosamente.", "success");
-			}
-		});
+	const handleDelete = index => {
+		let personDelete = store.persons[index];
+
+		actions.handlePersonDelete(personDelete.id);
 	};
 
 	const handleChangePage = (event, newPage) => {

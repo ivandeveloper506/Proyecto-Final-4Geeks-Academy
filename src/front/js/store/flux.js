@@ -1,6 +1,7 @@
 import { ShowAlert } from "../component/alert";
+import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-brown-wildcat-4xzhpn58.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-blush-panther-jkh8b44y.ws-us03.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -40,9 +41,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						// Se obtienen los datos del usuario conectado.
 						getActions().getProfileUser(data.user_id);
-
-						console.log("*** login ***");
-						console.log(data);
 
 						// // Se obtienen los datos de las personas
 						getActions().getPerson(data.user_id);
@@ -283,6 +281,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 							true,
 							2000
 						);
+					});
+			},
+			handlePersonDelete: personID => {
+				Swal.fire({
+					title: "¿Está seguro que desea eliminar el registro?",
+					text: "Esta acción no se podrá revertir y se eliminara toda la información asociada a la persona.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "¡Si, eliminarlo!"
+				}).then(result => {
+					if (result.isConfirmed) {
+						// Si la respuesta es positiva se invoca la función que procesa el delete.
+						getActions().personDelete(personID);
+					}
+				});
+			},
+			personDelete: async personID => {
+				await fetch(`${baseURLApi}person/${personID}`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							Swal.fire("Eliminado!", "La persona ha sido eliminada exitosamente.", "success");
+
+							// Se obtienen los datos de las personas nuevamente para refrescar los datos.
+							// getActions().getPerson(1);
+
+							console.log("*** personDelete [store.userProfile] ***");
+							let userDataProfile = getStore({ userProfile });
+
+							console.log(userDataProfile);
+
+							// Se configura la opción del home
+							getActions().activeOption("/dashboard/person");
+
+							return response.json();
+						} else {
+							Swal.fire("Error!", "Ha ocurrido un error al tratar de eliminar la persona.", "error");
+						}
+					})
+					.catch(error => {
+						Swal.fire("Error!", "Ha ocurrido un error al tratar de eliminar la persona.", "error");
 					});
 			},
 			activeOption: option => {

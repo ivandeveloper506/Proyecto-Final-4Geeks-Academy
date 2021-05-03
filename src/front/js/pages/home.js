@@ -30,7 +30,7 @@ export const Home = () => {
 				<div className="home-button-action-class">
 					<NavLink to="register">
 						<Button className="button-register-class" variant="btn btn-warning btn-lg">
-							Quiero registrarme <i className="fas fa-pen" />
+							Quiero registrarme <i className="fas fa-pen " />
 						</Button>
 					</NavLink>
 				</div>

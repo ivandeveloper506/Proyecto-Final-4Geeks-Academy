@@ -65,7 +65,11 @@ export default function PersonDetail() {
 			user_creation_id: store.userProfile.id
 		};
 
-		actions.personStore(personBody);
+		if (action === "edit") {
+			actions.personUpdate(personBody, personDetail.id);
+		} else {
+			actions.personStore(personBody);
+		}
 	};
 
 	const getPerson = () => {
@@ -78,13 +82,15 @@ export default function PersonDetail() {
 		setEmergencyContact("");
 		setUserImage("");
 
-		if (personId >= 0) {
+		if (action === "edit") {
 			{
-				store.persons.map((item, index) => {
-					if (personId === index) {
-						personDetail = item;
-					}
-				});
+				// store.persons.map((item, index) => {
+				// 	if (personId === index) {
+				// 		personDetail = item;
+				// 	}
+				// });
+
+				personDetail = store.persons[personId];
 			}
 
 			if (personDetail !== "undefined" && personDetail !== null) {
@@ -108,7 +114,7 @@ export default function PersonDetail() {
 		<div className="container container-detail-class">
 			<div className="row">
 				<div className="col-md-9">
-					<h2>{action === "new" ? "Nueva Persona" : "Editar Persona"}</h2>
+					<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
 				</div>
 
 				<div className="col-md-3">
@@ -122,10 +128,10 @@ export default function PersonDetail() {
 									}}
 									onClick={() => handleSave()}
 									variant="contained"
-									size="small"
+									size="medium"
 									className={classes.button}
 									startIcon={<SaveIcon />}>
-									Salvar
+									Guardar
 								</Button>
 							</Tooltip>
 						</div>
@@ -140,7 +146,7 @@ export default function PersonDetail() {
 										}}
 										type="submit"
 										variant="contained"
-										size="small"
+										size="medium"
 										className={classes.button}
 										startIcon={<ArrowBackIcon />}>
 										Regresar
@@ -151,12 +157,7 @@ export default function PersonDetail() {
 					</div>
 				</div>
 			</div>
-
 			<Divider />
-
-			{/* {store.persons.map((item, index) => {
-				if (personId === index) {
-					return ( */}
 			<div>
 				<form className={classes.root} noValidate autoComplete="off">
 					<TextField
@@ -255,9 +256,6 @@ export default function PersonDetail() {
 					/>
 				</form>
 			</div>
-			{/* );
-				}
-			})} */}
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../store/appContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -157,14 +157,6 @@ export default function EnhancedTable() {
 		setOrderBy(property);
 	};
 
-	const handleDoubleClick = (event, name) => {
-		alert("Editar persona con doble clic!");
-	};
-
-	const handleEdit = (event, name) => {
-		alert("Editar persona!");
-	};
-
 	const handleDelete = (event, name) => {
 		alert("Eliminar persona!");
 	};
@@ -212,11 +204,7 @@ export default function EnhancedTable() {
 									const labelId = `enhanced-table-checkbox-${index}`;
 
 									return (
-										<TableRow
-											hover
-											onDoubleClick={event => handleDoubleClick(event, row.name)}
-											tabIndex={-1}
-											key={index}>
+										<TableRow hover tabIndex={-1} key={index}>
 											<TableCell component="th" id={labelId} scope="row" padding="20">
 												{row.full_name}
 											</TableCell>

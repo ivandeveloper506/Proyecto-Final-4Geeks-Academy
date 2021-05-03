@@ -239,6 +239,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
+			personUpdate: async (personBody, personID) => {
+				await fetch(`${baseURLApi}person/${personID}`, {
+					method: "PUT",
+					body: JSON.stringify(personBody),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							ShowAlert(
+								"top-end",
+								"success",
+								"",
+								"¡Los datos de la persona han sido guardados exitosamente!",
+								false,
+								true,
+								2000
+							);
+
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ha ocurrido un error al tratar de guardar los datos de la persona.",
+								true,
+								true,
+								2000
+							);
+						}
+					})
+					.catch(error => {
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de guardar los datos de la persona.",
+							true,
+							true,
+							2000
+						);
+					});
+			},
 			activeOption: option => {
 				setStore({ activeOption: option });
 			},

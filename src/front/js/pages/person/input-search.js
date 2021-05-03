@@ -6,10 +6,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import AddIcon from "@material-ui/icons/Add";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 import Fab from "@material-ui/core/Fab";
 import { green } from "@material-ui/core/colors";
 import Tooltip from "@material-ui/core/Tooltip";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
 	grow: {
@@ -104,17 +105,19 @@ export default function PrimarySearchAppBar() {
 						/>
 					</div>
 					<div className={classes.grow} />
-					<Tooltip title="Agregar persona" aria-label="Agregar persona">
+					<Tooltip title="Crear Persona" aria-label="Crear Persona">
 						<NavLink to={`/dashboard/person/detail/`}>
-							<Fab
+							<Button
 								style={{
-									background: green[500],
+									background: "#28A745",
 									color: "white"
 								}}
-								// onClick={() => handleAdd()}
-							>
-								<AddIcon />
-							</Fab>
+								variant="contained"
+								size="medium"
+								className={classes.button}
+								startIcon={<AddBoxIcon />}>
+								Crear Persona
+							</Button>
 						</NavLink>
 					</Tooltip>
 				</Toolbar>

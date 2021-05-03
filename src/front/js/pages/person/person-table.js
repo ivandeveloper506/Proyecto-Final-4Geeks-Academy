@@ -19,6 +19,7 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import InputSearch from "./input-search";
+import Swal from "sweetalert2";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -159,7 +160,19 @@ export default function EnhancedTable() {
 	};
 
 	const handleDelete = (event, name) => {
-		alert("Eliminar persona!");
+		Swal.fire({
+			title: "¿Está seguro que desea eliminar el registro?",
+			text: "Esta acción no se podrá revertir y se eliminara toda la información asociada a la persona.",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "¡Si, eliminarlo!"
+		}).then(result => {
+			if (result.isConfirmed) {
+				Swal.fire("Eliminado!", "La persona ha sido eliminada exitosamente.", "success");
+			}
+		});
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -226,7 +239,7 @@ export default function EnhancedTable() {
 													<IconButton
 														className="text-danger"
 														aria-label="Eliminar persona"
-														onClick={event => handleDelete(event, row.name)}>
+														onClick={event => handleDelete(index)}>
 														<DeleteIcon />
 													</IconButton>
 												</Tooltip>
@@ -252,7 +265,6 @@ export default function EnhancedTable() {
 					onChangeRowsPerPage={handleChangeRowsPerPage}
 				/>
 			</Paper>
-			<FormControlLabel control={<Switch checked={dense} onChange={handleChangeDense} />} label="Ampliar fila" />
 		</div>
 	);
 }

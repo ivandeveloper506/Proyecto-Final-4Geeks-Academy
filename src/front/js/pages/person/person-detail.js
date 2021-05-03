@@ -40,8 +40,14 @@ export default function PersonDetail() {
 	return (
 		<div className="container container-detail-class">
 			<form className={classes.root} noValidate autoComplete="off">
-				{/* <TextField id="standard-basic" label="Nombre" placeholder="Ingrese el nombre..." /> */}
-				<TextField type="text" id="name" label="Nombre" variant="outlined" placeholder="Ingrese el nombre..." />
+				<TextField
+					required="true"
+					type="text"
+					id="name"
+					label="Nombre"
+					variant="outlined"
+					placeholder="Ingrese el nombre..."
+				/>
 				<TextField
 					required="true"
 					type="text"
@@ -56,6 +62,58 @@ export default function PersonDetail() {
 					label="Segundo apellido"
 					variant="outlined"
 					placeholder="Ingrese el segundo apellido..."
+				/>
+			</form>
+			<form className={classes.root} noValidate autoComplete="off">
+				<TextField
+					required="true"
+					type="text"
+					id="knownAs"
+					label="Conocido como"
+					variant="outlined"
+					placeholder="Ingrese el conocido como..."
+				/>
+				<TextField
+					required="true"
+					type="text"
+					id="birthDate"
+					label="Fecha nacimiento"
+					variant="outlined"
+					placeholder="Ingrese la fecha nacimiento..."
+				/>
+				<TextField
+					type="text"
+					id="telephoneNumber"
+					label="Número de teléfono"
+					variant="outlined"
+					placeholder="Ingrese el número de teléfono..."
+				/>
+			</form>
+			<form className={classes.root} noValidate autoComplete="off">
+				<TextField
+					required="true"
+					type="text"
+					id="emergencyContact"
+					label="Contacto de emergencia"
+					variant="outlined"
+					placeholder="Ingrese el nombre del contacto de emergencia..."
+				/>
+				<TextField
+					required="true"
+					type="text"
+					id="emergencyPhone"
+					label="Teléfono de emergencia"
+					variant="outlined"
+					placeholder="Ingrese el teléfono de emergencia..."
+				/>
+			</form>
+			<form className={classes.root} noValidate autoComplete="off">
+				<TextField
+					type="text"
+					id="userImage"
+					label="Foto"
+					variant="outlined"
+					placeholder="Ingrese la foto..."
 				/>
 			</form>
 		</div>

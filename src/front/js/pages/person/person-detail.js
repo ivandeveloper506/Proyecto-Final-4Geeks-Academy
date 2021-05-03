@@ -9,26 +9,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Fab from "@material-ui/core/Fab";
 import { green } from "@material-ui/core/colors";
 import Tooltip from "@material-ui/core/Tooltip";
-
-// export default function PersonDetail() {
-// 	const params = useParams();
-// 	const personId = parseInt(params.id);
-// 	const { store, actions } = useContext(Context);
-
-// 	console.log("*** PersonDetail ***");
-// 	console.log(personId);
-// 	console.log(store.persons);
-
-// 	return (
-// 		<div className="container">
-// 			{store.persons.map((item, index) => {
-// 				if (personId === index) {
-// 					return <div className="text-white">{item.full_name}</div>;
-// 				}
-// 			})}
-// 		</div>
-// 	);
-// }
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -52,6 +33,7 @@ export default function PersonDetail() {
 				<div className="col-md-9">
 					<h2>Registro y Mantenimiento de Personas</h2>
 				</div>
+
 				<div className="col-md-3">
 					<Tooltip title="Guardar cambios" aria-label="Guardar cambios">
 						<Button
@@ -84,6 +66,8 @@ export default function PersonDetail() {
 					</Tooltip>
 				</div>
 			</div>
+
+			<Divider />
 
 			{store.persons.map((item, index) => {
 				if (personId === index) {

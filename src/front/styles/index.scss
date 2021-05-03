@@ -108,10 +108,30 @@ body{
 }
 
 // INICIO - Clases tablas de mantenimiento y detalle
+.title-table-class{
+    padding: 10px 10px 10px 20px;
+}
+
+.title-mant-class{
+    padding: 20px 0px 10px 20px;
+}
+
 .container-detail-class {
     margin-top: 50px;
     background: white;
     border-radius: 5px;
+}
+
+.body-table-class{
+    background: rgba(161,143,125, 0.2);
+}
+
+.head-table-class{
+    background: rgba(161,143,125, 0.5);
+}
+
+.cell-table-class{
+   height: 60px;
 }
 // FIN - Clases tablas de mantenimiento y detalle
 

@@ -112,12 +112,12 @@ export default function PersonDetail() {
 
 	return (
 		<div className="container container-detail-class">
-			<div className="row">
-				<div className="col-md-9">
+			<div className="row title-mant-class">
+				<div className="col-md-8">
 					<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
 				</div>
 
-				<div className="col-md-3">
+				<div className="col-md">
 					<div className="row">
 						<div>
 							<Tooltip title="Guardar cambios" aria-label="Guardar cambios">

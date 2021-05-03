@@ -66,10 +66,11 @@ function EnhancedTableHead(props) {
 	};
 
 	return (
-		<TableHead>
+		<TableHead className="head-table-class">
 			<TableRow>
 				{headCells.map(headCell => (
 					<TableCell
+						className="cell-table-class"
 						key={headCell.id}
 						align={headCell.numeric ? "right" : "left"}
 						padding={headCell.disablePadding ? "none" : "default"}
@@ -106,7 +107,7 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = props => {
 	return (
 		<div>
-			<h2 className="title-mant-class">Listado de Personas</h2>
+			<h2 className="title-table-class">Listado de Personas</h2>
 			<InputSearch />
 		</div>
 	);
@@ -196,7 +197,7 @@ export default function EnhancedTable() {
 							onRequestSort={handleRequestSort}
 							rowCount={store.persons.length}
 						/>
-						<TableBody>
+						<TableBody className="body-table-class">
 							{stableSort(store.persons, getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {

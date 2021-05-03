@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userProfile: [],
 			persons: [],
 			userLogged: false,
-			activeOption: ""
+			activeOption: "",
+			actionCrud: ""
 		},
 		actions: {
 			login: async (email, password) => {
@@ -230,6 +231,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							2000
 						);
 					});
+			},
+			actionCrud: action => {
+				setStore({ actionCrud: action });
 			},
 			activeOption: option => {
 				setStore({ activeOption: option });

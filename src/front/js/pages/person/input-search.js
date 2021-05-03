@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useHistory } from "react-router-dom";
+import { Context } from "../../store/appContext";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -73,11 +75,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function PrimarySearchAppBar() {
+	const { store, actions } = useContext(Context);
 	const classes = useStyles();
+	const history = useHistory();
 
-	const handleAdd = (event, name) => {
-		alert("Agregar Persona!");
-	};
+	useEffect(() => {
+		actions.actionCrud("new");
+	}, []);
 
 	return (
 		<div className={classes.grow}>
@@ -101,14 +105,17 @@ export default function PrimarySearchAppBar() {
 					</div>
 					<div className={classes.grow} />
 					<Tooltip title="Agregar persona" aria-label="Agregar persona">
-						<Fab
-							style={{
-								background: green[500],
-								color: "white"
-							}}
-							onClick={() => handleAdd()}>
-							<AddIcon />
-						</Fab>
+						<NavLink to={`/dashboard/person/detail/`}>
+							<Fab
+								style={{
+									background: green[500],
+									color: "white"
+								}}
+								// onClick={() => handleAdd()}
+							>
+								<AddIcon />
+							</Fab>
+						</NavLink>
 					</Tooltip>
 				</Toolbar>
 			</AppBar>

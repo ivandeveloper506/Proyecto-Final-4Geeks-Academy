@@ -34,6 +34,7 @@ const Layout = () => {
 					<Route exact path="/contact" component={Contact} />
 					<Route exact path="/dashboard" component={Dashboard} />
 					<Route exact path="/dashboard/person" component={Person} />
+					<Route exact path="/dashboard/person/detail" component={PersonDetail} />
 					<Route exact path="/dashboard/person/detail/:id" component={PersonDetail} />
 					<Route exact path="/dashboard/person-information" component={PersonInformation} />
 					<Route exact path="/dashboard/person-generate-qr" component={PersonGenerateQr} />

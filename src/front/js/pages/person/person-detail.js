@@ -21,6 +21,8 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+let personDetail = [];
+
 export default function PersonDetail() {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
@@ -58,8 +60,29 @@ export default function PersonDetail() {
 		actions.personStore(personBody);
 	};
 
+	const getPerson = () => {
+		{
+			store.persons.map((item, index) => {
+				if (personId === index) {
+					personDetail = item;
+				}
+			});
+		}
+
+		if (personDetail !== "undefined" && personDetail !== null) {
+			setName(personDetail.name);
+			setFirstSurname(personDetail.first_surname);
+			setSecondSurname(personDetail.second_surname);
+			setKnownAs(personDetail.known_as);
+			setBirthDate(personDetail.birth_date);
+			setTelephoneNumber(personDetail.telephone_number);
+			setEmergencyContact(personDetail.emergency_contact);
+			setUserImage(personDetail.user_image);
+		}
+	};
+
 	useEffect(() => {
-		inputNameRef.current.focus();
+		getPerson();
 	}, []);
 
 	return (
@@ -113,8 +136,8 @@ export default function PersonDetail() {
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
 									onChange={e => setName(e.target.value)}
-									// value={item.name}
-									ref={inputNameRef}
+									value={name}
+									// ref={inputNameRef}
 									required="true"
 									type="text"
 									id="name"
@@ -124,7 +147,7 @@ export default function PersonDetail() {
 								/>
 								<TextField
 									onChange={e => setFirstSurname(e.target.value)}
-									// value={item.first_surname}
+									value={firstSurname}
 									required="true"
 									type="text"
 									id="firstSurname"
@@ -134,7 +157,7 @@ export default function PersonDetail() {
 								/>
 								<TextField
 									onChange={e => setSecondSurname(e.target.value)}
-									// value={item.second_surname}
+									value={secondSurname}
 									type="text"
 									id="secondSurname"
 									label="Segundo apellido"
@@ -145,7 +168,7 @@ export default function PersonDetail() {
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
 									onChange={e => setKnownAs(e.target.value)}
-									// value={item.known_as}
+									value={knownAs}
 									required="true"
 									type="text"
 									id="knownAs"
@@ -155,7 +178,7 @@ export default function PersonDetail() {
 								/>
 								<TextField
 									onChange={e => setBirthDate(e.target.value)}
-									// value={item.birth_date}
+									value={item.birthDate}
 									required="true"
 									type="date"
 									id="birthDate"
@@ -165,7 +188,7 @@ export default function PersonDetail() {
 								/>
 								<TextField
 									onChange={e => setTelephoneNumber(e.target.value)}
-									// value={item.telephone_number}
+									value={telephoneNumber}
 									type="number"
 									id="telephoneNumber"
 									label="Número de teléfono"
@@ -176,7 +199,7 @@ export default function PersonDetail() {
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
 									onChange={e => setEmergencyContact(e.target.value)}
-									// value={item.emergency_contact}
+									value={emergencyContact}
 									required="true"
 									type="text"
 									id="emergencyContact"
@@ -186,7 +209,7 @@ export default function PersonDetail() {
 								/>
 								<TextField
 									onChange={e => setEmergencyPhone(e.target.value)}
-									// value={item.emergency_phone}
+									value={emergencyPhone}
 									required="true"
 									type="text"
 									id="emergencyPhone"
@@ -198,6 +221,7 @@ export default function PersonDetail() {
 							<form className={classes.root} noValidate autoComplete="off">
 								<TextField
 									onChange={e => setUserImage(e.target.value)}
+									value={userImage}
 									type="text"
 									id="userImage"
 									label="Foto"

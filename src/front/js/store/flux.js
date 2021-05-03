@@ -42,9 +42,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// Se obtienen los datos del usuario conectado.
 						getActions().getProfileUser(data.user_id);
 
-						// // Se obtienen los datos de las personas
-						getActions().getPerson(data.user_id);
-
 						// Se configura la opción del home
 						getActions().activeOption("/dashboard");
 					})
@@ -176,8 +173,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ persons: data });
 
-						console.log("*** getPerson ***");
-						console.log(data);
+						//Se actualiza la variable que controla las actualizaciones de las personas.
+						setStore({ retrievePerson: false });
 					})
 					.catch(error => {
 						ShowAlert(
@@ -283,7 +280,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
-			handlePersonDelete: personID => {
+			handlePersonDelete: (personID, userID) => {
 				Swal.fire({
 					title: "¿Está seguro que desea eliminar el registro?",
 					text: "Esta acción no se podrá revertir y se eliminara toda la información asociada a la persona.",
@@ -295,11 +292,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).then(result => {
 					if (result.isConfirmed) {
 						// Si la respuesta es positiva se invoca la función que procesa el delete.
-						getActions().personDelete(personID);
+						getActions().personDelete(personID, userID);
 					}
 				});
 			},
-			personDelete: async personID => {
+			personDelete: async (personID, userID) => {
 				await fetch(`${baseURLApi}person/${personID}`, {
 					method: "DELETE",
 					headers: {
@@ -311,13 +308,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (response.status === 200) {
 							Swal.fire("Eliminado!", "La persona ha sido eliminada exitosamente.", "success");
 
-							// Se obtienen los datos de las personas nuevamente para refrescar los datos.
-							// getActions().getPerson(1);
-
-							console.log("*** personDelete [store.userProfile] ***");
-							let userDataProfile = getStore({ userProfile });
-
-							console.log(userDataProfile);
+							// Se obtienen los datos de las personas asociadas al usuario.
+							getActions().getPerson(userID);
 
 							// Se configura la opción del home
 							getActions().activeOption("/dashboard/person");

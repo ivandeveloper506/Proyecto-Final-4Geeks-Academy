@@ -162,7 +162,15 @@ export default function EnhancedTable() {
 	const handleDelete = index => {
 		let personDelete = store.persons[index];
 
-		actions.handlePersonDelete(personDelete.id);
+		actions.handlePersonDelete(personDelete.id, store.userProfile.id);
+	};
+
+	const retrievePerson = () => {
+		// Se obtienen los datos de las personas asociadas al usuario.
+		actions.getPerson(store.userProfile.id);
+
+		// Se configura la opción del home
+		actions.activeOption("/dashboard/person");
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -181,6 +189,10 @@ export default function EnhancedTable() {
 	const isSelected = name => selected.indexOf(name) !== -1;
 
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.persons.length - page * rowsPerPage);
+
+	useEffect(() => {
+		retrievePerson();
+	}, []);
 
 	return (
 		<div className={classes.root}>

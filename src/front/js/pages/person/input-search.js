@@ -79,9 +79,9 @@ export default function PrimarySearchAppBar() {
 	const classes = useStyles();
 	const history = useHistory();
 
-	useEffect(() => {
-		actions.actionCrud("new");
-	}, []);
+	// useEffect(() => {
+	// 	actions.actionCrud("new");
+	// }, []);
 
 	return (
 		<div className={classes.grow}>

@@ -9,8 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userProfile: [],
 			persons: [],
 			userLogged: false,
-			activeOption: "",
-			actionCrud: ""
+			activeOption: ""
 		},
 		actions: {
 			login: async (email, password) => {
@@ -205,7 +204,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						if (response.status === 201) {
-							ShowAlert("top-end", "success", "", "¡La persona ha sido exitosamente!", false, true, 2000);
+							ShowAlert(
+								"top-end",
+								"success",
+								"",
+								"¡La persona ha sido registrada exitosamente!",
+								false,
+								true,
+								2000
+							);
 
 							return response.json();
 						} else {
@@ -231,9 +238,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							2000
 						);
 					});
-			},
-			actionCrud: action => {
-				setStore({ actionCrud: action });
 			},
 			activeOption: option => {
 				setStore({ activeOption: option });

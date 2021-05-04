@@ -16,16 +16,16 @@ def login():
     password = request.json.get("password", None)
 
     if email is None:
-        return jsonify({"msg": "El email es requerido."}), 400
+        return jsonify({"message": "El email es requerido."}), 400
 
     if password is None:
-        return jsonify({"msg": "El password es requerido."}), 400
+        return jsonify({"message": "El password es requerido."}), 400
     
     user = User.query.filter_by(email=email, password=password).first()
     
     if user is None:
         # the user was not found on the database
-        return jsonify({"msg": "El email o el password son invalidos."}), 401
+        return jsonify({"message": "El email o el password son inválidos."}), 401
     else:
         expiration_date = datetime.timedelta(days=1)
         access_token = create_access_token(identity=user.id,expires_delta=expiration_date)
@@ -40,7 +40,7 @@ def register():
     
     # Se valida que el email no haya sido registrado.
     if user:
-        return jsonify({"msg": "El email ya fue registrado."}), 401
+        return jsonify({"message": "Ya existe una cuenta asociada a ese email."}), 401
 
     user = User(name = data_request["name"],
     first_surname = data_request["first_surname"],

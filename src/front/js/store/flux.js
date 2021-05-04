@@ -9,7 +9,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			userProfile: [],
 			persons: [],
+			passwordReset: [],
 			userLogged: false,
+			userPasswordReset: false,
 			activeOption: ""
 		},
 		actions: {
@@ -96,6 +98,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 							true,
 							2000
 						);
+					});
+			},
+			forgot: async userBody => {
+				await fetch(`${baseURLApi}users/forgot`, {
+					method: "POST",
+					body: JSON.stringify(userBody),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							// ShowAlert(
+							// 	"top-end",
+							// 	"success",
+							// 	userBody.full_name,
+							// 	"Su cuenta fue creada exitosamente!",
+							// 	false,
+							// 	true,
+							// 	2000
+							// );
+
+							return response.json();
+						}
+					})
+					.then(data => {
+						setStore({ passwordReset: data.results });
+
+						setStore({ userPasswordReset: true });
+
+						getActions().activeOption("/recover");
+
+						console.log("*** forgot password ***");
+						console.log(data.results);
+					})
+					.catch(error => {
+						alert("DANGER[error] - Ha ocurrido un error al tratar de recuperar la contraseña.");
+
+						// ShowAlert(
+						// 	"top-end",
+						// 	"error",
+						// 	"Oops...",
+						// 	"Ha ocurrido un error al tratar de crear la cuenta.",
+						// 	false,
+						// 	true,
+						// 	2000
+						// );
 					});
 			},
 			getProfileUser: async userID => {
@@ -311,7 +360,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							// Se obtienen los datos de las personas asociadas al usuario.
 							getActions().getPerson(userID);
 
-							// Se configura la opción del home
 							getActions().activeOption("/dashboard/person");
 
 							return response.json();

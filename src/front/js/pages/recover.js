@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/recover.scss";
 
 export default function Recover() {
 	const { store, actions } = useContext(Context);
-
 	const [email, setEmail] = useState("");
+	const inputEmailRef = useRef(null);
 
 	const handleRecover = e => {
 		e.preventDefault();
@@ -14,9 +14,13 @@ export default function Recover() {
 		const userBody = {
 			email: email
 		};
-		actions.recoveryPass(userBody);
-		alert("Ingreso a recuperar contraseña");
+
+		actions.forgot(userBody);
 	};
+
+	useEffect(() => {
+		inputEmailRef.current.focus();
+	}, []);
 
 	return (
 		<div className="container-fluid container-recover-main-class">
@@ -32,6 +36,7 @@ export default function Recover() {
 							<div className="m-3">
 								<label className="form-label text-white">Email</label>
 								<input
+									ref={inputEmailRef}
 									type="email"
 									className="form-control"
 									id="exampleInputEmail1"

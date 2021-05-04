@@ -20,6 +20,10 @@ export const NavbarMain = () => {
 		} else {
 			history.push("/");
 		}
+
+		if (store.userPasswordReset) {
+			history.push(store.activeOption);
+		}
 	});
 
 	const AppLogo = () => {

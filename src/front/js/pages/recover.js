@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/recover.scss";
+import PasswordResetValidate from "../component/password-reset-validate";
 
 export default function Recover() {
 	const { store, actions } = useContext(Context);
@@ -21,6 +22,12 @@ export default function Recover() {
 	useEffect(() => {
 		inputEmailRef.current.focus();
 	}, []);
+
+	useEffect(() => {
+		if (store.userPasswordReset) {
+			PasswordResetValidate(store.passwordReset.token);
+		}
+	});
 
 	return (
 		<div className="container-fluid container-recover-main-class">

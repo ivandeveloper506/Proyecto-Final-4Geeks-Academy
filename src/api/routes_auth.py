@@ -1,7 +1,8 @@
 import os
+import app
 import flask
 import datetime
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, current_app
 from api.models import db, User, Person
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -75,6 +76,15 @@ def register():
 
         db.session.add(person)
         db.session.commit()
+
+        nombreBienvenida = data_request["name"] + " " + data_request["first_surname"]
+
+        # Se envia correo de bienvenida al usuario que se esta registrando.
+        app.send_email(subject='Bienvenido(a) a QR+Services',
+                       sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
+                       recipients=[data_request["email"]],
+                       text_body=f'Hola {nombreBienvenida}, bienvenido(a) a QR+Services',
+                       html_body=f'<p>Hola <strong>{nombreBienvenida}</strong>, bienvenido(a) a QR+Services.</p>')
         
         return jsonify(User.serialize(user)), 201
     

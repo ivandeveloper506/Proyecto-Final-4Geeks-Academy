@@ -1,4 +1,7 @@
 import os
+import uuid
+import secrets
+import string
 from smtplib import SMTPException
 from threading import Thread
 from flask_mail import Mail, Message
@@ -95,6 +98,18 @@ def send_email(subject, sender, recipients, text_body,
         msg.html = html_body
     Thread(target=_send_async_email, args=(current_app._get_current_object(), msg)).start()
 # FIN - Funciones para envio de correos.
+
+# Función para generar códigos alfanumericos aleatorios
+def codeGenerate():
+    alphabet = string.ascii_letters + string.digits
+    while True:
+        password = ''.join(secrets.choice(alphabet) for i in range(10))
+        if (any(c.islower() for c in password)
+                and any(c.isupper() for c in password)
+                and sum(c.isdigit() for c in password) >= 3):
+            break
+    return password
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

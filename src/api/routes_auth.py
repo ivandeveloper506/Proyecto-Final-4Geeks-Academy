@@ -109,14 +109,14 @@ def forgot():
         return jsonify({"msg": "El email es invalido."}), 401
     
     try:
-        forgotCode = "CodigoPrueba"
+        codeForgot = app.codeGenerate()
 
         # Se envia correo para recuperación de contraseña.
         app.send_email(subject='Recuperación de contraseña',
                        sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
                        recipients=[data_request["email"]],
-                       text_body=f'Ingrese el siguiente código {forgotCode} para recuperar su contraseña.',
-                       html_body=f'<p style="font-size:15px;">Ingrese el siguiente código <strong style="color:blue; font-size:15px;">{forgotCode}</strong> para recuperar su contraseña.</p>')
+                       text_body=f'Recuperar su contraseña.',
+                       html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
 
         return jsonify({"msg": "El email de recuperación ha sido enviado exitosamente."}), 200
         

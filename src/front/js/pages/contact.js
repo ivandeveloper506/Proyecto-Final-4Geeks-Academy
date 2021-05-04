@@ -25,32 +25,45 @@ export default function Recover() {
 				<div className="col-sm-9 col-md-6 contact-main-class">
 					<div className="row d-flex flex-row align-items-center justify-content-center mt-3">
 						<h2 className="text-white">Contáctenos</h2>
-						<i className="fa fa-envelope fa-3x"></i>
+						<i className="fa fa-envelope fa-3x fa-fw"></i>
 					</div>
 					<hr className="line-class" />
 					<div>
 						<form onSubmit={handleRecover}>
 							<div className="m-3">
+								<label className="form-label text-white">Nombre</label>
+								<input
+									type="name"
+									className="form-control"
+									id="exampleInputname1"
+									aria-describedby="nameHelp"
+									placeholder="nombre"
+									required
+									value={name}
+									onChange={e => setName(e.target.value)}
+								/>
+							</div>
+							<div className="m-3">
 								<label className="form-label text-white">Email</label>
 								<input
 									type="email"
 									className="form-control"
-									id="exampleInputEmail1"
+									id="exampleInputemail1"
 									aria-describedby="emailHelp"
-									placeholder="Email"
+									placeholder="email"
 									required
-									value={email}
+									value={name}
 									onChange={e => setEmail(e.target.value)}
 								/>
 							</div>
 							<div className="m-3">
-								<label className="form-label text-white">Asunto</label>
+								<label className="form-label text-white">Teléfono</label>
 								<input
-									type="Asunto"
+									type="phone"
 									className="form-control"
-									id="exampleInputEmail1"
-									aria-describedby="emailHelp"
-									placeholder="Email"
+									id="exampleInputphone1"
+									aria-describedby="phoneHelp"
+									placeholder="teléfono"
 									required
 								/>
 							</div>
@@ -59,9 +72,9 @@ export default function Recover() {
 									Enviar mensaje
 								</button>
 							</div>
-							<div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
+							<div className="mt-3 row d-flex flex-row align-items-center justify-content-center text-white">
 								<h6>
-									<span className="text-white">
+									<span>
 										Su opinión es importante para nosotros. Por favor llene la información<br></br>
 										solicitada y nos pondremos encontacto con usted a la mayor brevedad.
 									</span>

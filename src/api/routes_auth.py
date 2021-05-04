@@ -3,7 +3,7 @@ import app
 import flask
 import datetime
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Person
+from api.models import db, User, Person, PasswordReset
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -93,23 +93,34 @@ def register():
 
 # [POST] - Ruta para recuperar contraseña de un [user]
 @routes_auth.route('/api/users/forgot', methods=['POST'])
-@jwt_required()
 def forgot():
     data_request = request.get_json()
 
     rEmail = data_request["email"]
 
     if rEmail is None:
-        return jsonify({"msg": "El email es requerido."}), 400
+        return jsonify({"message": "El email es requerido."}), 400
     
     user = User.query.filter_by(email=rEmail).first()
     
     # Se valida que el email no haya sido registrado.
     if user is None:
-        return jsonify({"msg": "El email es invalido."}), 401
+        return jsonify({"message": "El email ingresado es inválido."}), 401
     
     try:
         codeForgot = app.codeGenerate()
+
+        # Se guardar el regisrtro del token enviado al usuario
+        passwordReset = PasswordReset(email = rEmail,
+        token=codeForgot,
+        expiration_date = datetime.datetime.utcnow() + datetime.timedelta(minutes=15),
+        creation_date = datetime.datetime.utcnow(),
+        update_date = datetime.datetime.utcnow())
+
+        db.session.add(passwordReset)
+        db.session.commit()
+
+        passwordResetInfo = PasswordReset.serialize(passwordReset)
 
         # Se envia correo para recuperación de contraseña.
         app.send_email(subject='Recuperación de contraseña',
@@ -118,10 +129,10 @@ def forgot():
                        text_body=f'Recuperar su contraseña.',
                        html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
 
-        return jsonify({"msg": "El email de recuperación ha sido enviado exitosamente."}), 200
+        return jsonify({"message": "El email de recuperación ha sido enviado exitosamente.","results": passwordResetInfo}), 200
         
     except AssertionError as exception_message: 
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+        return jsonify(msg='error: {}. '.format(exception_message)), 400
 
 # [PUT] - Ruta para modificar el activo de un [user]
 @routes_auth.route('/api/users/active/<int:id>', methods=['PUT'])

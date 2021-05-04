@@ -2,6 +2,29 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+# INICIO - Modelo para la tabla [PasswordReset] - INICIO
+class PasswordReset(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(250), nullable=False)
+    token = db.Column(db.String(250), nullable=False)
+    expiration_date = db.Column(db.DateTime, nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False)
+    update_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return '<PasswordReset %r>' % self.email
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "token": self.token,
+            "expiration_date": self.expiration_date,
+            "creation_date": self.creation_date,
+            "update_date": self.update_date
+        }
+# FIN - Modelo para la tabla [PasswordReset] - FIN
+
 # INICIO - Modelo para la tabla [User] - INICIO
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -12,9 +12,6 @@ from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
 from api.models import db
 
-# TODO: Validar en el Frontend
-# from api.routes import api
-
 from api.admin import setup_admin
 
 # Configuración del email
@@ -52,12 +49,6 @@ CORS(app)
 
 # add the admin
 setup_admin(app)
-
-# Add all endpoints form the API with a "api" prefix
-
-# TODO: Cuando lleguemos al Frontend se debe validar esta línea para exponer todos los endpoints desde aqui
-# app.register_blueprint(api, url_prefix='/api')
-
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)
@@ -99,17 +90,17 @@ def send_email(subject, sender, recipients, text_body,
     Thread(target=_send_async_email, args=(current_app._get_current_object(), msg)).start()
 # FIN - Funciones para envio de correos.
 
-# Función para generar códigos alfanumericos aleatorios
+# INICIO - Función para generar códigos alfanumericos aleatorios
 def codeGenerate():
     alphabet = string.ascii_letters + string.digits
     while True:
-        password = ''.join(secrets.choice(alphabet) for i in range(10))
+        password = ''.join(secrets.choice(alphabet) for i in range(15))
         if (any(c.islower() for c in password)
                 and any(c.isupper() for c in password)
                 and sum(c.isdigit() for c in password) >= 3):
             break
     return password
-
+# FIN - Función para generar códigos alfanumericos aleatorios
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

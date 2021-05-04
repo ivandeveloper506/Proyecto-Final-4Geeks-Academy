@@ -2,7 +2,7 @@ import os
 import flask
 import datetime
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Person
+from api.models import db, User, Person, Message
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -81,6 +81,50 @@ def register():
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
 
+
+# [PUT] - Ruta para modificar el activo de un [user]
+@routes_auth.route('/api/users/active/<int:id>', methods=['PUT'])
+@jwt_required()
+def active(id):
+    user = User.query.get(id)
+
+    if user is None:
+        raise APIException('El usuario con el id especificado, no fue encontrado.',status_code=403)
+
+    data_request = request.get_json()
+
+    user.active = data_request["active"]
+
+    try: 
+        db.session.commit()
+        
+        return jsonify(User.serialize(user)), 200
+    
+    except AssertionError as exception_message: 
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
+        # [POST] - Ruta para registro de un [message]
+@routes_auth.route('/api/message/register', methods=['POST'])
+def registerMensaje():
+    data_request = request.get_json()
+    
+
+    mess = Message(name = data_request["name"],
+    phone = data_request["phone"],
+    email = data_request["email"],
+    message = data_request["message"],
+    creation_date = datetime.datetime.now(),
+    update_date = datetime.datetime.now())
+
+    try:
+        db.session.add(mess)
+        db.session.commit()
+        
+        return jsonify(Message.serialize(mess)), 201
+    
+    except AssertionError as exception_message: 
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
 # [POST] - Ruta para recuperar contraseña de un [user]
 @routes_auth.route('/api/users/recoveryPass', methods=['POST'])
 def recoveryPass():
@@ -101,27 +145,6 @@ def recoveryPass():
     try:
         db.session.commit()        
         #return jsonify(User.serialize(user)), 201
-    
-    except AssertionError as exception_message: 
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
-
-# [PUT] - Ruta para modificar el activo de un [user]
-@routes_auth.route('/api/users/active/<int:id>', methods=['PUT'])
-@jwt_required()
-def active(id):
-    user = User.query.get(id)
-
-    if user is None:
-        raise APIException('El usuario con el id especificado, no fue encontrado.',status_code=403)
-
-    data_request = request.get_json()
-
-    user.active = data_request["active"]
-
-    try: 
-        db.session.commit()
-        
-        return jsonify(User.serialize(user)), 200
     
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400

@@ -8,14 +8,23 @@ export default function Recover() {
 
 	const [email, setEmail] = useState("");
 
+	const [name, setName] = useState("");
+
+	const [phone, setPhone] = useState("");
+
+	const [message, setMessage] = useState("");
+
 	const handleRecover = e => {
 		e.preventDefault();
 
-		const userBody = {
-			email: email
+		const messageBody = {
+			name: name,
+			email: email,
+			phone: phone,
+			message: message
 		};
-		actions.recoveryPass(userBody);
-		alert("Ingreso a recuperar contraseña");
+		actions.registrarMensaje(messageBody);
+		alert("Ingreso a registrar mensaje");
 	};
 
 	return (
@@ -33,7 +42,7 @@ export default function Recover() {
 							<div className="m-3">
 								<label className="form-label text-white">Nombre</label>
 								<input
-									type="name"
+									type="text"
 									className="form-control"
 									id="exampleInputname1"
 									aria-describedby="nameHelp"
@@ -46,36 +55,51 @@ export default function Recover() {
 							<div className="m-3">
 								<label className="form-label text-white">Email</label>
 								<input
-									type="email"
+									type="text"
 									className="form-control"
 									id="exampleInputemail1"
 									aria-describedby="emailHelp"
 									placeholder="email"
 									required
-									value={name}
+									value={email}
 									onChange={e => setEmail(e.target.value)}
 								/>
 							</div>
 							<div className="m-3">
 								<label className="form-label text-white">Teléfono</label>
 								<input
-									type="phone"
+									type="text"
 									className="form-control"
 									id="exampleInputphone1"
 									aria-describedby="phoneHelp"
-									placeholder="teléfono"
+									placeholder="Teléfono"
 									required
+									value={phone}
+									onChange={e => setPhone(e.target.value)}
 								/>
 							</div>
 							<div className="m-3">
-								<button type="submit" className="btn btn-info btn-block">
+								<label className="form-label text-white">Mensaje</label>
+								<textarea
+									className="form-control"
+									id="exampleInputphone1"
+									aria-describedby="phoneHelp"
+									placeholder="Mensaje"
+									required
+									value={message}
+									onChange={e => setMessage(e.target.value)}
+									rows="3"
+								/>
+							</div>
+							<div className="m-3">
+								<button type="submit" className="btn btn-primary btn-block">
 									Enviar mensaje
 								</button>
 							</div>
-							<div className="mt-3 row d-flex flex-row align-items-center justify-content-center text-white">
+							<div className="m-3 row d-flex flex-row align-items-center justify-content-center text-white">
 								<h6>
 									<span>
-										Su opinión es importante para nosotros. Por favor llene la información<br></br>
+										Su opinión es importante para nosotros. Por favor llene la información
 										solicitada y nos pondremos encontacto con usted a la mayor brevedad.
 									</span>
 								</h6>

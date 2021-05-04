@@ -153,3 +153,28 @@ class PersonQr(db.Model):
             "update_date": self.update_date
         }
 # FIN - Modelo para la tabla [PersonQR] - FIN
+
+# INICIO - Modelo para la tabla [Message] - INICIO
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(12), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    message = db.Column(db.String(100), nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False)
+    update_date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self):
+        return '<Message %r>' % self.name
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "phone": self.phone,
+            "email": self.email,
+            "message": self.message,
+            "creation_date": self.creation_date,
+            "update_date": self.update_date
+        }
+# FIN - Modelo para la tabla [Message] - FIN

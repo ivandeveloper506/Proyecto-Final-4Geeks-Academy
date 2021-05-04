@@ -92,26 +92,34 @@ def register():
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
 
 # [POST] - Ruta para recuperar contraseña de un [user]
-@routes_auth.route('/api/users/recoveryPass', methods=['POST'])
-def recoveryPass():
+@routes_auth.route('/api/users/forgot', methods=['POST'])
+@jwt_required()
+def forgot():
     data_request = request.get_json()
 
-    #user = User.query.filter_by(email=data_request["email"]).first()
-    
-    # Se valida que exista el funcionario con el correo ingresado.
-    
-    #if user:
-        #return jsonify({"msg": "Se esta enviando la solicitud de recuperación de contraseña"}),200
-    #else
-        #return jsonify({"msg": "Correo incorrecto o usuario no nregistrado"}), 401
+    rEmail = data_request["email"]
 
-    user = User(
-    email = data_request["email"])
-
+    if rEmail is None:
+        return jsonify({"msg": "El email es requerido."}), 400
+    
+    user = User.query.filter_by(email=rEmail).first()
+    
+    # Se valida que el email no haya sido registrado.
+    if user is None:
+        return jsonify({"msg": "El email es invalido."}), 401
+    
     try:
-        db.session.commit()        
-        #return jsonify(User.serialize(user)), 201
-    
+        forgotCode = "CodigoPrueba"
+
+        # Se envia correo para recuperación de contraseña.
+        app.send_email(subject='Recuperación de contraseña',
+                       sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
+                       recipients=[data_request["email"]],
+                       text_body=f'Ingrese el siguiente código {forgotCode} para recuperar su contraseña.',
+                       html_body=f'<p style="font-size:15px;">Ingrese el siguiente código <strong style="color:blue; font-size:15px;">{forgotCode}</strong> para recuperar su contraseña.</p>')
+
+        return jsonify({"msg": "El email de recuperación ha sido enviado exitosamente."}), 200
+        
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
 

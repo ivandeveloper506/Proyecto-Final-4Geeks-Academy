@@ -27,9 +27,9 @@ export default function Recover() {
 		alert("Ingreso a enviar mensaje");
 	};
 
-	// useEffect(() => {
-	// 	inputNameRef.current.focus();
-	// }, []);
+	useEffect(() => {
+		inputNameRef.current.focus();
+	}, []);
 
 	return (
 		<div className="container-fluid main-div-class">

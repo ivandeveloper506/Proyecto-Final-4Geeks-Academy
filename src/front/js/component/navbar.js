@@ -24,6 +24,10 @@ export const NavbarMain = () => {
 		if (store.userPasswordReset) {
 			history.push(store.activeOption);
 		}
+
+		if (store.userPasswordValidate) {
+			history.push(store.activeOption);
+		}
 	});
 
 	const AppLogo = () => {

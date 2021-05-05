@@ -31,5 +31,10 @@ export default function PasswordResetValidate(store, actions) {
 				title: `¡Código validado exitosamente!`
 			});
 		}
+
+		actions.userPasswordValidate(true);
+		actions.userPasswordReset(false);
+
+		actions.activeOption("/recover");
 	});
 }

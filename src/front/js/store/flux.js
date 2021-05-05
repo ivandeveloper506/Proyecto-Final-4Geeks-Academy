@@ -12,6 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			passwordReset: [],
 			userLogged: false,
 			userPasswordReset: false,
+			userPasswordValidate: false,
 			activeOption: ""
 		},
 		actions: {
@@ -126,7 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ passwordReset: data.results });
 
-						setStore({ userPasswordReset: true });
+						getActions().userPasswordReset(true);
 
 						getActions().activeOption("/recover");
 
@@ -373,6 +374,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			activeOption: option => {
 				setStore({ activeOption: option });
+			},
+			userPasswordReset: option => {
+				setStore({ userPasswordReset: option });
+			},
+			userPasswordValidate: option => {
+				setStore({ userPasswordValidate: option });
 			},
 			logout: () => {
 				localStorage.setItem("x-access-token", null);

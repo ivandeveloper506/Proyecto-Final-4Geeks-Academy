@@ -123,11 +123,11 @@ def forgot():
         passwordResetInfo = PasswordReset.serialize(passwordReset)
 
         # Se envia correo para recuperación de contraseña.
-        app.send_email(subject='Recuperación de contraseña',
+        app.send_email(subject='Recuperación de contraseña [Código verificador]',
                        sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
                        recipients=[data_request["email"]],
                        text_body=f'Recuperar su contraseña.',
-                       html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código de Verificación: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
+                       html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código de verificación: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
 
         return jsonify({"message": "El email de recuperación ha sido enviado exitosamente.","results": passwordResetInfo}), 200
         
@@ -181,7 +181,7 @@ def passwordReset(token):
             db.session.commit()
 
             # Se envia correo para recuperación de contraseña.
-            app.send_email(subject='Contraseña actualizada',
+            app.send_email(subject='Recuperación de contraseña [Contraseña actualizada]',
                        sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
                        recipients=[data_request["email"]],
                        text_body=f'Actualizar su contraseña.',

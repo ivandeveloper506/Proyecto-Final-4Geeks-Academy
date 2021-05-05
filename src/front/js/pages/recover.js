@@ -1,4 +1,5 @@
 import { ShowAlert } from "../component/alert";
+import Swal from "sweetalert2";
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
@@ -24,12 +25,22 @@ export default function Recover() {
 	};
 
 	const handlePasswordReset = e => {
-		const userBody = {
-			email: store.userEmailPasswordReset,
-			password: password
-		};
+		if (password != passwordConfirm) {
+			Swal.fire({
+				icon: "error",
+				title: "Validando contraseña",
+				text: "Las contraseñas no coinciden"
+			});
 
-		actions.passwordReset(userBody, store.passwordReset.token);
+			actions.activeOption("/recover");
+		} else {
+			const userBody = {
+				email: store.userEmailPasswordReset,
+				password: password
+			};
+
+			actions.passwordReset(userBody, store.passwordReset.token);
+		}
 	};
 
 	useEffect(() => {

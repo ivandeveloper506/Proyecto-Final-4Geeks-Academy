@@ -6,7 +6,7 @@ export default function PasswordResetValidate(store, actions) {
 	let passwordResetToken = store.passwordReset.token;
 
 	Swal.fire({
-		title: "Ingresar Código de Verificación enviado al correo",
+		title: "Ingrese código verificador enviado al correo",
 		input: "text",
 		inputAttributes: {
 			autocapitalize: "off"

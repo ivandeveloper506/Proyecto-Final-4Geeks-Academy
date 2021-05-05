@@ -15,19 +15,21 @@ export const NavbarMain = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		if (store.userLogged) {
-			history.push(store.activeOption);
-		} else {
-			history.push("/");
-		}
+		// if (store.userLogged) {
+		// 	history.push(store.activeOption);
+		// } else {
+		// 	history.push("/");
+		// }
 
-		if (store.userPasswordReset) {
-			history.push(store.activeOption);
-		}
+		// if (store.userPasswordReset) {
+		// 	history.push(store.activeOption);
+		// }
 
-		if (store.userPasswordValidate) {
-			history.push(store.activeOption);
-		}
+		// if (store.userPasswordValidate) {
+		// 	history.push(store.activeOption);
+		// }
+
+		history.push(store.activeOption);
 	});
 
 	const AppLogo = () => {

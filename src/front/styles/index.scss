@@ -145,6 +145,15 @@ body{
 .cell-table-class{
    height: 60px;
 }
+
+.fa-pen:before,
+.fa-tables:before,
+.fa-syringe:before,
+.fa-qrcode:before,
+.fa-trash-alt:before {
+    font-size: 30px;
+}
+
 // FIN - Clases tablas de mantenimiento y detalle
 
 /* ESTILOS MEDIA QUERY */

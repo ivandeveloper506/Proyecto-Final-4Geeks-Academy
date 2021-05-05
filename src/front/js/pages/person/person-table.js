@@ -233,16 +233,38 @@ export default function EnhancedTable() {
 														<IconButton
 															className="text-warning"
 															aria-label="Editar persona">
-															<EditIcon />
+															<i className="fas fa-pen"></i>
 														</IconButton>
 													</NavLink>
+												</Tooltip>
+												<Tooltip title="Medicamentos">
+													<NavLink to={`/dashboard/person/detail/${index}`}>
+														<IconButton className="text-primary" aria-label="Medicamentos">
+															<i className="fas fa-tablets"></i>
+														</IconButton>
+													</NavLink>
+												</Tooltip>
+												<Tooltip title="Vacunas">
+													<NavLink to={`/dashboard/person/detail/${index}`}>
+														<IconButton className="text-success" aria-label="Vacunas">
+															<i className="fas fa-syringe"></i>
+														</IconButton>
+													</NavLink>
+												</Tooltip>
+												<Tooltip title="Generar Código QR">
+													<IconButton
+														className="text-dark"
+														aria-label="Generar Código QR"
+														onClick={event => handleDelete(index)}>
+														<i className="fas fa-qrcode"></i>
+													</IconButton>
 												</Tooltip>
 												<Tooltip title="Eliminar registro">
 													<IconButton
 														className="text-danger"
 														aria-label="Eliminar persona"
 														onClick={event => handleDelete(index)}>
-														<DeleteIcon />
+														<i className="fas fa-trash-alt"></i>
 													</IconButton>
 												</Tooltip>
 											</TableCell>

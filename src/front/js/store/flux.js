@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userLogged: false,
 			userPasswordReset: false,
 			userPasswordValidate: false,
+			userEmailPasswordReset: "",
 			activeOption: ""
 		},
 		actions: {
@@ -44,6 +45,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						// Se obtienen los datos del usuario conectado.
 						getActions().getProfileUser(data.user_id);
+
+						// Se configuran el false las variables de recuperación de contraseña
+						getActions().userPasswordReset(false);
+						getActions().userPasswordValidate(false);
 
 						// Se configura la opción del home
 						getActions().activeOption("/dashboard");
@@ -129,6 +134,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						getActions().userPasswordReset(true);
 
+						// Se actualiza el correo electronico usado para recuperar la contraseña
+						// ya que se utilizara para actualizar el mismo
+						getActions().userEmailPasswordReset(userBody.email);
+
 						getActions().activeOption("/recover");
 
 						console.log("*** forgot password ***");
@@ -146,6 +155,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// 	true,
 						// 	2000
 						// );
+					});
+			},
+			passwordReset: async userBody => {
+				await fetch(`${baseURLApi}users/password-reset/${"personID"}`, {
+					method: "PUT",
+					body: JSON.stringify(userBody),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							ShowAlert("top-end", "success", "", "¡Contraseña actualizada!", false, true, 2000);
+
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Error al actualizar contraseña.",
+								true,
+								true,
+								2000
+							);
+						}
+					})
+					.catch(error => {
+						ShowAlert("top-end", "error", "Oops...", "Error al actualizar contraseña.", true, true, 2000);
 					});
 			},
 			getProfileUser: async userID => {
@@ -380,6 +418,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			userPasswordValidate: option => {
 				setStore({ userPasswordValidate: option });
+			},
+			userEmailPasswordReset: email => {
+				setStore({ userEmailPasswordReset: email });
 			},
 			logout: () => {
 				localStorage.setItem("x-access-token", null);

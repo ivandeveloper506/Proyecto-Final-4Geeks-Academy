@@ -154,4 +154,30 @@ def active(id):
     
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
+# [PUT] - Ruta para modificar el activo de un [user]
+@routes_auth.route('/api/users/password-reset/<string:token>', methods=['PUT'])
+def passwordReset(token):
+    data_request = request.get_json()
+
+    email = data_request["email"]
+    password = data_request["password"]
+
+    if email is None:
+        return jsonify({"message": "El email es requerido."}), 400
+
+    if password is None:
+        return jsonify({"message": "El password es requerido."}), 400
+    
+    user = User.query.filter_by(email=email).first()
+    
+    if user is None:
+        # the user was not found on the database
+        return jsonify({"message": "El usuario con el email especificado no existe."}), 401
+    else:
+        user.password = password
+
+        db.session.commit()
+
+        return jsonify('¡La contraseña fue actualizada exitosamente!'), 200
 # FIN - Definición de EndPoints para el Modelo [User] para Login y Registro - FIN

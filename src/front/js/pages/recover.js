@@ -7,7 +7,10 @@ import PasswordResetValidate from "../component/password-reset-validate";
 export default function Recover() {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
-	const inputEmailRef = useRef(null);
+	const [password, setPassword] = useState("");
+	const [passwordConfirm, setPasswordConfirm] = useState("");
+	const inputEmailRef = useRef("");
+	const inputPasswordRef = useRef("");
 
 	const handleRecover = e => {
 		e.preventDefault();
@@ -19,22 +22,26 @@ export default function Recover() {
 		actions.forgot(userBody);
 	};
 
+	const handlePasswordReset = e => {
+		const userBody = {
+			email: store.userEmailPasswordReset,
+			password: password
+		};
+
+		actions.passwordReset(userBody);
+	};
+
 	useEffect(() => {
-		inputEmailRef.current.focus();
+		if (store.userPasswordValidate) {
+			inputPasswordRef.current.focus();
+		} else {
+			inputEmailRef.current.focus();
+		}
 	}, []);
 
 	useEffect(() => {
 		if (store.userPasswordReset) {
-			let codigo = false;
-
-			console.log("*** Recover sin validar ***");
-			console.log(codigo);
-
-			//  PasswordResetValidate(store.passwordReset.token);
 			PasswordResetValidate(store, actions);
-
-			console.log("*** Recover validado ***");
-			console.log(codigo);
 		}
 	});
 
@@ -44,25 +51,36 @@ export default function Recover() {
 				<div className="container-fluid container-recover-main-class">
 					<div className="form-row d-flex flex-row align-items-center justify-content-center">
 						<div className="col" />
-						<div className="col-sm-9 col-md-6 recover-main-class">
+						<div className="col-sm-9 col-md-6 recover-main-class1">
 							<div className="row d-flex flex-row align-items-center justify-content-center mt-3">
-								<h2 className="text-white">Recuperar contraseña entro</h2>
+								<h2 className="text-white">Recuperar contraseña</h2>
 							</div>
 							<hr className="line-class" />
 							<div>
-								<form onSubmit={handleRecover}>
+								<form onSubmit={handlePasswordReset}>
 									<div className="m-3">
-										<label className="form-label text-white">Email</label>
+										<label className="form-label text-white">Contraseña</label>
 										<input
-											ref={inputEmailRef}
-											type="email"
+											ref={inputPasswordRef}
+											type="password"
 											className="form-control"
-											id="exampleInputEmail1"
-											aria-describedby="emailHelp"
-											placeholder="Email"
+											id="inputPassword"
+											placeholder="Ingrese la nueva contraseña..."
 											required
-											value={email}
-											onChange={e => setEmail(e.target.value)}
+											value={password}
+											onChange={e => setPassword(e.target.value)}
+										/>
+									</div>
+									<div className="m-3">
+										<label className="form-label text-white">Confirmar contraseña</label>
+										<input
+											type="password"
+											className="form-control"
+											id="inputPasswordConfirm"
+											placeholder="Confirme la nueva contraseña..."
+											required
+											value={passwordConfirm}
+											onChange={e => setPasswordConfirm(e.target.value)}
 										/>
 									</div>
 									<div className="m-3">

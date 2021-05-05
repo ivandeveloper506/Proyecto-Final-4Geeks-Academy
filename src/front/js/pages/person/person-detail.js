@@ -11,6 +11,8 @@ import { green } from "@material-ui/core/colors";
 import Tooltip from "@material-ui/core/Tooltip";
 import Divider from "@material-ui/core/Divider";
 
+import { Form } from "react-bootstrap";
+
 const useStyles = makeStyles(theme => ({
 	root: {
 		"& > *": {
@@ -49,7 +51,7 @@ export default function PersonDetail() {
 	const inputNameRef = useRef("");
 
 	const handleSave = e => {
-		// e.preventDefault();
+		e.preventDefault();
 
 		// Se manda a crear el usuario
 		const personBody = {
@@ -84,12 +86,6 @@ export default function PersonDetail() {
 
 		if (action === "edit") {
 			{
-				// store.persons.map((item, index) => {
-				// 	if (personId === index) {
-				// 		personDetail = item;
-				// 	}
-				// });
-
 				personDetail = store.persons[personId];
 			}
 
@@ -111,8 +107,8 @@ export default function PersonDetail() {
 	}, []);
 
 	return (
-		<div className="container container-detail-class">
-			<div className="row title-mant-class">
+		<div className="container container-detail-class body-mant-class">
+			{/* <div className="row title-mant-class head-mant-class">
 				<div className="col-md-8">
 					<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
 				</div>
@@ -126,9 +122,10 @@ export default function PersonDetail() {
 										background: "#28A745",
 										color: "white"
 									}}
-									onClick={() => handleSave()}
+									// onClick={() => handleSave()}
 									variant="contained"
 									size="medium"
+									type="submit"
 									className={classes.button}
 									startIcon={<SaveIcon />}>
 									Guardar
@@ -156,10 +153,140 @@ export default function PersonDetail() {
 						</div>
 					</div>
 				</div>
-			</div>
-			<Divider />
+			</div> */}
 			<div>
-				<form className={classes.root} noValidate autoComplete="off">
+				<Form className="mt-3" onSubmit={handleSave}>
+					<div className="form-row title-mant-class head-mant-class">
+						<Form.Group className="col-md-9">
+							<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
+						</Form.Group>
+						<Form.Group className="col-md-3">
+							<button type="submit" className="btn btn-success">
+								<i className="fas fa-save"></i> Guardar
+							</button>
+
+							<NavLink to="/dashboard/person/">
+								<button className="btn btn-primary ml-3">
+									<i className="fas fa-arrow-left"></i> Regresar
+								</button>
+							</NavLink>
+						</Form.Group>
+					</div>
+
+					<div className="form-row">
+						<Form.Group className="col-md-4">
+							<Form.Label>Nombre</Form.Label>
+							<Form.Control
+								onChange={e => setName(e.target.value)}
+								value={name}
+								// ref={inputNameRef}
+								required="true"
+								type="text"
+								id="name"
+								label="Nombre"
+								placeholder="Ingrese el nombre..."
+							/>
+						</Form.Group>
+						<Form.Group className="col-md-4">
+							<Form.Label>Primer apellido</Form.Label>
+							<Form.Control
+								onChange={e => setFirstSurname(e.target.value)}
+								value={firstSurname}
+								required="true"
+								type="text"
+								id="firstSurname"
+								label="Primer apellido"
+								placeholder="Ingrese el primer apellido..."
+							/>
+						</Form.Group>
+						<Form.Group className="col-md-4">
+							<Form.Label>Segundo apellido</Form.Label>
+							<Form.Control
+								onChange={e => setSecondSurname(e.target.value)}
+								value={secondSurname}
+								type="text"
+								id="secondSurname"
+								label="Segundo apellido"
+								placeholder="Ingrese el segundo apellido..."
+							/>
+						</Form.Group>
+					</div>
+
+					<div className="form-row">
+						<Form.Group className="col-md-4">
+							<Form.Label>Conocido como (cc)</Form.Label>
+							<Form.Control
+								onChange={e => setKnownAs(e.target.value)}
+								value={knownAs}
+								required="true"
+								type="text"
+								id="knownAs"
+								label="Conocido como"
+								placeholder="Ingrese el conocido como..."
+							/>
+						</Form.Group>
+						<Form.Group className="col-md-4">
+							<Form.Label>Fecha nacimiento</Form.Label>
+							<Form.Control
+								onChange={e => setBirthDate(e.target.value)}
+								value={birthDate}
+								required="true"
+								type="date"
+								id="birthDate"
+								label="Fecha nacimiento"
+								placeholder="Ingrese la fecha nacimiento..."
+							/>
+						</Form.Group>
+						<Form.Group className="col-md-4">
+							<Form.Label>Número de teléfono</Form.Label>
+							<Form.Control
+								onChange={e => setTelephoneNumber(e.target.value)}
+								value={telephoneNumber}
+								type="number"
+								id="telephoneNumber"
+								label="Número de teléfono"
+								placeholder="Ingrese el número de teléfono..."
+							/>
+						</Form.Group>
+					</div>
+
+					<div className="form-row">
+						<Form.Group className="col-md-8">
+							<Form.Label>Contacto de emergencia</Form.Label>
+							<Form.Control
+								onChange={e => setEmergencyContact(e.target.value)}
+								value={emergencyContact}
+								required="true"
+								type="text"
+								id="emergencyContact"
+								label="Contacto de emergencia"
+								placeholder="Ingrese el nombre del contacto en caso de emergencia..."
+							/>
+						</Form.Group>
+						<Form.Group className="col-md-4">
+							<Form.Label>Teléfono de emergencia</Form.Label>
+							<Form.Control
+								onChange={e => setEmergencyPhone(e.target.value)}
+								value={emergencyPhone}
+								required="true"
+								type="number"
+								id="emergencyPhone"
+								label="Teléfono de emergencia"
+								placeholder="Ingrese el teléfono de emergencia..."
+							/>
+						</Form.Group>
+					</div>
+
+					{/* <Form.Group controlId="formBasicPassword">
+						<Form.Label>Password</Form.Label>
+						<Form.Control type="password" placeholder="Password" />
+					</Form.Group>
+					<Button variant="primary" type="submit">
+						Submit
+					</Button> */}
+				</Form>
+
+				{/* <form className={classes.root} noValidate autoComplete="off">
 					<TextField
 						onChange={e => setName(e.target.value)}
 						value={name}
@@ -255,6 +382,7 @@ export default function PersonDetail() {
 						placeholder="Ingrese la foto..."
 					/>
 				</form>
+			</div> */}
 			</div>
 		</div>
 	);

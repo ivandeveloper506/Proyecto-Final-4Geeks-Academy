@@ -330,7 +330,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								"top-end",
 								"success",
 								"",
-								"¡Los datos de la persona han sido guardados exitosamente!",
+								"¡Los datos de la persona han sido actualizados exitosamente!",
 								false,
 								true,
 								2000
@@ -369,7 +369,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					showCancelButton: true,
 					confirmButtonColor: "#3085d6",
 					cancelButtonColor: "#d33",
-					confirmButtonText: "¡Si, eliminarlo!"
+					confirmButtonText: "¡Si, eliminarlo!",
+					cancelButtonText: "Cancelar"
 				}).then(result => {
 					if (result.isConfirmed) {
 						// Si la respuesta es positiva se invoca la función que procesa el delete.

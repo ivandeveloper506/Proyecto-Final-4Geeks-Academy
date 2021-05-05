@@ -104,17 +104,9 @@ export default function PrimarySearchAppBar() {
 					<div className={classes.grow} />
 					<Tooltip title="Crear Persona" aria-label="Crear Persona">
 						<NavLink to={`/dashboard/person/detail/`}>
-							<Button
-								style={{
-									background: "#28A745",
-									color: "white"
-								}}
-								variant="contained"
-								size="medium"
-								className={classes.button}
-								startIcon={<AddBoxIcon />}>
-								Crear Persona
-							</Button>
+							<button className="btn btn-success">
+								<i className="fas fa-plus"></i> Crear persona
+							</button>
 						</NavLink>
 					</Tooltip>
 				</Toolbar>

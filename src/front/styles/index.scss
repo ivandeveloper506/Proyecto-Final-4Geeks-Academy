@@ -123,20 +123,23 @@ body{
 }
 
 .body-table-class{
-    background: rgba(161,143,125, 0.4);
+    background: rgba(161,143,125, 0.3);
 }
 
 .head-table-class{
-    background: rgba(161,143,125, 0.7);
+    background: rgba(161,143,125, 0.6);
 }
 
 .body-mant-class{
-    background: rgb(217,210,203)
+    background: rgb(218,212,208);
 }
 
 .head-mant-class{
-    background: rgb(189,176,164);
-    border-radius: 5px 5px 0px 0px;
+    background: rgb(199,188,177);
+    border-radius: 5px;
+    height: 75px;
+    margin-bottom: 20px; 
+    // margin-bottom: 50px; // RESPONSIVE
 }
 
 .cell-table-class{

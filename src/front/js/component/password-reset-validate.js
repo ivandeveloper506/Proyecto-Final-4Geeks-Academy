@@ -2,15 +2,20 @@ import Swal from "sweetalert2";
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
-export default function PasswordResetValidate(passwordResetToken) {
+export default function PasswordResetValidate(store, actions) {
+	let passwordResetToken = store.passwordReset.token;
+
 	Swal.fire({
-		title: "Ingrese el código de validación enviado al correo.",
+		title: "Ingresar Código de Verificación enviado al correo",
 		input: "text",
 		inputAttributes: {
 			autocapitalize: "off"
 		},
+		allowOutsideClick: false,
+		allowEscapeKey: false,
 		showCancelButton: true,
 		confirmButtonText: "Validar",
+		cancelButtonText: "Cancelar",
 		showLoaderOnConfirm: true,
 		preConfirm: code => {
 			if (code != passwordResetToken) {
@@ -23,7 +28,7 @@ export default function PasswordResetValidate(passwordResetToken) {
 	}).then(result => {
 		if (result.isConfirmed) {
 			Swal.fire({
-				title: `¡El código fue validado correctamente!`
+				title: `¡Código validado exitosamente!`
 			});
 		}
 	});

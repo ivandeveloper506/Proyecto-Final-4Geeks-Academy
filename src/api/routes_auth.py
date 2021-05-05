@@ -127,7 +127,7 @@ def forgot():
                        sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
                        recipients=[data_request["email"]],
                        text_body=f'Recuperar su contraseña.',
-                       html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
+                       html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código de Verificación: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
 
         return jsonify({"message": "El email de recuperación ha sido enviado exitosamente.","results": passwordResetInfo}), 200
         

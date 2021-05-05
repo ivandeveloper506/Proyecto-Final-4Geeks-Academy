@@ -25,7 +25,16 @@ export default function Recover() {
 
 	useEffect(() => {
 		if (store.userPasswordReset) {
-			PasswordResetValidate(store.passwordReset.token);
+			let codigo = false;
+
+			console.log("*** Recover sin validar ***");
+			console.log(codigo);
+
+			//  PasswordResetValidate(store.passwordReset.token);
+			PasswordResetValidate(store, actions);
+
+			console.log("*** Recover validado ***");
+			console.log(codigo);
 		}
 	});
 

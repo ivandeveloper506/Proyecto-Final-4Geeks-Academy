@@ -175,9 +175,20 @@ def passwordReset(token):
         # the user was not found on the database
         return jsonify({"message": "El usuario con el email especificado no existe."}), 401
     else:
-        user.password = password
+        try:
+            user.password = password
+            
+            db.session.commit()
 
-        db.session.commit()
-
-        return jsonify('¡La contraseña fue actualizada exitosamente!'), 200
+            # Se envia correo para recuperación de contraseña.
+            app.send_email(subject='Contraseña actualizada',
+                       sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
+                       recipients=[data_request["email"]],
+                       text_body=f'Actualizar su contraseña.',
+                       html_body=f'<p style="font-size:15px;">La contraseña ha sido actualizada exitosamente.</p>')
+        
+            return jsonify({"message": "¡La contraseña fue actualizada exitosamente!"}), 200
+    
+        except AssertionError as exception_message: 
+            return jsonify(msg='Error: {}. '.format(exception_message)), 400
 # FIN - Definición de EndPoints para el Modelo [User] para Login y Registro - FIN

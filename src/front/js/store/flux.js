@@ -157,8 +157,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// );
 					});
 			},
-			passwordReset: async userBody => {
-				await fetch(`${baseURLApi}users/password-reset/${"personID"}`, {
+			passwordReset: async (userBody, passwordResetToken) => {
+				await fetch(`${baseURLApi}users/password-reset/${"passwordResetToken"}`, {
 					method: "PUT",
 					body: JSON.stringify(userBody),
 					headers: {
@@ -171,21 +171,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 							return response.json();
 						} else {
-							ShowAlert(
-								"top-end",
-								"error",
-								"Oops...",
-								"Error al actualizar contraseña.",
-								true,
-								true,
-								2000
-							);
+							ShowAlert("top-end", "error", "Oops...", "Error actualizando contraseña", true, true, 2000);
 						}
 					})
 					.catch(error => {
-						ShowAlert("top-end", "error", "Oops...", "Error al actualizar contraseña.", true, true, 2000);
+						ShowAlert("top-end", "error", "Oops...", "Error actualizando contraseña", true, true, 2000);
 					});
 			},
+
 			getProfileUser: async userID => {
 				await fetch(`${baseURLApi}users/${userID}`, {
 					method: "GET",

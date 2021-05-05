@@ -1,3 +1,4 @@
+import { ShowAlert } from "../component/alert";
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
@@ -28,7 +29,7 @@ export default function Recover() {
 			password: password
 		};
 
-		actions.passwordReset(userBody);
+		actions.passwordReset(userBody, store.passwordReset.token);
 	};
 
 	useEffect(() => {

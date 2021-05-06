@@ -11,7 +11,8 @@ import Services from "./pages/services";
 import Contact from "./pages/contact";
 import Recover from "./pages/recover";
 import Dashboard from "./pages/dashboard";
-import Person from "./pages/person";
+import Person from "./pages/person/person";
+import PersonDetail from "./pages/person/person-detail";
 import PersonInformation from "./pages/person-information";
 import PersonGenerateQr from "./pages/person-generate-qr";
 
@@ -33,6 +34,8 @@ const Layout = () => {
 					<Route exact path="/contact" component={Contact} />
 					<Route exact path="/dashboard" component={Dashboard} />
 					<Route exact path="/dashboard/person" component={Person} />
+					<Route exact path="/dashboard/person/detail" component={PersonDetail} />
+					<Route exact path="/dashboard/person/detail/:id" component={PersonDetail} />
 					<Route exact path="/dashboard/person-information" component={PersonInformation} />
 					<Route exact path="/dashboard/person-generate-qr" component={PersonGenerateQr} />
 					<Route>

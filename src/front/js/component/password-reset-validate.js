@@ -16,6 +16,7 @@ export default function PasswordResetValidate(store, actions) {
 		showCancelButton: true,
 		confirmButtonText: "Validar",
 		cancelButtonText: "Cancelar",
+		closeOnClickOutside: false,
 		showLoaderOnConfirm: true,
 		preConfirm: code => {
 			if (code != passwordResetToken) {
@@ -23,8 +24,7 @@ export default function PasswordResetValidate(store, actions) {
 			}
 
 			return true;
-		},
-		allowOutsideClick: () => !Swal.isLoading()
+		}
 	}).then(result => {
 		if (result.isConfirmed) {
 			Swal.fire({

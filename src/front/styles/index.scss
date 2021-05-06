@@ -127,12 +127,12 @@ body{
     border-radius: 5px;
 }
 
-.body-table-class{
-    background: rgba(161,143,125, 0.3);
-}
+// .body-table-class{
+//     background: rgba(161,143,125, 0.3);
+// }
 
 .head-table-class{
-    background: rgba(161,143,125, 0.6);
+    background: rgba(161,143,125, 0.3);
 }
 
 .body-mant-class{
@@ -150,6 +150,16 @@ body{
 .cell-table-class{
    height: 60px;
 }
+
+.search-people-class{
+    background: rgb(227,221,216);
+    padding: 10px 10px 10px 5px;
+    margin: 0px;
+    // margin: 0px 1px 0px 1px;
+    border-radius: 3px 3px 0px 0px;
+    // border: 1px solid grey;
+}
+
 
 .fa-pen:before,
 .fa-tables:before,

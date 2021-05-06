@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "../../store/appContext";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -17,9 +17,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
+import SearchIcon from "@material-ui/icons/Search";
 import EditIcon from "@material-ui/icons/Edit";
-import InputSearch from "./input-search";
 import Swal from "sweetalert2";
+import SearchBar from "material-ui-search-bar";
+import Divider from "@material-ui/core/Divider";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -109,7 +111,7 @@ const EnhancedTableToolbar = props => {
 	return (
 		<div>
 			<h2 className="title-table-class">Listado de Personas</h2>
-			<InputSearch />
+			{/* <InputSearch /> */}
 		</div>
 	);
 };
@@ -144,7 +146,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function EnhancedTable() {
 	const { store, actions } = useContext(Context);
-
+	const [searchPerson, setSearchPerson] = useState("");
 	const classes = useStyles();
 	const [order, setOrder] = React.useState("asc");
 	const [orderBy, setOrderBy] = React.useState("calories");
@@ -152,6 +154,7 @@ export default function EnhancedTable() {
 	const [page, setPage] = React.useState(0);
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
+	const inputSearchRef = useRef(null);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -192,12 +195,44 @@ export default function EnhancedTable() {
 
 	useEffect(() => {
 		retrievePerson();
+		inputSearchRef.current.focus();
 	}, []);
 
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				<EnhancedTableToolbar numSelected={selected.length} />
+				{/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+				<div className="row container-fluid">
+					<h2 className="col title-table-class">Listado de Personas</h2>
+				</div>
+				<div className="row container-fluid search-people-class">
+					<div className="col-md-10">
+						<SearchBar
+							// className="search-bar-class"
+							ref={inputSearchRef}
+							// onChange={event => {
+							// 	setSearchPerson(event.target.value);
+							// }}
+							type="text"
+							className="search-bar-class"
+							placeholder="Buscar persona..."
+							aria-label="Search Person"
+							name="SearchPerson"
+							id="SearchPerson"
+						/>
+					</div>
+
+					<div className="col-md-2">
+						<Tooltip title="Crear Persona" aria-label="Crear Persona">
+							<NavLink to={`/dashboard/person/detail/`}>
+								<button className="mt-1 btn btn-success">
+									<i className="fas fa-plus"></i> Crear persona
+								</button>
+							</NavLink>
+						</Tooltip>
+					</div>
+				</div>
+
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -238,26 +273,27 @@ export default function EnhancedTable() {
 													</NavLink>
 												</Tooltip>
 												<Tooltip title="Medicamentos">
-													<NavLink to={`/dashboard/person/detail/${index}`}>
+													<NavLink to={`/dashboard/person/medicine/${index}`}>
 														<IconButton className="text-primary" aria-label="Medicamentos">
 															<i className="fas fa-tablets"></i>
 														</IconButton>
 													</NavLink>
 												</Tooltip>
 												<Tooltip title="Vacunas">
-													<NavLink to={`/dashboard/person/detail/${index}`}>
+													<NavLink to={`/dashboard/person/vaccine/${index}`}>
 														<IconButton className="text-success" aria-label="Vacunas">
 															<i className="fas fa-syringe"></i>
 														</IconButton>
 													</NavLink>
 												</Tooltip>
 												<Tooltip title="Generar Código QR">
-													<IconButton
-														className="text-dark"
-														aria-label="Generar Código QR"
-														onClick={event => handleDelete(index)}>
-														<i className="fas fa-qrcode"></i>
-													</IconButton>
+													<NavLink to={`/dashboard/person/generateqr/${index}`}>
+														<IconButton
+															className="text-success"
+															aria-label="Generar Código QR">
+															<i className="fas fa-qrcode"></i>
+														</IconButton>
+													</NavLink>
 												</Tooltip>
 												<Tooltip title="Eliminar registro">
 													<IconButton

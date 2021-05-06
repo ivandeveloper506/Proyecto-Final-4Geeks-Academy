@@ -1,7 +1,7 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-blue-walrus-dzluuj52.ws-us03.gitpod.io/api/";
+const baseURLApi = "https://3001-amaranth-seahorse-rurdyq4s.ws-us03.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -51,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						getActions().userPasswordValidate(false);
 
 						// Se configura la opción del home
-						getActions().activeOption("/dashboard");
+						getActions().activeOption("/dashboard/person");
 					})
 					.catch(error => {
 						ShowAlert(
@@ -178,7 +178,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						ShowAlert("top-end", "error", "Oops...", "Error actualizando contraseña", true, true, 2000);
 					});
 			},
-
 			getProfileUser: async userID => {
 				await fetch(`${baseURLApi}users/${userID}`, {
 					method: "GET",

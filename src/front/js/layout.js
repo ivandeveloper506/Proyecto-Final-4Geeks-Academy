@@ -36,8 +36,11 @@ const Layout = () => {
 					<Route exact path="/dashboard/person" component={Person} />
 					<Route exact path="/dashboard/person/detail" component={PersonDetail} />
 					<Route exact path="/dashboard/person/detail/:id" component={PersonDetail} />
-					<Route exact path="/dashboard/person-information" component={PersonInformation} />
-					<Route exact path="/dashboard/person-generate-qr" component={PersonGenerateQr} />
+					<Route exact path="/dashboard/person/medicine/:id" component={PersonDetail} />
+					<Route exact path="/dashboard/person/vaccine/:id" component={PersonDetail} />
+					<Route exact path="/dashboard/person/generateqr/:id" component={PersonGenerateQr} />
+					{/* <Route exact path="/dashboard/person-information" component={PersonInformation} /> */}
+					{/* <Route exact path="/dashboard/person-generate-qr" component={PersonGenerateQr} /> */}
 					<Route>
 						<h1>Not found!</h1>
 					</Route>

@@ -201,14 +201,12 @@ export default function EnhancedTable() {
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				{/* <EnhancedTableToolbar numSelected={selected.length} /> */}
 				<div className="row container-fluid">
 					<h2 className="col title-table-class">Listado de Personas</h2>
 				</div>
 				<div className="row container-fluid search-people-class">
 					<div className="col-md-10">
 						<SearchBar
-							// className="search-bar-class"
 							ref={inputSearchRef}
 							// onChange={event => {
 							// 	setSearchPerson(event.target.value);
@@ -289,7 +287,7 @@ export default function EnhancedTable() {
 												<Tooltip title="Generar Código QR">
 													<NavLink to={`/dashboard/person/generateqr/${index}`}>
 														<IconButton
-															className="text-success"
+															className="text-dark"
 															aria-label="Generar Código QR">
 															<i className="fas fa-qrcode"></i>
 														</IconButton>

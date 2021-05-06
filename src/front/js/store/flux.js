@@ -1,7 +1,7 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-amaranth-seahorse-rurdyq4s.ws-us03.gitpod.io/api/";
+const baseURLApi = "https://3001-teal-herring-fc34stwp.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {

@@ -14,6 +14,7 @@ import Dashboard from "./pages/dashboard";
 import Person from "./pages/person/person";
 import PersonDetail from "./pages/person/person-detail";
 import PersonMedicineTable from "./pages/person/person-medicine-table";
+import PersonMedicineDetail from "./pages/person/person-medicine-detail";
 import PersonInformation from "./pages/person-information";
 import PersonGenerateQr from "./pages/person-generate-qr";
 
@@ -37,8 +38,13 @@ const Layout = () => {
 					<Route exact path="/dashboard/person" component={Person} />
 					<Route exact path="/dashboard/person/detail" component={PersonDetail} />
 					<Route exact path="/dashboard/person/detail/:id" component={PersonDetail} />
-					<Route exact path="/dashboard/person/medicine" component={PersonMedicineTable} />
 					<Route exact path="/dashboard/person/medicine/:id" component={PersonMedicineTable} />
+					<Route exact path="/dashboard/person/medicine/detail/" component={PersonMedicineTable} />
+					<Route
+						exact
+						path="/dashboard/person/medicine/detail/:id/:personId"
+						component={PersonMedicineDetail}
+					/>
 					<Route exact path="/dashboard/person/vaccine/:id" component={PersonDetail} />
 					<Route exact path="/dashboard/person/generateqr/:id" component={PersonGenerateQr} />
 					{/* <Route exact path="/dashboard/person-information" component={PersonInformation} /> */}

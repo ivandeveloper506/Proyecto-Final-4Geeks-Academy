@@ -145,6 +145,8 @@ export default function EnhancedTable() {
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 	const inputSearchRef = useRef(null);
 
+	const personId = store.persons[personIdParam].id;
+
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
 		setOrder(isAsc ? "desc" : "asc");
@@ -159,7 +161,7 @@ export default function EnhancedTable() {
 
 	const retrievePersonMedicine = () => {
 		// Se obtienen los datos de los medicamentos de las persona asociada argumento persona.
-		const personId = store.persons[personIdParam].id;
+		// const personId = store.persons[personIdParam].id;
 
 		// actions.getPersonMedicine(personId);
 
@@ -286,7 +288,8 @@ export default function EnhancedTable() {
 											<TableCell align="right">{row.observation}</TableCell>
 											<TableCell>
 												<Tooltip title="Editar medicamento">
-													<NavLink to={`/dashboard/person/detail/medicine/${index}`}>
+													<NavLink
+														to={`/dashboard/person/medicine/detail/${index}/${personId}`}>
 														<IconButton
 															className="text-warning"
 															aria-label="Editar medicamento">

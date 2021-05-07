@@ -1,7 +1,7 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-teal-herring-fc34stwp.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-coral-rattlesnake-k0miupbx.ws-us03.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -262,6 +262,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"error",
 							"Oops...",
 							"Ha ocurrido un error al tratar de recuperar los datos de las personas.",
+							false,
+							true,
+							2000
+						);
+					});
+			},
+			getPersonMedicine: async personID => {
+				await fetch(`${baseURLApi}person_medicine/person/${personID}`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ha ocurrido un error al tratar de recuperar los datos de los medicamentos de las personas.",
+								false,
+								true,
+								2000
+							);
+						}
+					})
+					.then(data => {
+						setStore({ persons: data });
+
+						//Se actualiza la variable que controla las actualizaciones de las personas.
+						setStore({ retrievePerson: false });
+					})
+					.catch(error => {
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de recuperar los datos de los medicamentos de las personas.",
 							false,
 							true,
 							2000

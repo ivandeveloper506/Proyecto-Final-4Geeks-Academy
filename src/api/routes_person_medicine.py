@@ -28,6 +28,20 @@ def indexPersonMedicine(id):
 
     return jsonify(PersonMedicine.serialize(person_medicine)), 200
 
+# [GET] - Ruta para obtener todos los registros de [PersonMedicine] por Persona
+@routes_person_medicine.route('/api/person_medicine/person/<int:personId>', methods=['GET'])
+@jwt_required()
+def indexPersonMedicineByPerson(personId):
+    data_request = request.get_json()
+
+    results = PersonMedicine.query.filter_by(person_id=personId)
+
+    if results is None:
+        raise APIException('No existen medicamentos para la persona con el id especificado.',status_code=403)
+
+    return jsonify(list(map(lambda x: x.serialize(), results))), 200
+
+
 # [POST] - Ruta para crear un [PersonMedicine]
 @routes_person_medicine.route('/api/person_medicine', methods=['POST'])
 @jwt_required()

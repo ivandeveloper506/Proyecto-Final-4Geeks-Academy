@@ -107,19 +107,6 @@ EnhancedTableHead.propTypes = {
 	personId: PropTypes.personId
 };
 
-const EnhancedTableToolbar = props => {
-	return (
-		<div>
-			<h2 className="title-table-class">Listado de Personas</h2>
-			{/* <InputSearch /> */}
-		</div>
-	);
-};
-
-EnhancedTableToolbar.propTypes = {
-	numSelected: PropTypes.number.isRequired
-};
-
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%"
@@ -171,6 +158,9 @@ export default function EnhancedTable() {
 	const retrievePerson = () => {
 		// Se obtienen los datos de las personas asociadas al usuario.
 		actions.getPerson(store.userProfile.id);
+
+		// Se obtienen los datos de los medicamentos de una vez
+		actions.getPersonMedicine(1);
 
 		// Se configura la opción del home
 		actions.activeOption("/dashboard/person");

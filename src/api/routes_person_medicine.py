@@ -40,6 +40,12 @@ def indexPersonMedicineByPerson(personId):
         raise APIException('No existen medicamentos para la persona con el id especificado.',status_code=403)
 
     return jsonify(list(map(lambda x: x.serialize(), results))), 200
+    # person_medicine = PersonMedicine.query.get(personId)
+
+    # if person_medicine is None:
+    #     raise APIException('El detalle de los medicamentos de la persona con el id especificado, no fue encontrado.',status_code=403)
+
+    # return jsonify(PersonMedicine.serialize(person_medicine)), 200
 
 
 # [POST] - Ruta para crear un [PersonMedicine]

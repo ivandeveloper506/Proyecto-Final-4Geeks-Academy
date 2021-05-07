@@ -9,6 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			userProfile: [],
 			persons: [],
+			personMedicine: [],
+			personVaccine: [],
 			passwordReset: [],
 			userLogged: false,
 			userPasswordReset: false,
@@ -269,7 +271,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			getPersonMedicine: async personID => {
-				await fetch(`${baseURLApi}person_medicine/person/${personID}`, {
+				await fetch(`${baseURLApi}person_medicine`, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -279,23 +281,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => {
 						if (response.status === 200) {
 							return response.json();
-						} else {
-							ShowAlert(
-								"top-end",
-								"error",
-								"Oops...",
-								"Ha ocurrido un error al tratar de recuperar los datos de los medicamentos de las personas.",
-								false,
-								true,
-								2000
-							);
 						}
+						// } else {
+						// 	console.log("*** getPersonMedicine [then(response] ***");
+						// 	console.log(response);
+
+						// 	ShowAlert(
+						// 		"top-end",
+						// 		"error",
+						// 		"Oops...",
+						// 		"Ha ocurrido un error al tratar de recuperar los datos de los medicamentos de las personas.",
+						// 		false,
+						// 		true,
+						// 		2000
+						// 	);
+						// }
 					})
 					.then(data => {
-						setStore({ persons: data });
+						console.log("*** getPersonMedicine [then(data] ***");
+						console.log(data);
 
-						//Se actualiza la variable que controla las actualizaciones de las personas.
-						setStore({ retrievePerson: false });
+						setStore({ personMedicine: data });
 					})
 					.catch(error => {
 						ShowAlert(

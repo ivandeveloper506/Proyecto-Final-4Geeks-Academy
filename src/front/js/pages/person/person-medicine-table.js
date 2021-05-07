@@ -106,19 +106,6 @@ EnhancedTableHead.propTypes = {
 	personId: PropTypes.personId
 };
 
-const EnhancedTableToolbar = props => {
-	return (
-		<div>
-			<h2 className="title-table-class">Listado de Personas</h2>
-			{/* <InputSearch /> */}
-		</div>
-	);
-};
-
-EnhancedTableToolbar.propTypes = {
-	numSelected: PropTypes.number.isRequired
-};
-
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%"
@@ -128,7 +115,7 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(2)
 	},
 	table: {
-		minWidth: 750
+		minWidth: 600
 	},
 	visuallyHidden: {
 		border: 0,
@@ -145,7 +132,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function EnhancedTable() {
 	const params = useParams();
-	const personId = parseInt(params.id);
+	const personIdParam = parseInt(params.id);
 	const { store, actions } = useContext(Context);
 	const [searchPerson, setSearchPerson] = useState("");
 	const classes = useStyles();
@@ -164,17 +151,19 @@ export default function EnhancedTable() {
 	};
 
 	const handleDelete = index => {
-		let personDelete = store.persons[index];
+		let personDelete = store.personMedicine[index];
 
-		actions.handlePersonDelete(personDelete.id, store.userProfile.id);
+		// actions.handlePersonMedicineDelete(personMedicineDelete.id, store.userProfile.id);
 	};
 
 	const retrievePersonMedicine = () => {
 		// Se obtienen los datos de los medicamentos de las persona asociada argumento persona.
-		actions.getPersonMedicine(personId);
+		const personId = store.persons[personIdParam].id;
 
-		// Se configura la opción del home
-		// actions.activeOption("/dashboard/person");
+		// actions.getPersonMedicine(personId);
+
+		console.log("*** retrievePersonMedicine - [store.personMedicine] ***");
+		console.log(store.personMedicine);
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -192,7 +181,7 @@ export default function EnhancedTable() {
 
 	const isSelected = name => selected.indexOf(name) !== -1;
 
-	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.persons.length - page * rowsPerPage);
+	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.personMedicine.length - page * rowsPerPage);
 
 	useEffect(() => {
 		retrievePersonMedicine();
@@ -203,7 +192,7 @@ export default function EnhancedTable() {
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
 				<div className="row container-fluid">
-					<h2 className="col title-table-class">Listado de Personas</h2>
+					<h2 className="col title-table-class">Listado de Medicamentos</h2>
 				</div>
 				<div className="row container-fluid search-people-class">
 					<div className="col-md-10">
@@ -244,10 +233,10 @@ export default function EnhancedTable() {
 							order={order}
 							orderBy={orderBy}
 							onRequestSort={handleRequestSort}
-							rowCount={store.persons.length}
+							rowCount={store.personMedicine.length}
 						/>
 						<TableBody className="body-table-class">
-							{stableSort(store.persons, getComparator(order, orderBy))
+							{stableSort(store.personMedicine, getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
 									const isItemSelected = isSelected(row.name);
@@ -259,7 +248,6 @@ export default function EnhancedTable() {
 												{row.description}
 											</TableCell>
 											<TableCell align="right">{row.frequency}</TableCell>
-											<TableCell align="right">{row.emergency_phone}</TableCell>
 											<TableCell align="right">{row.observation}</TableCell>
 											<TableCell>
 												<Tooltip title="Editar medicamento">

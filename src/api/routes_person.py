@@ -28,7 +28,7 @@ def indexPerson(id):
 
     return jsonify(Person.serialize(person)), 200
 
-# [GET] - Ruta para obtener un [Person]
+# [GET] - Ruta para obtener las [Person] para un usuario especifico
 @routes_person.route('/api/person/users/<int:id>', methods=['GET'])
 @jwt_required()
 def indexPersonUser(id):

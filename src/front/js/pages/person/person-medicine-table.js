@@ -22,6 +22,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Swal from "sweetalert2";
 import SearchBar from "material-ui-search-bar";
 import Divider from "@material-ui/core/Divider";
+import { Form } from "react-bootstrap";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -164,6 +165,15 @@ export default function EnhancedTable() {
 
 		console.log("*** retrievePersonMedicine - [store.personMedicine] ***");
 		console.log(store.personMedicine);
+		console.log(personId);
+
+		store.personMedicine.filter(item => {
+			console.log(item);
+			console.log(item.person_id);
+			console.log(personId);
+
+			item.person_id === personId;
+		});
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -186,7 +196,7 @@ export default function EnhancedTable() {
 	useEffect(() => {
 		retrievePersonMedicine();
 		inputSearchRef.current.focus();
-	}, []);
+	});
 
 	return (
 		<div className={classes.root}>
@@ -195,7 +205,7 @@ export default function EnhancedTable() {
 					<h2 className="col title-table-class">Listado de Medicamentos</h2>
 				</div>
 				<div className="row container-fluid search-people-class">
-					<div className="col-md-10">
+					<div className="col-md-8">
 						<SearchBar
 							ref={inputSearchRef}
 							// onChange={event => {
@@ -210,7 +220,23 @@ export default function EnhancedTable() {
 						/>
 					</div>
 
-					<div className="col-md-2">
+					<div className="col-md-4">
+						<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
+							<NavLink to={`/dashboard/person/medicine/detail/`}>
+								<button className="mt-1 btn btn-success">
+									<i className="fas fa-plus"></i> Crear medicamento
+								</button>
+							</NavLink>
+						</Tooltip>
+						<Tooltip title="Regresar" aria-label="Regresar">
+							<NavLink to="/dashboard/person">
+								<button className="btn btn-primary ml-3">
+									<i className="fas fa-arrow-left"></i> Regresar
+								</button>
+							</NavLink>
+						</Tooltip>
+
+						{/* <Form.Group className="col-md-4">
 						<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
 							<NavLink to={`/dashboard/person/detail/medicine/`}>
 								<button className="mt-1 btn btn-success">
@@ -218,6 +244,15 @@ export default function EnhancedTable() {
 								</button>
 							</NavLink>
 						</Tooltip>
+
+						<Tooltip title="Regresar" aria-label="Regresar">
+							<NavLink to="/dashboard/person">
+								<button className="btn btn-primary ml-3">
+									<i className="fas fa-arrow-left"></i> Regresar
+								</button>
+							</NavLink>
+						</Tooltip>
+					</Form.Group> */}
 					</div>
 				</div>
 

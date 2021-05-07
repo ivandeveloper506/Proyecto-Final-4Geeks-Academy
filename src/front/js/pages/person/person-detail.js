@@ -10,7 +10,6 @@ import Fab from "@material-ui/core/Fab";
 import { green } from "@material-ui/core/colors";
 import Tooltip from "@material-ui/core/Tooltip";
 import Divider from "@material-ui/core/Divider";
-
 import { Form } from "react-bootstrap";
 
 const useStyles = makeStyles(theme => ({
@@ -115,14 +114,18 @@ export default function PersonDetail() {
 							<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
 						</Form.Group>
 						<Form.Group className="col-md-3">
-							<button type="submit" className="btn btn-success">
-								<i className="fas fa-save"></i> Guardar
-							</button>
+							<Tooltip title="Guardar datos" aria-label="Guardar datos">
+								<button type="submit" className="btn btn-success">
+									<i className="fas fa-save"></i> Guardar
+								</button>
+							</Tooltip>
 
 							<NavLink to="/dashboard/person/">
-								<button className="btn btn-primary ml-3">
-									<i className="fas fa-arrow-left"></i> Regresar
-								</button>
+								<Tooltip title="Regresar" aria-label="Regresar">
+									<button className="btn btn-primary ml-3">
+										<i className="fas fa-arrow-left"></i> Regresar
+									</button>
+								</Tooltip>
 							</NavLink>
 						</Form.Group>
 					</div>

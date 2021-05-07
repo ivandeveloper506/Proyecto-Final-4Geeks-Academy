@@ -152,9 +152,9 @@ export default function EnhancedTable() {
 	};
 
 	const handleDelete = index => {
-		let personDelete = store.personMedicine[index];
+		let personMedicineDelete = store.personMedicine[index];
 
-		// actions.handlePersonMedicineDelete(personMedicineDelete.id, store.userProfile.id);
+		actions.handlePersonMedicineDelete(personMedicineDelete.id, personIdParam);
 	};
 
 	const retrievePersonMedicine = () => {

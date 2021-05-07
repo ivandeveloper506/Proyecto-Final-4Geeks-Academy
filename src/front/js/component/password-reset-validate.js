@@ -13,10 +13,10 @@ export default function PasswordResetValidate(store, actions) {
 		},
 		allowOutsideClick: false,
 		allowEscapeKey: false,
+		closeOnClickOutside: false,
 		showCancelButton: true,
 		confirmButtonText: "Validar",
 		cancelButtonText: "Cancelar",
-		closeOnClickOutside: false,
 		showLoaderOnConfirm: true,
 		preConfirm: code => {
 			if (code != passwordResetToken) {

@@ -412,6 +412,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					title: "¿Está seguro que desea eliminar el registro?",
 					text: "Esta acción no se podrá revertir y se eliminara toda la información asociada a la persona.",
 					icon: "warning",
+					allowOutsideClick: false,
+					allowEscapeKey: false,
+					closeOnClickOutside: false,
 					showCancelButton: true,
 					confirmButtonColor: "#3085d6",
 					cancelButtonColor: "#d33",
@@ -450,6 +453,66 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Swal.fire("Error!", "Ha ocurrido un error al tratar de eliminar la persona.", "error");
 					});
 			},
+
+			handlePersonMedicineDelete: (personMedicineID, personIndex) => {
+				Swal.fire({
+					title: "¿Está seguro que desea eliminar el registro?",
+					text: "Esta acción no se podrá revertir y se eliminara el medicamento asociado a la persona.",
+					icon: "warning",
+					showCancelButton: true,
+					allowOutsideClick: false,
+					allowEscapeKey: false,
+					closeOnClickOutside: false,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "¡Si, eliminarlo!",
+					cancelButtonText: "Cancelar"
+				}).then(result => {
+					if (result.isConfirmed) {
+						// Si la respuesta es positiva se invoca la función que procesa el delete.
+						getActions().personMedicineDelete(personMedicineID, personIndex);
+					}
+				});
+			},
+			personMedicineDelete: async (personMedicineID, personIndex) => {
+				await fetch(`${baseURLApi}person_medicine/${personMedicineID}`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							Swal.fire(
+								"Eliminado!",
+								"El medicamento de la persona ha sido eliminado exitosamente.",
+								"success"
+							);
+
+							// Se obtienen los datos de los medicamentos de las personas asociadas al usuario.
+							getActions().getPersonMedicine(1); // TODO Hay que mandar el ID DE LA PERSONA
+
+							getActions().activeOption(`/dashboard/person/medicine/${personIndex}`);
+
+							return response.json();
+						} else {
+							Swal.fire(
+								"Error!",
+								"Ha ocurrido un error al tratar de eliminar el medicamento de la persona.",
+								"error"
+							);
+						}
+					})
+					.catch(error => {
+						Swal.fire(
+							"Error!",
+							"Ha ocurrido un error al tratar de eliminar el medicamento de la persona.",
+							"error"
+						);
+					});
+			},
+
 			activeOption: option => {
 				setStore({ activeOption: option });
 			},

@@ -407,6 +407,100 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
+
+			personMedicineStore: async personMedicineBody => {
+				await fetch(`${baseURLApi}person_medicine`, {
+					method: "POST",
+					body: JSON.stringify(personMedicineBody),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 201) {
+							ShowAlert(
+								"top-end",
+								"success",
+								"",
+								"¡El medicamento de la persona ha sido registrado exitosamente!",
+								false,
+								true,
+								2000
+							);
+
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ha ocurrido un error al tratar de crear el medicamento de la persona.",
+								true,
+								true,
+								2000
+							);
+						}
+					})
+					.catch(error => {
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de crear el medicamento de la persona.",
+							true,
+							true,
+							2000
+						);
+					});
+			},
+			personMedicineUpdate: async (personMedicineBody, personMedicineID) => {
+				await fetch(`${baseURLApi}person_medicine/${personMedicineID}`, {
+					method: "PUT",
+					body: JSON.stringify(personMedicineBody),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							ShowAlert(
+								"top-end",
+								"success",
+								"",
+								"¡Los datos del medicamento de la persona han sido actualizados exitosamente!",
+								false,
+								true,
+								2000
+							);
+
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ha ocurrido un error al tratar de guardar los datos del medicamento de la persona.",
+								true,
+								true,
+								2000
+							);
+						}
+					})
+					.catch(error => {
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ha ocurrido un error al tratar de guardar los datos del medicamento de la persona.",
+							true,
+							true,
+							2000
+						);
+					});
+			},
+
 			handlePersonDelete: (personID, userID) => {
 				Swal.fire({
 					title: "¿Está seguro que desea eliminar el registro?",

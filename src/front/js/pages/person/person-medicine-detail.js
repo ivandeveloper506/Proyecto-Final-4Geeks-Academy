@@ -37,6 +37,12 @@ export default function PersonMedicineDetail() {
 		action = "new";
 	}
 
+	if (personMedicineId === -1) {
+		action = "new";
+	} else {
+		action = "edit";
+	}
+
 	const classes = useStyles();
 
 	const [description, setDescription] = useState("");
@@ -48,18 +54,21 @@ export default function PersonMedicineDetail() {
 		e.preventDefault();
 
 		// Se manda a crear el medicamento
-		const medicineBody = {
+		const personMedicineBody = {
 			description: description,
 			frequency: frequency,
 			observation: observation,
-			person_id: 1, // TOTO: OJO DEBE IR EL ID DE LA PERSONA
+			person_id: personId,
 			user_creation_id: store.userProfile.id
 		};
 
+		console.log("*** handleSave [personMedicineBody]***");
+		console.log(personMedicineBody);
+
 		if (action === "edit") {
-			actions.personUpdate(personBody, personDetail.id);
+			actions.personMedicineUpdate(personMedicineBody, personMedicineDetail.id);
 		} else {
-			actions.personStore(personBody);
+			actions.personMedicineStore(personMedicineBody);
 		}
 	};
 
@@ -101,7 +110,7 @@ export default function PersonMedicineDetail() {
 								</button>
 							</Tooltip>
 
-							<NavLink to={`/dashboard/person/medicine/${personMedicineId}`}>
+							<NavLink to={`/dashboard/person/medicine/${params.personId}`}>
 								<Tooltip title="Regresar" aria-label="Regresar">
 									<button className="btn btn-primary ml-3">
 										<i className="fas fa-arrow-left"></i> Regresar
@@ -119,7 +128,7 @@ export default function PersonMedicineDetail() {
 								onChange={e => setDescription(e.target.value)}
 								value={description}
 								ref={inputDescriptionRef}
-								required="true"
+								required
 								type="text"
 								id="description"
 								label="Descripción"
@@ -134,7 +143,7 @@ export default function PersonMedicineDetail() {
 							<Form.Control
 								onChange={e => setFrequency(e.target.value)}
 								value={frequency}
-								required="true"
+								required
 								type="text"
 								id="frequency"
 								label="Frecuencia"
@@ -149,11 +158,11 @@ export default function PersonMedicineDetail() {
 							<Form.Control
 								onChange={e => setObservation(e.target.value)}
 								value={observation}
-								required="true"
 								type="text"
 								id="observation"
 								label="Observaciones"
 								placeholder="Ingrese las observaciones..."
+								rows="3"
 							/>
 						</Form.Group>
 					</div>

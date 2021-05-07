@@ -224,7 +224,7 @@ export default function EnhancedTable() {
 
 					<div className="col-md-4">
 						<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
-							<NavLink to={`/dashboard/person/medicine/detail/`}>
+							<NavLink to={`/dashboard/person/medicine/detail/-1/${personId}`}>
 								<button className="mt-1 btn btn-success">
 									<i className="fas fa-plus"></i> Crear medicamento
 								</button>

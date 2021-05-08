@@ -28,7 +28,7 @@ let action = "";
 export default function PersonDetail() {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-	const personId = parseInt(params.id);
+	const personId = parseInt(params.personId);
 
 	if (personId >= 0) {
 		action = "edit";

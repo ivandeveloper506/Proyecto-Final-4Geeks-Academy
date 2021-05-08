@@ -28,8 +28,10 @@ let action = "";
 export default function PersonMedicineDetail() {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
+	const personIdParam = parseInt(params.personId);
 	const personMedicineId = parseInt(params.id);
-	const personId = parseInt(params.personId);
+
+	const personId = store.persons[personIdParam].id;
 
 	if (personMedicineId >= 0) {
 		action = "edit";
@@ -110,7 +112,7 @@ export default function PersonMedicineDetail() {
 								</button>
 							</Tooltip>
 
-							<NavLink to={`/dashboard/person/medicine/${params.personId}`}>
+							<NavLink to={`/dashboard/person/medicine/${personIdParam}`}>
 								<Tooltip title="Regresar" aria-label="Regresar">
 									<button className="btn btn-primary ml-3">
 										<i className="fas fa-arrow-left"></i> Regresar

@@ -133,7 +133,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function EnhancedTable() {
 	const params = useParams();
-	const personIdParam = parseInt(params.id);
+	const personIdParam = parseInt(params.personId);
+
 	const { store, actions } = useContext(Context);
 	const [searchPerson, setSearchPerson] = useState("");
 	const classes = useStyles();
@@ -224,7 +225,7 @@ export default function EnhancedTable() {
 
 					<div className="col-md-4">
 						<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
-							<NavLink to={`/dashboard/person/medicine/detail/-1/${personId}`}>
+							<NavLink to={`/dashboard/person/medicine/detail/${personIdParam}/-1`}>
 								<button className="mt-1 btn btn-success">
 									<i className="fas fa-plus"></i> Crear medicamento
 								</button>
@@ -237,24 +238,6 @@ export default function EnhancedTable() {
 								</button>
 							</NavLink>
 						</Tooltip>
-
-						{/* <Form.Group className="col-md-4">
-						<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
-							<NavLink to={`/dashboard/person/detail/medicine/`}>
-								<button className="mt-1 btn btn-success">
-									<i className="fas fa-plus"></i> Crear medicamento
-								</button>
-							</NavLink>
-						</Tooltip>
-
-						<Tooltip title="Regresar" aria-label="Regresar">
-							<NavLink to="/dashboard/person">
-								<button className="btn btn-primary ml-3">
-									<i className="fas fa-arrow-left"></i> Regresar
-								</button>
-							</NavLink>
-						</Tooltip>
-					</Form.Group> */}
 					</div>
 				</div>
 
@@ -289,7 +272,7 @@ export default function EnhancedTable() {
 											<TableCell>
 												<Tooltip title="Editar medicamento">
 													<NavLink
-														to={`/dashboard/person/medicine/detail/${index}/${personId}`}>
+														to={`/dashboard/person/medicine/detail/${personIdParam}/${index}`}>
 														<IconButton
 															className="text-warning"
 															aria-label="Editar medicamento">

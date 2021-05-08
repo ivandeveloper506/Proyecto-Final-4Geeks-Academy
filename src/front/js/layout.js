@@ -37,12 +37,12 @@ const Layout = () => {
 					<Route exact path="/dashboard" component={Dashboard} />
 					<Route exact path="/dashboard/person" component={Person} />
 					<Route exact path="/dashboard/person/detail" component={PersonDetail} />
-					<Route exact path="/dashboard/person/detail/:id" component={PersonDetail} />
-					<Route exact path="/dashboard/person/medicine/:id" component={PersonMedicineTable} />
+					<Route exact path="/dashboard/person/detail/:personId" component={PersonDetail} />
+					<Route exact path="/dashboard/person/medicine/:personId" component={PersonMedicineTable} />
 					<Route exact path="/dashboard/person/medicine/detail/" component={PersonMedicineDetail} />
 					<Route
 						exact
-						path="/dashboard/person/medicine/detail/:id/:personId"
+						path="/dashboard/person/medicine/detail/:personId/:id"
 						component={PersonMedicineDetail}
 					/>
 					<Route exact path="/dashboard/person/vaccine/:id" component={PersonDetail} />

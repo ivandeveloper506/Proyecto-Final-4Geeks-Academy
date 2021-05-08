@@ -160,6 +160,19 @@ body{
     // border: 1px solid grey;
 }
 
+.fa-pen:before,
+.fa-tablets:before,
+.fa-syringe:before,
+.fa-qrcode:before,
+.fa-trash:before {
+    font-size: 20px;
+}
+
+.button-table-class {
+    height: 40px;
+    width: 45px;
+}
+
 // FIN - Clases tablas de mantenimiento y detalle
 
 /* ESTILOS MEDIA QUERY */

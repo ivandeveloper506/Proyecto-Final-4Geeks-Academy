@@ -16,7 +16,7 @@ import PersonDetail from "./pages/person/person-detail";
 import PersonMedicineTable from "./pages/person/person-medicine-table";
 import PersonMedicineDetail from "./pages/person/person-medicine-detail";
 import PersonInformation from "./pages/person-information";
-import PersonGenerateQr from "./pages/person-generate-qr";
+import PersonGenerateQr from "./pages/person/person-table-generateqr";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -45,8 +45,8 @@ const Layout = () => {
 						path="/dashboard/person/medicine/detail/:personId/:id"
 						component={PersonMedicineDetail}
 					/>
-					<Route exact path="/dashboard/person/vaccine/:id" component={PersonDetail} />
-					<Route exact path="/dashboard/person/generateqr/:id" component={PersonGenerateQr} />
+					<Route exact path="/dashboard/person/generateqr" component={PersonGenerateQr} />
+					{/* <Route exact path="/dashboard/person/generateqr/:id" component={Person} /> */}
 					{/* <Route exact path="/dashboard/person-information" component={PersonInformation} /> */}
 					{/* <Route exact path="/dashboard/person-generate-qr" component={PersonGenerateQr} /> */}
 					<Route>

@@ -50,7 +50,7 @@ export const NavbarMain = () => {
 		<div className="text-white">
 			{store.userLogged ? (
 				<Navbar expand="lg">
-					<NavLink className="navbar-item-logo-class" to="/dashboard">
+					<NavLink className="navbar-item-logo-class" to="/dashboard/person">
 						<AppLogo />
 					</NavLink>
 					<Navbar.Toggle className="bg-white" />
@@ -59,10 +59,7 @@ export const NavbarMain = () => {
 							<NavLink className="navbar-item-class" to="/dashboard/person">
 								<i className="fas fa-users"></i> Personas
 							</NavLink>
-							<NavLink className="navbar-item-class" to="/dashboard/person-information">
-								<i className="fas fa-address-book"></i> Información Personas
-							</NavLink>
-							<NavLink className="navbar-item-class" to="/dashboard/person-generate-qr">
+							<NavLink className="navbar-item-class" to="/dashboard/person/generateqr">
 								<i className="fas fa-qrcode"></i> Generar QR
 							</NavLink>
 						</Nav>

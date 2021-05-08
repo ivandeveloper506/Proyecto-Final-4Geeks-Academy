@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "../../store/appContext";
-import { Link, NavLink, useHistory, useParams } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -22,7 +22,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import Swal from "sweetalert2";
 import SearchBar from "material-ui-search-bar";
 import Divider from "@material-ui/core/Divider";
-import { Form } from "react-bootstrap";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -52,10 +51,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
 	{
-		id: "description",
+		id: "full_name",
 		numeric: false,
 		disablePadding: false,
-		label: "Medicamento"
+		label: "Persona"
 	},
 	{ id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
 ];
@@ -108,11 +107,12 @@ EnhancedTableHead.propTypes = {
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%"
+		// width: "max-content"
 	},
 	paper: {
 		width: "100%",
 		maxWidth: 400,
-		marginBottom: theme.spacing(2)
+		marginBottom: theme.spacing(1)
 	},
 	table: {
 		minWidth: 200,
@@ -127,14 +127,12 @@ const useStyles = makeStyles(theme => ({
 		padding: 0,
 		position: "absolute",
 		top: 20,
-		width: 1
+		width: 1,
+		paddingLeft: 0
 	}
 }));
 
 export default function EnhancedTable() {
-	const params = useParams();
-	const personIdParam = parseInt(params.personId);
-
 	const { store, actions } = useContext(Context);
 	const [searchPerson, setSearchPerson] = useState("");
 	const classes = useStyles();
@@ -145,8 +143,6 @@ export default function EnhancedTable() {
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-	const personId = store.persons[personIdParam].id;
-
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
 		setOrder(isAsc ? "desc" : "asc");
@@ -154,28 +150,20 @@ export default function EnhancedTable() {
 	};
 
 	const handleDelete = index => {
-		let personMedicineDelete = store.personMedicine[index];
+		let personDelete = store.persons[index];
 
-		actions.handlePersonMedicineDelete(personMedicineDelete.id, personIdParam);
+		actions.handlePersonDelete(personDelete.id, store.userProfile.id);
 	};
 
-	const retrievePersonMedicine = () => {
-		// Se obtienen los datos de los medicamentos de las persona asociada argumento persona.
-		// const personId = store.persons[personIdParam].id;
+	const retrievePerson = () => {
+		// Se obtienen los datos de las personas asociadas al usuario.
+		actions.getPerson(store.userProfile.id);
 
-		// actions.getPersonMedicine(personId);
+		// Se obtienen los datos de los medicamentos de una vez
+		actions.getPersonMedicine(1);
 
-		console.log("*** retrievePersonMedicine - [store.personMedicine] ***");
-		console.log(store.personMedicine);
-		console.log(personId);
-
-		store.personMedicine.filter(item => {
-			console.log(item);
-			console.log(item.person_id);
-			console.log(personId);
-
-			item.person_id === personId;
-		});
+		// Se configura la opción del home
+		actions.activeOption("/dashboard/person/generateqr");
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -193,11 +181,11 @@ export default function EnhancedTable() {
 
 	const isSelected = name => selected.indexOf(name) !== -1;
 
-	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.personMedicine.length - page * rowsPerPage);
+	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.persons.length - page * rowsPerPage);
 
 	useEffect(() => {
-		retrievePersonMedicine();
-	});
+		retrievePerson();
+	}, []);
 
 	return (
 		<div className="row container-fluid">
@@ -205,24 +193,17 @@ export default function EnhancedTable() {
 			<div className="col-md-6">
 				<div className={classes.root}>
 					<Paper className={classes.paper}>
-						<div className="row search-people-class">
-							<div className="col">
-								<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
-									<NavLink to={`/dashboard/person/medicine/detail/${personIdParam}/-1`}>
+						{/* <div className="row container-fluid search-people-class">
+							<div className="col d-flex justify-content-center">
+								<Tooltip title="Crear Persona" aria-label="Crear Persona">
+									<NavLink to={`/dashboard/person/detail/`}>
 										<button className="mt-1 btn btn-success">
-											<i className="fas fa-plus"></i> Crear medicamento
-										</button>
-									</NavLink>
-								</Tooltip>
-								<Tooltip title="Regresar" aria-label="Regresar">
-									<NavLink to="/dashboard/person">
-										<button className="btn btn-primary ml-3">
-											<i className="fas fa-arrow-left"></i> Regresar
+											<i className="fas fa-plus"></i> Crear persona
 										</button>
 									</NavLink>
 								</Tooltip>
 							</div>
-						</div>
+						</div> */}
 
 						<TableContainer>
 							<Table
@@ -236,10 +217,10 @@ export default function EnhancedTable() {
 									order={order}
 									orderBy={orderBy}
 									onRequestSort={handleRequestSort}
-									rowCount={store.personMedicine.length}
+									rowCount={store.persons.length}
 								/>
 								<TableBody className="body-table-class">
-									{stableSort(store.personMedicine, getComparator(order, orderBy))
+									{stableSort(store.persons, getComparator(order, orderBy))
 										.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 										.map((row, index) => {
 											const isItemSelected = isSelected(row.name);
@@ -248,23 +229,36 @@ export default function EnhancedTable() {
 											return (
 												<TableRow hover tabIndex={-1} key={index}>
 													<TableCell component="th" id={labelId} scope="row" padding="20">
-														{row.description}
+														{row.full_name}
 													</TableCell>
 													<TableCell>
-														<Tooltip title="Editar medicamento">
-															<NavLink
-																to={`/dashboard/person/medicine/detail/${personIdParam}/${index}`}>
+														{/* <Tooltip title="Editar registro">
+															<NavLink to={`/dashboard/person/detail/${index}`}>
 																<button className="m-2 btn btn-warning button-table-class">
 																	<i className="fas fa-pen"></i>
 																</button>
 															</NavLink>
 														</Tooltip>
-														<Tooltip title="Eliminar medicamento">
+														<Tooltip title="Eliminar registro">
 															<button
 																className="m-2 btn btn-danger button-table-class"
 																onClick={event => handleDelete(index)}>
 																<i className="fas fa-trash"></i>
 															</button>
+														</Tooltip>
+														<Tooltip title="Medicamentos">
+															<NavLink to={`/dashboard/person/medicine/${index}`}>
+																<button className="m-2 btn btn-primary button-table-class">
+																	<i className="fas fa-tablets"></i>
+																</button>
+															</NavLink>
+														</Tooltip> */}
+														<Tooltip title="Generar Código QR">
+															<NavLink to={`/dashboard/person/generateqr/${index}`}>
+																<button className="m-2 btn btn-success">
+																	<i className="fas fa-qrcode"></i>
+																</button>
+															</NavLink>
 														</Tooltip>
 													</TableCell>
 												</TableRow>

@@ -107,15 +107,16 @@ EnhancedTableHead.propTypes = {
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%"
+		// width: "max-content"
 	},
 	paper: {
 		width: "100%",
-		maxWidth: 380,
+		maxWidth: 400,
 		marginBottom: theme.spacing(1)
 	},
 	table: {
 		minWidth: 200,
-		maxWidth: 380
+		maxWidth: 400
 	},
 	visuallyHidden: {
 		border: 0,
@@ -126,7 +127,8 @@ const useStyles = makeStyles(theme => ({
 		padding: 0,
 		position: "absolute",
 		top: 20,
-		width: 1
+		width: 1,
+		paddingLeft: 0
 	}
 }));
 
@@ -186,9 +188,8 @@ export default function EnhancedTable() {
 	}, []);
 
 	return (
-		<div className="row">
+		<div className="row container-fluid">
 			<div className="col-md-3" />
-
 			<div className="col-md-6">
 				<div className={classes.root}>
 					<Paper className={classes.paper}>
@@ -204,7 +205,7 @@ export default function EnhancedTable() {
 							</div>
 						</div>
 
-						<TableContainer className="TableContainer-class">
+						<TableContainer>
 							<Table
 								className={classes.table}
 								aria-labelledby="tableTitle"
@@ -233,21 +234,21 @@ export default function EnhancedTable() {
 													<TableCell>
 														<Tooltip title="Editar registro">
 															<NavLink to={`/dashboard/person/detail/${index}`}>
-																<button className="m-2 btn btn-warning">
+																<button className="m-2 btn btn-warning button-table-class">
 																	<i className="fas fa-pen"></i>
 																</button>
 															</NavLink>
 														</Tooltip>
 														<Tooltip title="Eliminar registro">
 															<button
-																className="m-2 btn btn-danger"
+																className="m-2 btn btn-danger button-table-class"
 																onClick={event => handleDelete(index)}>
 																<i className="fas fa-trash"></i>
 															</button>
 														</Tooltip>
 														<Tooltip title="Medicamentos">
 															<NavLink to={`/dashboard/person/medicine/${index}`}>
-																<button className="m-2 btn btn-primary">
+																<button className="m-2 btn btn-primary button-table-class">
 																	<i className="fas fa-tablets"></i>
 																</button>
 															</NavLink>

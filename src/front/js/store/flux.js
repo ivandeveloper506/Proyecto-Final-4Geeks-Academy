@@ -425,6 +425,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().activeOption("/home");
 
 				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
+			},
+			getAPIExterna: async userID => {
+				await fetch("https://cima.aemps.es/cima/rest/psuministro", {
+					method: "GET"
+					// headers: {
+					// 	"Content-Type": "application/json"
+					// }
+				})
+					.then(response => {
+						if (response.status === 200) {
+							return response.json();
+						} else {
+							alert("Error con API Externa");
+						}
+					})
+					.then(data => {
+						// setStore({ persons: data });
+
+						console.log("*** getAPIExterna ***");
+						console.log(data.resultados);
+					})
+					.catch(error => {
+						alert("Error con API Externa");
+					});
 			}
 		}
 	};

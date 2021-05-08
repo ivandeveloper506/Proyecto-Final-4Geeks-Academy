@@ -1,0 +1,22 @@
+.qr-main-class{
+    margin-top: 50px;
+    color: black;
+    background: white;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.qr-title-main-class{
+    height: 100px;
+    padding: 10px;
+    background: rgb(218,212,208);
+    border-radius: 10px 10px 0px 0px;
+}
+
+/* ESTILOS MEDIA QUERY */
+@media (min-width: 1200px) {
+    .qr-title-main-class {
+    height: 60px;
+    padding: 7px;
+    }
+}

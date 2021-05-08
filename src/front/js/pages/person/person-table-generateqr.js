@@ -111,12 +111,12 @@ const useStyles = makeStyles(theme => ({
 	},
 	paper: {
 		width: "100%",
-		maxWidth: 400,
+		maxWidth: 800,
 		marginBottom: theme.spacing(1)
 	},
 	table: {
 		minWidth: 200,
-		maxWidth: 400
+		maxWidth: 800
 	},
 	visuallyHidden: {
 		border: 0,
@@ -254,7 +254,8 @@ export default function EnhancedTable() {
 															</NavLink>
 														</Tooltip> */}
 														<Tooltip title="Generar Código QR">
-															<NavLink to={`/dashboard/person/generateqr/${index}`}>
+															<NavLink
+																to={`/dashboard/person/generateqr/detail/${index}`}>
 																<button className="m-2 btn btn-success">
 																	<i className="fas fa-qrcode"></i>
 																</button>

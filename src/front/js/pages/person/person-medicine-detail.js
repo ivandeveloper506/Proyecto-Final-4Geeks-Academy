@@ -102,6 +102,25 @@ export default function PersonMedicineDetail() {
 			<div>
 				<Form className="mt-3" onSubmit={handleSave}>
 					<div className="form-row title-mant-class head-mant-class">
+						<Form.Group className="col-md-3">
+							<Tooltip title="Guardar datos" aria-label="Guardar datos">
+								<button type="submit" className="btn btn-success">
+									<i className="fas fa-save"></i> Guardar
+								</button>
+							</Tooltip>
+
+							<NavLink to={`/dashboard/person/medicine/${personIdParam}`}>
+								<Tooltip title="Regresar" aria-label="Regresar">
+									<button className="btn btn-primary ml-3">
+										<i className="fas fa-arrow-left"></i> Regresar
+									</button>
+								</Tooltip>
+							</NavLink>
+						</Form.Group>
+					</div>
+					{/* <div>
+				<Form className="mt-3" onSubmit={handleSave}>
+					<div className="form-row title-mant-class head-mant-class">
 						<Form.Group className="col-md-9">
 							<h2>{action === "new" ? "Registrar Medicamento" : "Editar Medicamento"}</h2>
 						</Form.Group>
@@ -120,7 +139,7 @@ export default function PersonMedicineDetail() {
 								</Tooltip>
 							</NavLink>
 						</Form.Group>
-					</div>
+					</div> */}
 
 					<div className="form-row">
 						<Form.Group className="col">

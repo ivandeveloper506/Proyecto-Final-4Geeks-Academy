@@ -56,9 +56,6 @@ const headCells = [
 		disablePadding: false,
 		label: "Persona"
 	},
-	// { id: "telephone_number", numeric: false, disablePadding: false, label: "Teléfono" },
-	// { id: "emergency_phone", numeric: false, disablePadding: false, label: "Teléfono emergencia" },
-	// { id: "emergency_contact", numeric: false, disablePadding: false, label: "Contacto emergencia" },
 	{ id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
 ];
 
@@ -143,7 +140,6 @@ export default function EnhancedTable() {
 	const [page, setPage] = React.useState(0);
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
-	// const inputSearchRef = useRef(null);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -187,146 +183,100 @@ export default function EnhancedTable() {
 
 	useEffect(() => {
 		retrievePerson();
-		// inputSearchRef.current.focus();
 	}, []);
 
 	return (
-		<div className={classes.root}>
-			<Paper className={classes.paper}>
-				{/* <div className="row container-fluid">
-					<h2 className="col title-table-class">Listado de Personas</h2>
-				</div> */}
-				<div className="row container-fluid search-people-class">
-					{/* <div className="col-md-10">
-						<SearchBar
-							ref={inputSearchRef}
-							// onChange={event => {
-							// 	setSearchPerson(event.target.value);
-							// }}
-							type="text"
-							className="search-bar-class"
-							placeholder="Buscar persona..."
-							aria-label="Search Person"
-							name="SearchPerson"
-							id="SearchPerson"
-						/>
-					</div> */}
+		<div className="row">
+			<div className="col-md-3" />
 
-					<div className="col-md-2">
-						<Tooltip title="Crear Persona" aria-label="Crear Persona">
-							<NavLink to={`/dashboard/person/detail/`}>
-								<button className="mt-1 btn btn-success">
-									<i className="fas fa-plus"></i> Crear persona
-								</button>
-							</NavLink>
-						</Tooltip>
-					</div>
-				</div>
+			<div className="col-md-6">
+				<div className={classes.root}>
+					<Paper className={classes.paper}>
+						<div className="row container-fluid search-people-class">
+							<div className="col d-flex justify-content-center">
+								<Tooltip title="Crear Persona" aria-label="Crear Persona">
+									<NavLink to={`/dashboard/person/detail/`}>
+										<button className="mt-1 btn btn-success">
+											<i className="fas fa-plus"></i> Crear persona
+										</button>
+									</NavLink>
+								</Tooltip>
+							</div>
+						</div>
 
-				<TableContainer className="TableContainer-class">
-					<Table
-						className={classes.table}
-						aria-labelledby="tableTitle"
-						size={dense ? "small" : "medium"}
-						aria-label="enhanced table">
-						<EnhancedTableHead
-							classes={classes}
-							numSelected={selected.length}
-							order={order}
-							orderBy={orderBy}
-							onRequestSort={handleRequestSort}
-							rowCount={store.persons.length}
-						/>
-						<TableBody className="body-table-class">
-							{stableSort(store.persons, getComparator(order, orderBy))
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row, index) => {
-									const isItemSelected = isSelected(row.name);
-									const labelId = `enhanced-table-checkbox-${index}`;
+						<TableContainer className="TableContainer-class">
+							<Table
+								className={classes.table}
+								aria-labelledby="tableTitle"
+								size={dense ? "small" : "medium"}
+								aria-label="enhanced table">
+								<EnhancedTableHead
+									classes={classes}
+									numSelected={selected.length}
+									order={order}
+									orderBy={orderBy}
+									onRequestSort={handleRequestSort}
+									rowCount={store.persons.length}
+								/>
+								<TableBody className="body-table-class">
+									{stableSort(store.persons, getComparator(order, orderBy))
+										.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+										.map((row, index) => {
+											const isItemSelected = isSelected(row.name);
+											const labelId = `enhanced-table-checkbox-${index}`;
 
-									return (
-										<TableRow hover tabIndex={-1} key={index}>
-											<TableCell component="th" id={labelId} scope="row" padding="20">
-												{row.full_name}
-											</TableCell>
-											{/* <TableCell align="right">{row.telephone_number}</TableCell>
-											<TableCell align="right">{row.emergency_phone}</TableCell>
-											<TableCell align="right">{row.emergency_contact}</TableCell> */}
-											<TableCell>
-												<Tooltip title="Editar registro">
-													<NavLink to={`/dashboard/person/detail/${index}`}>
-														{/* <IconButton
-															className="text-warning"
-															aria-label="Editar persona">
-															<i className="fas fa-pen"></i>
-														</IconButton> */}
-														<button className="m-2 btn btn-warning">
-															<i className="fas fa-pen"></i>
-														</button>
-													</NavLink>
-												</Tooltip>
-												{/* <Tooltip title="Vacunas">
-													<NavLink to={`/dashboard/person/vaccine/${index}`}> */}
-												{/* <IconButton className="text-success" aria-label="Vacunas">
-															<i className="fas fa-syringe"></i>
-														</IconButton> */}
-												{/* <button className="ml-2 btn btn-success">
-															<i className="fas fa-syringe"></i>
-														</button>
-													</NavLink> */}
-												{/* </Tooltip> */}
-												<Tooltip title="Eliminar registro">
-													{/* <IconButton
-														className="text-danger"
-														aria-label="Eliminar persona"
-														onClick={event => handleDelete(index)}>
-														<i className="fas fa-trash-alt"></i>
-													</IconButton> */}
-													<button
-														className="m-2 btn btn-danger"
-														onClick={event => handleDelete(index)}>
-														<i className="fas fa-trash"></i>
-													</button>
-												</Tooltip>
-												<Tooltip title="Medicamentos">
-													<NavLink to={`/dashboard/person/medicine/${index}`}>
-														{/* <IconButton className="text-primary" aria-label="Medicamentos">
-															<i className="fas fa-tablets"></i>
-														</IconButton> */}
-														<button className="m-2 btn btn-primary">
-															<i className="fas fa-tablets"></i>
-														</button>
-													</NavLink>
-												</Tooltip>
-												{/* <Tooltip title="Generar Código QR">
-													<NavLink to={`/dashboard/person/generateqr/${index}`}>
-														<button className="ml-2 btn btn-dark">
-															<i className="fas fa-qrcode"></i>
-														</button>
-													</NavLink>
-												</Tooltip> */}
-											</TableCell>
+											return (
+												<TableRow hover tabIndex={-1} key={index}>
+													<TableCell component="th" id={labelId} scope="row" padding="20">
+														{row.full_name}
+													</TableCell>
+													<TableCell>
+														<Tooltip title="Editar registro">
+															<NavLink to={`/dashboard/person/detail/${index}`}>
+																<button className="m-2 btn btn-warning">
+																	<i className="fas fa-pen"></i>
+																</button>
+															</NavLink>
+														</Tooltip>
+														<Tooltip title="Eliminar registro">
+															<button
+																className="m-2 btn btn-danger"
+																onClick={event => handleDelete(index)}>
+																<i className="fas fa-trash"></i>
+															</button>
+														</Tooltip>
+														<Tooltip title="Medicamentos">
+															<NavLink to={`/dashboard/person/medicine/${index}`}>
+																<button className="m-2 btn btn-primary">
+																	<i className="fas fa-tablets"></i>
+																</button>
+															</NavLink>
+														</Tooltip>
+													</TableCell>
+												</TableRow>
+											);
+										})}
+									{emptyRows > 0 && (
+										<TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+											<TableCell colSpan={6} />
 										</TableRow>
-									);
-								})}
-							{emptyRows > 0 && (
-								<TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-									<TableCell colSpan={6} />
-								</TableRow>
-							)}
-						</TableBody>
-					</Table>
-				</TableContainer>
-				<TablePagination
-					rowsPerPageOptions={[5, 10, 25]}
-					component="div"
-					count={store.persons.length}
-					rowsPerPage={rowsPerPage}
-					page={page}
-					onChangePage={handleChangePage}
-					onChangeRowsPerPage={handleChangeRowsPerPage}
-				/>
-			</Paper>
+									)}
+								</TableBody>
+							</Table>
+						</TableContainer>
+						<TablePagination
+							rowsPerPageOptions={[5, 10, 25]}
+							component="div"
+							count={store.persons.length}
+							rowsPerPage={rowsPerPage}
+							page={page}
+							onChangePage={handleChangePage}
+							onChangeRowsPerPage={handleChangeRowsPerPage}
+						/>
+					</Paper>
+				</div>
+			</div>
+			<div className="col-md-3" />
 		</div>
 	);
 }

@@ -54,11 +54,11 @@ const headCells = [
 		id: "full_name",
 		numeric: false,
 		disablePadding: false,
-		label: "Nombre"
+		label: "Persona"
 	},
-	{ id: "telephone_number", numeric: false, disablePadding: false, label: "Teléfono" },
-	{ id: "emergency_phone", numeric: false, disablePadding: false, label: "Teléfono emergencia" },
-	{ id: "emergency_contact", numeric: false, disablePadding: false, label: "Contacto emergencia" },
+	// { id: "telephone_number", numeric: false, disablePadding: false, label: "Teléfono" },
+	// { id: "emergency_phone", numeric: false, disablePadding: false, label: "Teléfono emergencia" },
+	// { id: "emergency_contact", numeric: false, disablePadding: false, label: "Contacto emergencia" },
 	{ id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
 ];
 
@@ -113,10 +113,12 @@ const useStyles = makeStyles(theme => ({
 	},
 	paper: {
 		width: "100%",
-		marginBottom: theme.spacing(2)
+		maxWidth: 380,
+		marginBottom: theme.spacing(1)
 	},
 	table: {
-		minWidth: 750
+		minWidth: 200,
+		maxWidth: 380
 	},
 	visuallyHidden: {
 		border: 0,
@@ -141,7 +143,7 @@ export default function EnhancedTable() {
 	const [page, setPage] = React.useState(0);
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
-	const inputSearchRef = useRef(null);
+	// const inputSearchRef = useRef(null);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -185,17 +187,17 @@ export default function EnhancedTable() {
 
 	useEffect(() => {
 		retrievePerson();
-		inputSearchRef.current.focus();
+		// inputSearchRef.current.focus();
 	}, []);
 
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				<div className="row container-fluid">
+				{/* <div className="row container-fluid">
 					<h2 className="col title-table-class">Listado de Personas</h2>
-				</div>
+				</div> */}
 				<div className="row container-fluid search-people-class">
-					<div className="col-md-10">
+					{/* <div className="col-md-10">
 						<SearchBar
 							ref={inputSearchRef}
 							// onChange={event => {
@@ -208,7 +210,7 @@ export default function EnhancedTable() {
 							name="SearchPerson"
 							id="SearchPerson"
 						/>
-					</div>
+					</div> */}
 
 					<div className="col-md-2">
 						<Tooltip title="Crear Persona" aria-label="Crear Persona">
@@ -221,7 +223,7 @@ export default function EnhancedTable() {
 					</div>
 				</div>
 
-				<TableContainer>
+				<TableContainer className="TableContainer-class">
 					<Table
 						className={classes.table}
 						aria-labelledby="tableTitle"
@@ -247,50 +249,62 @@ export default function EnhancedTable() {
 											<TableCell component="th" id={labelId} scope="row" padding="20">
 												{row.full_name}
 											</TableCell>
-											<TableCell align="right">{row.telephone_number}</TableCell>
+											{/* <TableCell align="right">{row.telephone_number}</TableCell>
 											<TableCell align="right">{row.emergency_phone}</TableCell>
-											<TableCell align="right">{row.emergency_contact}</TableCell>
+											<TableCell align="right">{row.emergency_contact}</TableCell> */}
 											<TableCell>
 												<Tooltip title="Editar registro">
 													<NavLink to={`/dashboard/person/detail/${index}`}>
-														<IconButton
+														{/* <IconButton
 															className="text-warning"
 															aria-label="Editar persona">
 															<i className="fas fa-pen"></i>
-														</IconButton>
+														</IconButton> */}
+														<button className="m-2 btn btn-warning">
+															<i className="fas fa-pen"></i>
+														</button>
 													</NavLink>
 												</Tooltip>
-												<Tooltip title="Medicamentos">
-													<NavLink to={`/dashboard/person/medicine/${index}`}>
-														<IconButton className="text-primary" aria-label="Medicamentos">
-															<i className="fas fa-tablets"></i>
-														</IconButton>
-													</NavLink>
-												</Tooltip>
-												<Tooltip title="Vacunas">
-													<NavLink to={`/dashboard/person/vaccine/${index}`}>
-														<IconButton className="text-success" aria-label="Vacunas">
+												{/* <Tooltip title="Vacunas">
+													<NavLink to={`/dashboard/person/vaccine/${index}`}> */}
+												{/* <IconButton className="text-success" aria-label="Vacunas">
 															<i className="fas fa-syringe"></i>
-														</IconButton>
-													</NavLink>
-												</Tooltip>
-												<Tooltip title="Generar Código QR">
-													<NavLink to={`/dashboard/person/generateqr/${index}`}>
-														<IconButton
-															className="text-dark"
-															aria-label="Generar Código QR">
-															<i className="fas fa-qrcode"></i>
-														</IconButton>
-													</NavLink>
-												</Tooltip>
+														</IconButton> */}
+												{/* <button className="ml-2 btn btn-success">
+															<i className="fas fa-syringe"></i>
+														</button>
+													</NavLink> */}
+												{/* </Tooltip> */}
 												<Tooltip title="Eliminar registro">
-													<IconButton
+													{/* <IconButton
 														className="text-danger"
 														aria-label="Eliminar persona"
 														onClick={event => handleDelete(index)}>
 														<i className="fas fa-trash-alt"></i>
-													</IconButton>
+													</IconButton> */}
+													<button
+														className="m-2 btn btn-danger"
+														onClick={event => handleDelete(index)}>
+														<i className="fas fa-trash"></i>
+													</button>
 												</Tooltip>
+												<Tooltip title="Medicamentos">
+													<NavLink to={`/dashboard/person/medicine/${index}`}>
+														{/* <IconButton className="text-primary" aria-label="Medicamentos">
+															<i className="fas fa-tablets"></i>
+														</IconButton> */}
+														<button className="m-2 btn btn-primary">
+															<i className="fas fa-tablets"></i>
+														</button>
+													</NavLink>
+												</Tooltip>
+												{/* <Tooltip title="Generar Código QR">
+													<NavLink to={`/dashboard/person/generateqr/${index}`}>
+														<button className="ml-2 btn btn-dark">
+															<i className="fas fa-qrcode"></i>
+														</button>
+													</NavLink>
+												</Tooltip> */}
 											</TableCell>
 										</TableRow>
 									);

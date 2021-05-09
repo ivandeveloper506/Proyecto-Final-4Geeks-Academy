@@ -1,18 +1,33 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "../../store/appContext";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import "../../../styles/qrstyles.scss";
 import Tooltip from "@material-ui/core/Tooltip";
 
 export default function PersonGenerateQr() {
 	const { store, actions } = useContext(Context);
+	const params = useParams();
+	const personId = parseInt(params.personId);
+
+	let personDetail = store.persons[personId];
 
 	const handleGenerate = index => {
 		// let personDelete = store.persons[index];
 
 		alert("Entro a generar el código QR");
 
-		// actions.generateQR(personDelete.id, store.userProfile.id);
+		console.log("*** handleGenerate ***");
+		console.log(personDetail);
+		console.log(`${store.URLCodeQR}${personDetail.id}`);
+
+		// Se manda a crear el usuario
+		const personQRBody = {
+			url: `${store.URLCodeQR}${personDetail.id}`,
+			person_id: personDetail.id,
+			user_creation_id: store.userProfile.id
+		};
+
+		actions.generateQR(personQRBody);
 	};
 
 	return (
@@ -20,7 +35,7 @@ export default function PersonGenerateQr() {
 			<div className="container-fluid qr-main-class">
 				<div className="row qr-title-main-class">
 					<div className="col-md-9">
-						<h4>Generar Código QR []</h4>
+						<h4>Generar Código QR [{personDetail.full_name}]</h4>
 					</div>
 					<div className="col-md-3">
 						<Tooltip title="Generar Código" aria-label="Generar Código">

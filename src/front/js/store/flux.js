@@ -1,11 +1,12 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-amber-capybara-n6d52z5m.ws-us03.gitpod.io/api/";
+const baseURLApi = "https://3001-green-marmot-8n828rkl.ws-us03.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			URLCodeQR: "https://3001-green-marmot-8n828rkl.ws-us03.gitpod.io/api/personqr/",
 			message: null,
 			userProfile: [],
 			persons: [],
@@ -606,7 +607,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
+			generateQR: async personQRBody => {
+				await fetch(`${baseURLApi}personqr`, {
+					method: "POST",
+					body: JSON.stringify(personQRBody),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						if (response.status === 201) {
+							ShowAlert(
+								"top-end",
+								"success",
+								"",
+								"¡El Código QR fue generado exitosamente!",
+								false,
+								true,
+								2000
+							);
 
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"",
+								"¡Ocurrio un error al tratar de generar el Código QR.",
+								false,
+								true,
+								2000
+							);
+						}
+					})
+					.catch(error => {
+						ShowAlert(
+							"top-end",
+							"error",
+							"",
+							"¡Ocurrio un error al tratar de generar el Código QR.",
+							false,
+							true,
+							2000
+						);
+					});
+			},
 			activeOption: option => {
 				setStore({ activeOption: option });
 			},

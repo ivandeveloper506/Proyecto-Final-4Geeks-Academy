@@ -33,10 +33,16 @@ export default function PersonGenerateQr() {
 	useEffect(() => {
 		console.log("*** PersonGenerateQr [useEffect] - Entro a generar el código QR ***");
 
-		actions.getQRCodePerson(personDetail.id);
+		const personQRBody = {
+			person_id: personDetail.id
+		};
+
+		actions.getQRCodePerson(personQRBody);
 
 		console.log("*** PersonGenerateQr [QRCodePerson] ***");
 		console.log(store.QRCodePerson);
+
+		actions.activeOption(`/dashboard/person/generateqr/detail/${personId}`);
 	}, []);
 
 	return (

@@ -2,7 +2,7 @@ import os
 import flask
 import datetime
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, PersonQr
+from api.models import db, PersonQr, User
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -17,25 +17,22 @@ def index():
 
     return jsonify(list(map(lambda x: x.serialize(), results))), 200
 
-# [GET] - Ruta para obtener un [PersonQr]
-@routes_person_qr.route('/api/personqr/<int:personId>', methods=['POST'])
+# [POST] - Ruta para obtener un [PersonQr] por id de persona
+@routes_person_qr.route('/api/person/qr', methods=['POST'])
 @jwt_required()
-def indexPersonQr(personId):
-    data_request = request.get_json()
+def indexPersonQr():
+    person_id = request.json.get("person_id",None)
 
-    results = PersonQr.query.filter_by(person_id=personId)
-
-    if results is None:
-        raise APIException('No existe Código QR para la persona especificada.',status_code=403)
-
-    try:
-        return jsonify(list(map(lambda x: x.serialize(), results))), 200
+    if person_id is None:
+        return jsonify({"message": "El código de la persona es requerido."}), 400
     
-    except AssertionError as exception_message: 
-        return jsonify(message='Error: {}. '.format(exception_message)), 400
-
-    # return jsonify(list(map(lambda x: x.serialize(), results))), 200
-
+    personQr = PersonQr.query.filter_by(person_id=person_id).first()
+    
+    if personQr is None:
+        # the user was not found on the database
+        return jsonify({"message": "El código de persona es invalido."}), 401
+    else:
+        return jsonify(PersonQr.serialize(personQr)), 200
 
 # [POST] - Ruta para crear un [PersonQr]
 @routes_person_qr.route('/api/personqr', methods=['POST'])

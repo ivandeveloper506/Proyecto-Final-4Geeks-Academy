@@ -1,12 +1,12 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-amber-puffin-d30nxu14.ws-us03.gitpod.io/api/";
+const baseURLApi = "https://3001-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3001-amber-puffin-d30nxu14.ws-us03.gitpod.io/api/personqr/",
+			URLCodeQR: "https://3001-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/api/personqr/",
 			QRCodePerson: [],
 			message: null,
 			userProfile: [],
@@ -605,28 +605,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
-			getQRCodePerson: async personID => {
-				await fetch(`${baseURLApi}personqr/${personID}`, {
+			getQRCodePerson: async personQRBody => {
+				await fetch(`${baseURLApi}person/qr`, {
 					method: "POST",
+					body: JSON.stringify(personQRBody),
 					headers: {
 						"Content-Type": "application/json",
 						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
 					}
 				})
 					.then(response => {
-						console.log("*** getQRCodePerson [then(response] ***");
-						console.log(reponse);
-
 						if (response.status === 200) {
-							console.log("*** getQRCodePerson [response.status === 200] ***");
-
 							return response.json();
 						} else {
 							ShowAlert(
 								"top-end",
 								"error",
-								"Oops...",
-								"Ocurrio un error al tratar de recuperar los datos del Código QR de la persona.",
+								"",
+								"¡Ocurrio un error al tratar de obtener el Código QR de la persona",
 								false,
 								true,
 								2000
@@ -634,18 +630,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.then(data => {
-						console.log("*** getQRCodePerson [then(data] ***");
-
 						setStore({ QRCodePerson: data });
 					})
 					.catch(error => {
-						console.log("*** getQRCodePerson [catch(error] ***");
-
 						ShowAlert(
 							"top-end",
 							"error",
-							"Oops...",
-							"Ocurrio un error al tratar de recuperar los datos del Código QR de la persona.",
+							"",
+							"¡Ocurrio un error al tratar de obtener el Código QR de la persona",
 							false,
 							true,
 							2000
@@ -654,7 +646,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			generateQR: async personQRBody => {
 				await fetch(`${baseURLApi}personqr`, {
-					method: "POST",
+					method: "GET",
 					body: JSON.stringify(personQRBody),
 					headers: {
 						"Content-Type": "application/json",

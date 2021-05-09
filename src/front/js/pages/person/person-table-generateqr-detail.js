@@ -71,22 +71,29 @@ export default function PersonGenerateQr() {
 				</div>
 				<div className="row">
 					<div className="col-md-5">Columna 1</div>
-					<div className=""></div>
+					{/* <div className=""></div> */}
 
 					<div className="col-md person-qr-info-class">
-						<QRCode
-							value={store.QRCodePerson.url}
-							size="150"
-							ecLevel="H"
-							qrStyle="square"
-							fgColor="#003E7E"
-							bgColor="#F0F0F0"
-							enableCORS="true"
-						/>
+						<div className="row">
+							<div className="col">
+								<QRCode
+									value={store.QRCodePerson.url}
+									size="150"
+									ecLevel="H"
+									qrStyle="square"
+									fgColor="#003E7E"
+									bgColor="#F0F0F0"
+									enableCORS="true"
+								/>
+							</div>
+							<div className="col qr-info-card-class">
+								<p className="mt-3">{personDetail.full_name}</p>
+								<h5>ESCANEA EL</h5>
+								<h3>CÓDIGO QR</h3>
+							</div>
+						</div>
 					</div>
 				</div>
-
-				{/* <div className="row">row 1</div> */}
 			</div>
 			<div className="col-md-2" />
 		</div>

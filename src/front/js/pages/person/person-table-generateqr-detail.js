@@ -3,6 +3,7 @@ import { Context } from "../../store/appContext";
 import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import "../../../styles/qrstyles.scss";
 import Tooltip from "@material-ui/core/Tooltip";
+import { QRCode } from "react-qrcode-logo";
 
 export default function PersonGenerateQr() {
 	const { store, actions } = useContext(Context);
@@ -47,18 +48,17 @@ export default function PersonGenerateQr() {
 
 	return (
 		<div className="container">
-			<div className="container-fluid qr-main-class">
+			<div className="col-md-2" />
+			<div className="col-md-8 container-fluid qr-main-class">
 				<div className="row qr-title-main-class">
-					<div className="col-md-9">
-						<h4>Generar Código QR [{personDetail.full_name}]</h4>
+					<div className="col-md-7">
+						<h6>Generar Código QR [{personDetail.full_name}]</h6>
 					</div>
-					<div className="col-md-3">
+					<div className="col-md-5">
 						<Tooltip title="Generar Código" aria-label="Generar Código">
-							{/* <NavLink to={`/dashboard/person/medicine/detail/${personIdParam}/-1`}> */}
 							<button className="mt-1 btn btn-success" onClick={event => handleGenerate()}>
 								<i className="fas fa-plus"></i> Generar
 							</button>
-							{/* </NavLink> */}
 						</Tooltip>
 						<Tooltip title="Regresar" aria-label="Regresar">
 							<NavLink to="/dashboard/person/generateqr">
@@ -69,7 +69,26 @@ export default function PersonGenerateQr() {
 						</Tooltip>
 					</div>
 				</div>
+				<div className="row">
+					<div className="col-md-5">Columna 1</div>
+					<div className=""></div>
+
+					<div className="col-md person-qr-info-class">
+						<QRCode
+							value={store.QRCodePerson.url}
+							size="150"
+							ecLevel="H"
+							qrStyle="square"
+							fgColor="#003E7E"
+							bgColor="#F0F0F0"
+							enableCORS="true"
+						/>
+					</div>
+				</div>
+
+				{/* <div className="row">row 1</div> */}
 			</div>
+			<div className="col-md-2" />
 		</div>
 	);
 }

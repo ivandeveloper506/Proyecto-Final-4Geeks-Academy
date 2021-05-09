@@ -1,12 +1,13 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-green-marmot-8n828rkl.ws-us03.gitpod.io/api/";
+const baseURLApi = "https://3001-amber-puffin-d30nxu14.ws-us03.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3001-green-marmot-8n828rkl.ws-us03.gitpod.io/api/personqr/",
+			URLCodeQR: "https://3001-amber-puffin-d30nxu14.ws-us03.gitpod.io/api/personqr/",
+			QRCodePerson: [],
 			message: null,
 			userProfile: [],
 			persons: [],
@@ -408,7 +409,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
-
 			personMedicineStore: async personMedicineBody => {
 				await fetch(`${baseURLApi}person_medicine`, {
 					method: "POST",
@@ -501,7 +501,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
-
 			handlePersonDelete: (personID, userID) => {
 				Swal.fire({
 					title: "¿Está seguro que desea eliminar el registro?",
@@ -548,7 +547,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Swal.fire("Error!", "Ha ocurrido un error al tratar de eliminar la persona.", "error");
 					});
 			},
-
 			handlePersonMedicineDelete: (personMedicineID, personIndex) => {
 				Swal.fire({
 					title: "¿Está seguro que desea eliminar el registro?",
@@ -604,6 +602,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Error!",
 							"Ha ocurrido un error al tratar de eliminar el medicamento de la persona.",
 							"error"
+						);
+					});
+			},
+			getQRCodePerson: async personID => {
+				await fetch(`${baseURLApi}personqr/${personID}`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
+					}
+				})
+					.then(response => {
+						console.log("*** getQRCodePerson [then(response] ***");
+						console.log(reponse);
+
+						if (response.status === 200) {
+							console.log("*** getQRCodePerson [response.status === 200] ***");
+
+							return response.json();
+						} else {
+							ShowAlert(
+								"top-end",
+								"error",
+								"Oops...",
+								"Ocurrio un error al tratar de recuperar los datos del Código QR de la persona.",
+								false,
+								true,
+								2000
+							);
+						}
+					})
+					.then(data => {
+						console.log("*** getQRCodePerson [then(data] ***");
+
+						setStore({ QRCodePerson: data });
+					})
+					.catch(error => {
+						console.log("*** getQRCodePerson [catch(error] ***");
+
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ocurrio un error al tratar de recuperar los datos del Código QR de la persona.",
+							false,
+							true,
+							2000
 						);
 					});
 			},

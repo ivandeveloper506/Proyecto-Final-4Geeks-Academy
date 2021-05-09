@@ -18,15 +18,24 @@ def index():
     return jsonify(list(map(lambda x: x.serialize(), results))), 200
 
 # [GET] - Ruta para obtener un [PersonQr]
-@routes_person_qr.route('/api/personqr/<int:id>', methods=['GET'])
+@routes_person_qr.route('/api/personqr/<int:personId>', methods=['POST'])
 @jwt_required()
-def indexPersonQr(id):
-    personQr = PersonQr.query.get(id)
+def indexPersonQr(personId):
+    data_request = request.get_json()
 
-    if personQr is None:
-        raise APIException('La información del QR de la persona con el id especificado, no fue encontrada.',status_code=403)
+    results = PersonQr.query.filter_by(person_id=personId)
 
-    return jsonify(PersonQr.serialize(personQr)), 200
+    if results is None:
+        raise APIException('No existe Código QR para la persona especificada.',status_code=403)
+
+    try:
+        return jsonify(list(map(lambda x: x.serialize(), results))), 200
+    
+    except AssertionError as exception_message: 
+        return jsonify(message='Error: {}. '.format(exception_message)), 400
+
+    # return jsonify(list(map(lambda x: x.serialize(), results))), 200
+
 
 # [POST] - Ruta para crear un [PersonQr]
 @routes_person_qr.route('/api/personqr', methods=['POST'])
@@ -45,6 +54,24 @@ def store():
         db.session.commit()
         
         return jsonify(PersonQr.serialize(personQr)), 201
+    
+    except AssertionError as exception_message: 
+        return jsonify(msg='Error: {}. '.format(exception_message)), 400
+
+# [DELETE] - Ruta para eliminar un [PersonQr]
+@routes_person_qr.route('/api/personqr/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete(id):
+    personQr = PersonQr.query.get(id)
+
+    if personQr is None:
+        raise APIException('El Código QR con id especificado, no fue encontrado.',status_code=403)
+
+    try:
+        db.session.delete(personQr)
+        db.session.commit()
+        
+        return jsonify('El Código QR fue eliminado satisfactoriamente.'), 200
     
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400

@@ -30,6 +30,15 @@ export default function PersonGenerateQr() {
 		actions.generateQR(personQRBody);
 	};
 
+	useEffect(() => {
+		console.log("*** PersonGenerateQr [useEffect] - Entro a generar el código QR ***");
+
+		actions.getQRCodePerson(personDetail.id);
+
+		console.log("*** PersonGenerateQr [QRCodePerson] ***");
+		console.log(store.QRCodePerson);
+	}, []);
+
 	return (
 		<div className="container">
 			<div className="container-fluid qr-main-class">

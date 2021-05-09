@@ -6,7 +6,7 @@ const baseURLApi = "https://3001-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/a
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3001-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/api/personqr/",
+			URLCodeQR: "https://3001-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/api/person/infoqr/",
 			QRCodePerson: [],
 			message: null,
 			userProfile: [],
@@ -646,7 +646,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			generateQR: async personQRBody => {
 				await fetch(`${baseURLApi}personqr`, {
-					method: "GET",
+					method: "POST",
 					body: JSON.stringify(personQRBody),
 					headers: {
 						"Content-Type": "application/json",

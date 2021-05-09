@@ -38,7 +38,7 @@ export default function PersonGenerateQr() {
 			person_id: personDetail.id
 		};
 
-		actions.getQRCodePerson(personQRBody);
+		actions.getQRCodePerson(personQRBody); // TODO: REVISAR, SE CAE CUANDO NO HA SIDO GENERADO
 
 		console.log("*** PersonGenerateQr [QRCodePerson] ***");
 		console.log(store.QRCodePerson);
@@ -69,24 +69,27 @@ export default function PersonGenerateQr() {
 						</Tooltip>
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-md-5">Columna 1</div>
+				<div className="row mt-3">
+					<div className="col-md-5">
+						<p>Generar código QR</p>
+					</div>
 					{/* <div className=""></div> */}
 
 					<div className="col-md person-qr-info-class">
 						<div className="row">
 							<div className="col">
 								<QRCode
+									className="col qr-info-cardL-class"
 									value={store.QRCodePerson.url}
 									size="150"
 									ecLevel="H"
 									qrStyle="square"
 									fgColor="#003E7E"
-									bgColor="#F0F0F0"
+									bgColor="#C4F1FE"
 									enableCORS="true"
 								/>
 							</div>
-							<div className="col qr-info-card-class">
+							<div className="col qr-info-cardR-class">
 								<p className="mt-3">{personDetail.full_name}</p>
 								<h5>ESCANEA EL</h5>
 								<h3>CÓDIGO QR</h3>

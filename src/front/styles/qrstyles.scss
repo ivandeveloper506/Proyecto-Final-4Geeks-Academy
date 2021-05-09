@@ -14,18 +14,24 @@
 }
 
 .person-qr-info-class{
-    background: white;
+    background: rgb(237,246,251);
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
-      box-shadow: 0px 1px 5px rgba(0,0,0,0.4);
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.4);
 }
 
-.qr-info-card-class{
+.qr-info-cardL-class{
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.qr-info-cardR-class{
     text-align: center;
     justify-content: center;
     align-content: center;
-    padding: 15px;
+    padding: 10px 35px 15px 15px;
 }
 
 /* ESTILOS MEDIA QUERY */

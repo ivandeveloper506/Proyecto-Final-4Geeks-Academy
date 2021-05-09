@@ -2,7 +2,7 @@ import os
 import flask
 import datetime
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, PersonQr, User
+from api.models import db, PersonQr, Person
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -33,6 +33,16 @@ def indexPersonQr():
         return jsonify({"message": "El código de persona es invalido."}), 401
     else:
         return jsonify(PersonQr.serialize(personQr)), 200
+
+# [POST] - Ruta para obtener la información de un [PersonQr] por id de persona
+@routes_person_qr.route('/api/person/infoqr/<int:id>', methods=['GET'])
+def indexInfoPersonQr(id):
+    person = Person.query.get(id)
+
+    if person is None:
+        raise APIException('La persona con el id especificado, no fue encontrada.',status_code=403)
+
+    return jsonify(Person.serialize(person)), 200
 
 # [POST] - Ruta para crear un [PersonQr]
 @routes_person_qr.route('/api/personqr', methods=['POST'])

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Context } from "../../front/js/store/appContext";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Home } from "./pages/home";
 import injectContext from "./store/appContext";
@@ -21,6 +22,7 @@ import PersonInfoQr from "./pages/person/person-infoqr";
 import PersonGenerateQrDetail from "./pages/person/person-table-generateqr-detail";
 
 const Layout = () => {
+	const { store, actions } = useContext(Context);
 	const basename = process.env.BASENAME || "";
 
 	return (
@@ -62,7 +64,7 @@ const Layout = () => {
 					</Route>
 					{/* <Route exact path="*" component={NotFoundPage} /> */}
 				</Switch>
-				<Footer />
+				{store.infoQRActive ? "" : <Footer />}
 			</BrowserRouter>
 		</div>
 	);

@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			URLCodeQR: "https://3000-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
+			PersonInfoQR: [],
 			message: null,
 			userProfile: [],
 			persons: [],
@@ -18,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userPasswordReset: false,
 			userPasswordValidate: false,
 			userEmailPasswordReset: "",
-			activeOption: ""
+			activeOption: "",
+			infoQRActive: false
 		},
 		actions: {
 			login: async (email, password) => {
@@ -644,6 +646,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
+			getPersonInfoQR: async personId => {
+				await fetch(`${baseURLApi}person/infoqr/${personId}`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (response.status === 200) {
+							return response.json();
+						}
+					})
+					.then(data => {
+						setStore({ PersonInfoQR: data });
+					})
+					.catch(error => {
+						ShowAlert(
+							"top-end",
+							"error",
+							"Oops...",
+							"Ocurrido un error al tratar de recuperar la información del Código QR de la persona.",
+							false,
+							true,
+							2000
+						);
+					});
+			},
 			generateQR: async personQRBody => {
 				await fetch(`${baseURLApi}personqr`, {
 					method: "POST",
@@ -701,6 +730,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			userEmailPasswordReset: email => {
 				setStore({ userEmailPasswordReset: email });
+			},
+			infoQRActive: active => {
+				setStore({ infoQRActive: active });
 			},
 			logout: () => {
 				localStorage.setItem("x-access-token", null);

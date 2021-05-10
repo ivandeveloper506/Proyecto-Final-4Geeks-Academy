@@ -8,6 +8,7 @@ export default function PersonInfoQr() {
 	const params = useParams();
 	const personId = parseInt(params.personId);
 	let personData = [];
+	let personMedicine = [];
 
 	useEffect(() => {
 		actions.activePersonInfoQR(personId);
@@ -22,51 +23,85 @@ export default function PersonInfoQr() {
 		console.log("*** PersonInfoQr [store.PersonInfoQR] ***");
 		console.log(store.PersonInfoQR.results);
 		personData = store.PersonInfoQR.results;
+		personMedicine = store.PersonInfoQR.medicine;
 	}
 
 	return (
-		<div className="container-fluid">
-			<div className="container main-info-qr-class">
-				<div className="row">
-					<div className="col mt-3">
-						<h3>{personData != undefined ? personData["full_name"] : ""}</h3>
-					</div>
+		<div className="container-fluid main-info-qr-class">
+			<div className="row">
+				<div className="col mt-3">
+					<h3>{personData != undefined ? personData["full_name"] : ""}</h3>
 				</div>
-				<hr />
-				<div className="row">
-					<div className="col">
-						<p>
-							<strong>Medicamentos</strong>
-						</p>
-					</div>
+			</div>
+			<hr />
+			<div className="row">
+				<div className="col">
+					<p>
+						<strong>Medicamentos</strong>
+					</p>
 				</div>
-				<hr />
-				<div className="row">
-					<div className="col">
-						<p>
-							<strong>Vacunación COVID-19</strong>
-						</p>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-6">
-						<div className="row">
-							<div className="col-6">
-								<p>Primera Dosis:</p>
+			</div>
+			<div className="row">
+				<div className="col">
+					{personMedicine.map((item, index) => {
+						return (
+							<div key={index}>
+								<div className="row">
+									<div className="col-4">
+										<p>Nombre:</p>
+									</div>
+									<div className="col-8">
+										<p>{item.description}</p>
+									</div>
+								</div>
+								<div className="row">
+									<div className="col-4">
+										<p>Frecuencia:</p>
+									</div>
+									<div className="col-8">
+										<p>{item.frequency}</p>
+									</div>
+								</div>
+								<div className="row">
+									<div className="col-4">
+										<p>Observaciones:</p>
+									</div>
+									<div className="col-8">
+										<p>{item.observation}</p>
+									</div>
+								</div>
+								<hr />
 							</div>
-							<div className="col-6">
-								<p>{personData != undefined ? personData["vaccine_covid1_date"] : ""}</p>
-							</div>
+						);
+					})}
+				</div>
+			</div>
+			<hr />
+			<div className="row">
+				<div className="col">
+					<p>
+						<strong>Vacunación COVID-19</strong>
+					</p>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-md-6">
+					<div className="row">
+						<div className="col-6">
+							<p>Primera Dosis:</p>
+						</div>
+						<div className="col-6">
+							<p>{personData != undefined ? personData["vaccine_covid1_date"] : ""}</p>
 						</div>
 					</div>
-					<div className="col-md-6">
-						<div className="row">
-							<div className="col-6">
-								<p>Segunda Dosis:</p>
-							</div>
-							<div className="col-6">
-								<p>{personData != undefined ? personData["vaccine_covid2_date"] : ""}</p>
-							</div>
+				</div>
+				<div className="col-md-6">
+					<div className="row">
+						<div className="col-6">
+							<p>Segunda Dosis:</p>
+						</div>
+						<div className="col-6">
+							<p>{personData != undefined ? personData["vaccine_covid2_date"] : ""}</p>
 						</div>
 					</div>
 				</div>

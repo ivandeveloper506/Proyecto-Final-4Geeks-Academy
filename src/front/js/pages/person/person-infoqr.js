@@ -1,17 +1,18 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import { Context } from "../../store/appContext";
+import "../../../styles/qrstyles.scss";
 
 export default function PersonInfoQr() {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 	const personId = parseInt(params.personId);
-	const personData = [];
+	let personData = [];
 
 	useEffect(() => {
-		actions.getPersonInfoQR(personId);
-		actions.activeOption(`/person/infoqr/${personId}`);
-		actions.infoQRActive(true);
+		actions.activePersonInfoQR(personId);
+		// actions.activeOption(`/person/infoqr/${personId}`);
+		// actions.infoQRActive(true);
 	}, []);
 
 	// console.log("*** PersonInfoQr [store.PersonInfoQR] ***");
@@ -24,14 +25,62 @@ export default function PersonInfoQr() {
 	}
 
 	return (
-		<div className="container-fluid main-div-class">
-			<div className="container">
+		<div className="container-fluid">
+			<div className="container main-info-qr-class">
 				<div className="row">
-					<div className="col title-page-class">
-						<h1>{personData != undefined ? personData["full_name"] : ""}</h1>
+					<div className="col mt-3">
+						<h3>{personData != undefined ? personData["full_name"] : ""}</h3>
+					</div>
+				</div>
+				<hr />
+				<div className="row">
+					<div className="col">
+						<p>
+							<strong>Medicamentos</strong>
+						</p>
+					</div>
+				</div>
+				<hr />
+				<div className="row">
+					<div className="col">
+						<p>
+							<strong>Vacunación COVID-19</strong>
+						</p>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-md-6">
+						<div className="row">
+							<div className="col-6">
+								<p>Primera Dosis:</p>
+							</div>
+							<div className="col-6">
+								<p>{personData != undefined ? personData["vaccine_covid1_date"] : ""}</p>
+							</div>
+						</div>
+					</div>
+					<div className="col-md-6">
+						<div className="row">
+							<div className="col-6">
+								<p>Segunda Dosis:</p>
+							</div>
+							<div className="col-6">
+								<p>{personData != undefined ? personData["vaccine_covid2_date"] : ""}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		// <div className="container-fluid main-div-class">
+		// 	<div className="container">
+		// 		<div className="row">
+		// 			<div className="col title-page-class">
+		// 				<h3>{personData != undefined ? personData["full_name"] : ""}</h3>
+		// 			</div>
+		// 		</div>
+		// 	</div>
+		// </div>
 	);
 }

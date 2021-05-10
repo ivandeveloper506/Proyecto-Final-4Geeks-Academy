@@ -719,6 +719,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
+			activePersonInfoQR: personId => {
+				getActions().infoQRActive(true);
+				getActions().activeOption(`/person/infoqr/${personId}`);
+				getActions().getPersonInfoQR(personId);
+			},
 			activeOption: option => {
 				setStore({ activeOption: option });
 			},

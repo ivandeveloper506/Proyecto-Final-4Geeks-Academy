@@ -34,6 +34,17 @@
     padding: 10px 35px 15px 15px;
 }
 
+.main-info-qr-class{
+    background: white;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    color: black;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 100vh;
+}
+
 /* ESTILOS MEDIA QUERY */
 @media (min-width: 1200px) {
     .qr-title-main-class {

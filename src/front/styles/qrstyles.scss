@@ -36,11 +36,46 @@
 
 .main-info-qr-class{
     background: white;
-    text-align: center;
-    justify-content: center;
-    align-content: center;
+    text-align: left;
     color: black;
     max-height: max-content;
+}
+
+.info-qr-title1-class {
+    background: rgb(108,117,125);
+    color: white;
+    text-align: center;
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.4);
+}
+
+.info-qr-title2-class {
+    background: rgb(255, 217, 103);
+    text-align: center;
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+    padding: 3px;
+    padding-bottom: 10px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.4);
+}
+
+.info-qr-title3-class {
+    background: rgb(230, 230, 230);
+    text-align: center;
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.4);
+}
+
+.info-qr-card-class{
+    background: white;
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.4);
 }
 
 /* ESTILOS MEDIA QUERY */

@@ -32,7 +32,7 @@ def indexPersonMedicine(id):
 @routes_person_medicine.route('/api/person_medicine/person/<int:personId>', methods=['GET'])
 @jwt_required()
 def indexPersonMedicineByPerson(personId):
-    data_request = request.get_json()
+    # data_request = request.get_json()
 
     results = PersonMedicine.query.filter_by(person_id=personId)
 

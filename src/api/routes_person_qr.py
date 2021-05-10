@@ -2,7 +2,7 @@ import os
 import flask
 import datetime
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, PersonQr, Person
+from api.models import db, PersonQr, Person, PersonMedicine
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -42,7 +42,22 @@ def indexInfoPersonQr(id):
     if person is None:
         raise APIException('La persona con el id especificado, no fue encontrada.',status_code=403)
 
-    return jsonify(Person.serialize(person)), 200
+    person = Person.serialize(person)
+
+    personInfoQr = {
+    "full_name": person["full_name"],
+    "emergency_contact": person["emergency_contact"],
+    "emergency_phone": person["emergency_phone"],
+    "user_image": person["user_image"],
+    "vaccine_covid1_date": "",
+    "vaccine_covid2_date": ""
+    }
+
+    resultsMedicine = PersonMedicine.query.filter_by(person_id=id)
+
+    personMedicine = list(map(lambda x: x.serialize(), resultsMedicine))
+
+    return jsonify({"results": personInfoQr, "medicine": personMedicine}), 200
 
 # [POST] - Ruta para crear un [PersonQr]
 @routes_person_qr.route('/api/personqr', methods=['POST'])

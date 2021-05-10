@@ -6,7 +6,7 @@ const baseURLApi = "https://3001-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/a
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3001-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/api/person/infoqr/",
+			URLCodeQR: "https://3000-crimson-woodpecker-9x5cdppf.ws-us04.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			message: null,
 			userProfile: [],

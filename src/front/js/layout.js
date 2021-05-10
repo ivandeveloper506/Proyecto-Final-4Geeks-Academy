@@ -17,6 +17,7 @@ import PersonMedicineTable from "./pages/person/person-medicine-table";
 import PersonMedicineDetail from "./pages/person/person-medicine-detail";
 import PersonInformation from "./pages/person-information";
 import PersonGenerateQr from "./pages/person/person-table-generateqr";
+import PersonInfoQr from "./pages/person/person-infoqr";
 import PersonGenerateQrDetail from "./pages/person/person-table-generateqr-detail";
 
 const Layout = () => {
@@ -52,6 +53,7 @@ const Layout = () => {
 						path="/dashboard/person/generateqr/detail/:personId"
 						component={PersonGenerateQrDetail}
 					/>
+					<Route exact path="/person/infoqr/:personId" component={PersonInfoQr} />
 					{/* <Route exact path="/dashboard/person/generateqr/:id" component={Person} /> */}
 					{/* <Route exact path="/dashboard/person-information" component={PersonInformation} /> */}
 					{/* <Route exact path="/dashboard/person-generate-qr" component={PersonGenerateQr} /> */}

@@ -44,7 +44,7 @@ export default function PersonInfoQr() {
 				</div>
 			</div>
 
-			<div className="info-qr-title2-class">
+			<div className="info-qr-title2-class mt-2">
 				<div className="row">
 					<div className="col mt-3">
 						<h4>En caso de emergencia</h4>
@@ -67,9 +67,7 @@ export default function PersonInfoQr() {
 					</div>
 				</div>
 			</div>
-
-			<hr />
-			<div className="info-qr-title3-class">
+			<div className="info-qr-title3-class mt-3">
 				<div className="row">
 					<div className="col">
 						<h4>Medicamentos</h4>
@@ -112,8 +110,7 @@ export default function PersonInfoQr() {
 					})}
 				</div>
 			</div>
-			<hr />
-			<div className="info-qr-title3-class">
+			<div className="info-qr-title3-class mt-3">
 				<div className="row">
 					<div className="col">
 						<p>
@@ -126,10 +123,10 @@ export default function PersonInfoQr() {
 				<div className="row">
 					<div className="col-md-6">
 						<div className="row">
-							<div className="col-6">
-								<p>COVID-19 1° Dosis:</p>
+							<div className="col-4">
+								<p>1° Dosis:</p>
 							</div>
-							<div className="col-6">
+							<div className="col-8">
 								<p>
 									{personData != undefined
 										? getDateFormat(new Date(personData["vaccine1_date"]), "L")
@@ -140,10 +137,10 @@ export default function PersonInfoQr() {
 					</div>
 					<div className="col-md-6">
 						<div className="row">
-							<div className="col-6">
-								<p>COVID-19 2° Dosis:</p>
+							<div className="col-4">
+								<p>2° Dosis:</p>
 							</div>
-							<div className="col-6">
+							<div className="col-8">
 								<p>
 									{personData != undefined
 										? getDateFormat(new Date(personData["vaccine2_date"]), "L")
@@ -152,6 +149,14 @@ export default function PersonInfoQr() {
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div className="row m-3">
+				<div className="col d-flex justify-content-center">
+					<NavLink className="text-primary" to="/home">
+						<h4>Ir a Qr+Services</h4>
+					</NavLink>
 				</div>
 			</div>
 		</div>

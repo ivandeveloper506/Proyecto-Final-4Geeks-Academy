@@ -115,6 +115,7 @@ export default function PersonDetail() {
 
 	useEffect(() => {
 		getPerson();
+		inputNameRef.current.focus();
 	}, []);
 
 	return (
@@ -144,12 +145,17 @@ export default function PersonDetail() {
 
 					<div className="form-row">
 						<Form.Group className="col-md-4">
-							<Form.Label>* Nombre</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Nombre
+							</Form.Label>
 							<Form.Control
 								className="bg-white"
 								onChange={e => setName(e.target.value)}
 								value={name}
-								// ref={inputNameRef}
+								ref={inputNameRef}
 								required="true"
 								type="text"
 								id="name"
@@ -158,7 +164,12 @@ export default function PersonDetail() {
 							/>
 						</Form.Group>
 						<Form.Group className="col-md-4">
-							<Form.Label>Primer apellido</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Primer apellido
+							</Form.Label>
 							<Form.Control
 								onChange={e => setFirstSurname(e.target.value)}
 								value={firstSurname}
@@ -195,7 +206,12 @@ export default function PersonDetail() {
 							/>
 						</Form.Group>
 						<Form.Group className="col-md-4">
-							<Form.Label>Fecha nacimiento</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Fecha nacimiento
+							</Form.Label>
 							<Form.Control
 								onChange={e => setBirthDate(e.target.value)}
 								value={birthDate}

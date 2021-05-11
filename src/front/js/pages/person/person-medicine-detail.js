@@ -64,13 +64,16 @@ export default function PersonMedicineDetail() {
 			user_creation_id: store.userProfile.id
 		};
 
-		console.log("*** handleSave [personMedicineBody]***");
-		console.log(personMedicineBody);
-
 		if (action === "edit") {
 			actions.personMedicineUpdate(personMedicineBody, personMedicineDetail.id);
 		} else {
 			actions.personMedicineStore(personMedicineBody);
+
+			setDescription("");
+			setFrequency("");
+			setObservation("");
+
+			inputDescriptionRef.current.focus();
 		}
 	};
 
@@ -121,7 +124,12 @@ export default function PersonMedicineDetail() {
 					</div>
 					<div className="form-row">
 						<Form.Group className="col">
-							<Form.Label>Descripción</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Descripción
+							</Form.Label>
 							<Form.Control
 								className="bg-white"
 								onChange={e => setDescription(e.target.value)}
@@ -138,7 +146,12 @@ export default function PersonMedicineDetail() {
 
 					<div className="form-row">
 						<Form.Group className="col">
-							<Form.Label>Frecuencia</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Frecuencia
+							</Form.Label>
 							<Form.Control
 								onChange={e => setFrequency(e.target.value)}
 								value={frequency}

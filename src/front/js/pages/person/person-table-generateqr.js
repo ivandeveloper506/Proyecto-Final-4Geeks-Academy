@@ -188,7 +188,7 @@ export default function EnhancedTable() {
 	}, []);
 
 	return (
-		<div className="row container-fluid">
+		<div className="row container-fluid container-person-class">
 			<div className="col-md-3" />
 			<div className="col-md-6">
 				<div className={classes.root}>

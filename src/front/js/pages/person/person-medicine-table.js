@@ -111,12 +111,12 @@ const useStyles = makeStyles(theme => ({
 	},
 	paper: {
 		width: "100%",
-		maxWidth: 400,
-		marginBottom: theme.spacing(2)
+		maxWidth: 600,
+		marginBottom: theme.spacing(1)
 	},
 	table: {
 		minWidth: 200,
-		maxWidth: 400
+		maxWidth: 600
 	},
 	visuallyHidden: {
 		border: 0,
@@ -200,7 +200,7 @@ export default function EnhancedTable() {
 	});
 
 	return (
-		<div className="row container-fluid">
+		<div className="row container-fluid container-person-class">
 			<div className="col-md-3" />
 			<div className="col-md-6">
 				<div className={classes.root}>

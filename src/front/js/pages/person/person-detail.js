@@ -47,6 +47,8 @@ export default function PersonDetail() {
 	const [userImage, setUserImage] = useState("");
 	const [emergencyContact, setEmergencyContact] = useState("");
 	const [emergencyPhone, setEmergencyPhone] = useState("");
+	const [vaccineCovid1Date, setVaccineCovid1Date] = useState("");
+	const [vaccineCovid2Date, setVaccineCovid2Date] = useState("");
 	const inputNameRef = useRef("");
 
 	const handleSave = e => {
@@ -63,6 +65,8 @@ export default function PersonDetail() {
 			user_image: userImage,
 			emergency_contact: emergencyContact,
 			emergency_phone: emergencyPhone,
+			vaccine_covid1_date: vaccineCovid1Date,
+			vaccine_covid2_date: vaccineCovid2Date,
 			user_creation_id: store.userProfile.id
 		};
 
@@ -82,6 +86,8 @@ export default function PersonDetail() {
 		setTelephoneNumber("");
 		setEmergencyContact("");
 		setUserImage("");
+		setVaccineCovid1Date("");
+		setVaccineCovid2Date("");
 
 		if (action === "edit") {
 			{
@@ -97,6 +103,8 @@ export default function PersonDetail() {
 				setTelephoneNumber(personDetail.telephone_number);
 				setEmergencyContact(personDetail.emergency_contact);
 				setUserImage(personDetail.user_image);
+				setVaccineCovid1Date(personDetail.vaccine_covid1_date);
+				setVaccineCovid2Date(personDetail.vaccine_covid2_date);
 			}
 		}
 	};
@@ -132,7 +140,7 @@ export default function PersonDetail() {
 
 					<div className="form-row">
 						<Form.Group className="col-md-4">
-							<Form.Label>Nombre</Form.Label>
+							<Form.Label>* Nombre</Form.Label>
 							<Form.Control
 								className="bg-white"
 								onChange={e => setName(e.target.value)}
@@ -176,7 +184,6 @@ export default function PersonDetail() {
 							<Form.Control
 								onChange={e => setKnownAs(e.target.value)}
 								value={knownAs}
-								required="true"
 								type="text"
 								id="knownAs"
 								label="Conocido como"
@@ -214,7 +221,6 @@ export default function PersonDetail() {
 							<Form.Control
 								onChange={e => setEmergencyContact(e.target.value)}
 								value={emergencyContact}
-								required="true"
 								type="text"
 								id="emergencyContact"
 								label="Contacto de emergencia"
@@ -226,11 +232,33 @@ export default function PersonDetail() {
 							<Form.Control
 								onChange={e => setEmergencyPhone(e.target.value)}
 								value={emergencyPhone}
-								required="true"
 								type="number"
 								id="emergencyPhone"
 								label="Teléfono de emergencia"
 								placeholder="Ingrese el teléfono de emergencia..."
+							/>
+						</Form.Group>
+					</div>
+
+					<div className="form-row">
+						<Form.Group className="col-md-6">
+							<Form.Label>COVID-19 1° Dosis</Form.Label>
+							<Form.Control
+								onChange={e => setVaccineCovid1Date(e.target.value)}
+								value={vaccineCovid1Date}
+								type="date"
+								id="vaccineCovid1Date"
+								label="COVID-19 1° Dosis"
+							/>
+						</Form.Group>
+						<Form.Group className="col-md-6">
+							<Form.Label>COVID-19 2° Dosis</Form.Label>
+							<Form.Control
+								onChange={e => setVaccineCovid2Date(e.target.value)}
+								value={vaccineCovid2Date}
+								type="date"
+								id="vaccineCovid2Date"
+								label="COVID-19 2° Dosis"
 							/>
 						</Form.Group>
 					</div>

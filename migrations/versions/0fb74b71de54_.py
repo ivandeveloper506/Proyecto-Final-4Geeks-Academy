@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 8fc5ebfef3b6
+Revision ID: 0fb74b71de54
 Revises: 
-Create Date: 2021-05-09 15:42:04.777494
+Create Date: 2021-05-10 22:53:18.248811
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8fc5ebfef3b6'
+revision = '0fb74b71de54'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -63,8 +63,10 @@ def upgrade():
     sa.Column('birth_date', sa.Date(), nullable=False),
     sa.Column('telephone_number', sa.String(length=15), nullable=False),
     sa.Column('user_image', sa.String(length=2000), nullable=True),
-    sa.Column('emergency_contact', sa.String(length=255), nullable=False),
-    sa.Column('emergency_phone', sa.String(length=15), nullable=False),
+    sa.Column('emergency_contact', sa.String(length=255), nullable=True),
+    sa.Column('emergency_phone', sa.String(length=15), nullable=True),
+    sa.Column('vaccine_covid1_date', sa.Date(), nullable=True),
+    sa.Column('vaccine_covid2_date', sa.Date(), nullable=True),
     sa.Column('user_creation_id', sa.Integer(), nullable=True),
     sa.Column('creation_date', sa.DateTime(), nullable=False),
     sa.Column('update_date', sa.DateTime(), nullable=False),

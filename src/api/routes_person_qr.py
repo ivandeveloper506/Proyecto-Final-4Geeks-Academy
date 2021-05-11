@@ -30,8 +30,10 @@ def indexPersonQr():
     
     if personQr is None:
         # the user was not found on the database
-        return jsonify({"message": "El código de persona es invalido."}), 401
+        # return jsonify({"message": "No existe información de la persona."}), 200
+        return jsonify([]), 200
     else:
+    # else:
         return jsonify(PersonQr.serialize(personQr)), 200
 
 # [POST] - Ruta para obtener la información de un [PersonQr] por id de persona
@@ -46,11 +48,12 @@ def indexInfoPersonQr(id):
 
     personInfoQr = {
     "full_name": person["full_name"],
+    "known_as": person["known_as"],
     "emergency_contact": person["emergency_contact"],
     "emergency_phone": person["emergency_phone"],
     "user_image": person["user_image"],
-    "vaccine_covid1_date": "",
-    "vaccine_covid2_date": ""
+    "vaccine_covid1_date": person["vaccine_covid1_date"],
+    "vaccine_covid2_date": person["vaccine_covid2_date"]
     }
 
     resultsMedicine = PersonMedicine.query.filter_by(person_id=id)

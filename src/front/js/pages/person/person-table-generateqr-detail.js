@@ -40,8 +40,10 @@ export default function PersonGenerateQr() {
 
 		actions.getQRCodePerson(personQRBody); // TODO: REVISAR, SE CAE CUANDO NO HA SIDO GENERADO
 
-		console.log("*** PersonGenerateQr [QRCodePerson] ***");
+		console.log("*** PersonGenerateQr [store.QRCodePerson] ***");
 		console.log(store.QRCodePerson);
+		console.log("*** PersonGenerateQr [store.QRCodePerson.length] ***");
+		console.log(store.QRCodePerson.length);
 
 		actions.activeOption(`/dashboard/person/generateqr/detail/${personId}`);
 	}, []);
@@ -71,14 +73,40 @@ export default function PersonGenerateQr() {
 				</div>
 				<div className="row mt-3">
 					<div className="col-md-5">
-						<p>Generar código QR</p>
+						{/* <p>Generar código QR</p> */}
+						{store.QRCodePerson.length === 0 ? (
+							<p>
+								Utilice la opión del botón Generar para generar el Código QR con la información de la
+								persona.
+							</p>
+						) : (
+							<p>
+								El Código QR contiene la información que sea desea compartir, de la persona{" "}
+								{personDetail.full_name} .
+							</p>
+						)}
 					</div>
 					{/* <div className=""></div> */}
 
 					<div className="col-md person-qr-info-class">
 						<div className="row">
 							<div className="col">
-								<QRCode
+								{store.QRCodePerson.length === 0 ? (
+									""
+								) : (
+									<QRCode
+										className="col qr-info-cardL-class"
+										value={store.QRCodePerson.url}
+										size="150"
+										ecLevel="H"
+										qrStyle="square"
+										fgColor="#003E7E"
+										bgColor="#C4F1FE"
+										enableCORS="true"
+									/>
+								)}
+
+								{/* <QRCode
 									className="col qr-info-cardL-class"
 									value={store.QRCodePerson.url}
 									size="150"
@@ -87,12 +115,15 @@ export default function PersonGenerateQr() {
 									fgColor="#003E7E"
 									bgColor="#C4F1FE"
 									enableCORS="true"
-								/>
+								/> */}
 							</div>
 							<div className="col qr-info-cardR-class">
 								<p className="mt-3">{personDetail.full_name}</p>
-								<h5>ESCANEA EL</h5>
-								<h3>CÓDIGO QR</h3>
+								{store.QRCodePerson.length === 0 ? "" : <h5>ESCANEA EL</h5>}
+								{store.QRCodePerson.length === 0 ? "" : <h3>CÓDIGO QR</h3>}
+
+								{/* <h5>ESCANEA EL</h5>
+								<h3>CÓDIGO QR</h3> */}
 							</div>
 						</div>
 					</div>

@@ -26,6 +26,7 @@ export default function PersonInfoQr() {
 			<div className="row info-qr-title1-class">
 				<div className="col mt-3">
 					<h3>{personData != undefined ? personData["full_name"] : ""}</h3>
+					<h6>Conocido como (CC): {personData != undefined ? personData["known_as"] : ""}</h6>
 				</div>
 			</div>
 

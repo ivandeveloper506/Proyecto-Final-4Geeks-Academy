@@ -274,9 +274,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						);
 					});
 			},
-			getPersonMedicine: async personID => {
-				await fetch(`${baseURLApi}person_medicine`, {
-					method: "GET",
+			getPersonMedicine: async personBody => {
+				await fetch(`${baseURLApi}person_medicine/person`, {
+					method: "POST",
+					body: JSON.stringify(personBody),
 					headers: {
 						"Content-Type": "application/json",
 						Authorization: `Bearer ${localStorage.getItem("x-access-token")}`
@@ -286,20 +287,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (response.status === 200) {
 							return response.json();
 						}
-						// } else {
-						// 	console.log("*** getPersonMedicine [then(response] ***");
-						// 	console.log(response);
-
-						// 	ShowAlert(
-						// 		"top-end",
-						// 		"error",
-						// 		"Oops...",
-						// 		"Ha ocurrido un error al tratar de recuperar los datos de los medicamentos de las personas.",
-						// 		false,
-						// 		true,
-						// 		2000
-						// 	);
-						// }
 					})
 					.then(data => {
 						console.log("*** getPersonMedicine [then(data] ***");
@@ -549,7 +536,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Swal.fire("Error!", "Ha ocurrido un error al tratar de eliminar la persona.", "error");
 					});
 			},
-			handlePersonMedicineDelete: (personMedicineID, personIndex) => {
+			handlePersonMedicineDelete: (personBody, personMedicineID, personIndex) => {
 				Swal.fire({
 					title: "¿Está seguro que desea eliminar el registro?",
 					text: "Esta acción no se podrá revertir y se eliminara el medicamento asociado a la persona.",
@@ -565,11 +552,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).then(result => {
 					if (result.isConfirmed) {
 						// Si la respuesta es positiva se invoca la función que procesa el delete.
-						getActions().personMedicineDelete(personMedicineID, personIndex);
+						getActions().personMedicineDelete(personBody, personMedicineID, personIndex);
 					}
 				});
 			},
-			personMedicineDelete: async (personMedicineID, personIndex) => {
+			personMedicineDelete: async (personBody, personMedicineID, personIndex) => {
 				await fetch(`${baseURLApi}person_medicine/${personMedicineID}`, {
 					method: "DELETE",
 					headers: {
@@ -586,7 +573,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							);
 
 							// Se obtienen los datos de los medicamentos de las personas asociadas al usuario.
-							getActions().getPersonMedicine(1); // TODO Hay que mandar el ID DE LA PERSONA
+							getActions().getPersonMedicine(personBody);
 
 							getActions().activeOption(`/dashboard/person/medicine/${personIndex}`);
 

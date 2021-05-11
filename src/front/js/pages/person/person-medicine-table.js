@@ -156,26 +156,32 @@ export default function EnhancedTable() {
 	const handleDelete = index => {
 		let personMedicineDelete = store.personMedicine[index];
 
-		actions.handlePersonMedicineDelete(personMedicineDelete.id, personIdParam);
+		const personBody = {
+			person_id: personId
+		};
+
+		actions.handlePersonMedicineDelete(personBody, personMedicineDelete.id, personIdParam);
 	};
 
 	const retrievePersonMedicine = () => {
-		// Se obtienen los datos de los medicamentos de las persona asociada argumento persona.
-		// const personId = store.persons[personIdParam].id;
+		const personBody = {
+			person_id: personId
+		};
 
-		// actions.getPersonMedicine(personId);
+		actions.getPersonMedicine(personBody);
+		actions.activeOption(`/dashboard/person/medicine/${personIdParam}`);
 
 		console.log("*** retrievePersonMedicine - [store.personMedicine] ***");
 		console.log(store.personMedicine);
 		console.log(personId);
 
-		store.personMedicine.filter(item => {
-			console.log(item);
-			console.log(item.person_id);
-			console.log(personId);
+		// store.personMedicine.filter(item => {
+		// 	console.log(item);
+		// 	console.log(item.person_id);
+		// 	console.log(personId);
 
-			item.person_id === personId;
-		});
+		// 	item.person_id === personId;
+		// });
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -197,7 +203,7 @@ export default function EnhancedTable() {
 
 	useEffect(() => {
 		retrievePersonMedicine();
-	});
+	}, []);
 
 	return (
 		<div className="row container-fluid container-person-class">

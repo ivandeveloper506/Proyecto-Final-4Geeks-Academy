@@ -29,11 +29,10 @@ def indexPersonQr():
     personQr = PersonQr.query.filter_by(person_id=person_id).first()
     
     if personQr is None:
-        # the user was not found on the database
-        # return jsonify({"message": "No existe información de la persona."}), 200
+        # Se manda de esta forma, porque no se ve como un error
+        # ya que si no existe la información, se crea en el momento.
         return jsonify([]), 200
     else:
-    # else:
         return jsonify(PersonQr.serialize(personQr)), 200
 
 # [POST] - Ruta para obtener la información de un [PersonQr] por id de persona

@@ -160,9 +160,8 @@ export default function EnhancedTable() {
 		actions.getPerson(store.userProfile.id);
 
 		// Se obtienen los datos de los medicamentos de una vez
-		actions.getPersonMedicine(1);
+		// actions.getPersonMedicine(1);
 
-		// Se configura la opción del home
 		actions.activeOption("/dashboard/person/generateqr");
 	};
 

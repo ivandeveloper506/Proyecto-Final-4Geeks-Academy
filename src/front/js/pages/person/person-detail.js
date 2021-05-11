@@ -47,12 +47,16 @@ export default function PersonDetail() {
 	const [userImage, setUserImage] = useState("");
 	const [emergencyContact, setEmergencyContact] = useState("");
 	const [emergencyPhone, setEmergencyPhone] = useState("");
-	const [vaccineCovid1Date, setVaccineCovid1Date] = useState("");
-	const [vaccineCovid2Date, setVaccineCovid2Date] = useState("");
+	const [vaccine1Date, setVaccine1Date] = useState("");
+	const [vaccine2Date, setVaccine2Date] = useState("");
 	const inputNameRef = useRef("");
 
 	const handleSave = e => {
 		e.preventDefault();
+
+		console.log("*** handleSave [person] ***");
+		console.log(vaccine1Date);
+		console.log(vaccine2Date);
 
 		// Se manda a crear el usuario
 		const personBody = {
@@ -65,8 +69,8 @@ export default function PersonDetail() {
 			user_image: userImage,
 			emergency_contact: emergencyContact,
 			emergency_phone: emergencyPhone,
-			vaccine_covid1_date: vaccineCovid1Date,
-			vaccine_covid2_date: vaccineCovid2Date,
+			vaccine1_date: vaccine1Date,
+			vaccine2_date: vaccine2Date,
 			user_creation_id: store.userProfile.id
 		};
 
@@ -86,8 +90,8 @@ export default function PersonDetail() {
 		setTelephoneNumber("");
 		setEmergencyContact("");
 		setUserImage("");
-		setVaccineCovid1Date("");
-		setVaccineCovid2Date("");
+		setVaccine1Date("");
+		setVaccine2Date("");
 
 		if (action === "edit") {
 			{
@@ -103,8 +107,8 @@ export default function PersonDetail() {
 				setTelephoneNumber(personDetail.telephone_number);
 				setEmergencyContact(personDetail.emergency_contact);
 				setUserImage(personDetail.user_image);
-				setVaccineCovid1Date(personDetail.vaccine_covid1_date);
-				setVaccineCovid2Date(personDetail.vaccine_covid2_date);
+				setVaccine1Date(personDetail.vaccine1_date);
+				setVaccine2Date(personDetail.vaccine2_date);
 			}
 		}
 	};
@@ -244,20 +248,20 @@ export default function PersonDetail() {
 						<Form.Group className="col-md-6">
 							<Form.Label>COVID-19 1° Dosis</Form.Label>
 							<Form.Control
-								onChange={e => setVaccineCovid1Date(e.target.value)}
-								value={vaccineCovid1Date}
+								onChange={e => setVaccine1Date(e.target.value)}
+								value={vaccine1Date}
 								type="date"
-								id="vaccineCovid1Date"
+								id="vaccine1Date"
 								label="COVID-19 1° Dosis"
 							/>
 						</Form.Group>
 						<Form.Group className="col-md-6">
 							<Form.Label>COVID-19 2° Dosis</Form.Label>
 							<Form.Control
-								onChange={e => setVaccineCovid2Date(e.target.value)}
-								value={vaccineCovid2Date}
+								onChange={e => setVaccine2Date(e.target.value)}
+								value={vaccine2Date}
 								type="date"
-								id="vaccineCovid2Date"
+								id="vaccine2Date"
 								label="COVID-19 2° Dosis"
 							/>
 						</Form.Group>

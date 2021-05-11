@@ -56,8 +56,8 @@ def store():
     user_image = data_request["user_image"],
     emergency_contact = data_request["emergency_contact"],
     emergency_phone = data_request["emergency_phone"],
-    vaccine_covid1_date = data_request["vaccine_covid1_date"],
-    vaccine_covid2_date = data_request["vaccine_covid2_date"],
+    vaccine1_date = data_request["vaccine1_date"],
+    vaccine2_date = data_request["vaccine2_date"],
     user_creation_id = data_request["user_creation_id"],
     creation_date = datetime.datetime.now(),
     update_date = datetime.datetime.now())
@@ -91,6 +91,8 @@ def update(id):
     person.user_image = data_request["user_image"]
     person.emergency_contact = data_request["emergency_contact"]
     person.emergency_phone = data_request["emergency_phone"]
+    person.vaccine1_date = data_request["vaccine1_date"]
+    person.vaccine2_date = data_request["vaccine2_date"]
     person.update_date = datetime.datetime.now()
 
     try: 

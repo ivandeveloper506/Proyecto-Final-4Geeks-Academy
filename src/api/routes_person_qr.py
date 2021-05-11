@@ -52,8 +52,8 @@ def indexInfoPersonQr(id):
     "emergency_contact": person["emergency_contact"],
     "emergency_phone": person["emergency_phone"],
     "user_image": person["user_image"],
-    "vaccine_covid1_date": person["vaccine_covid1_date"],
-    "vaccine_covid2_date": person["vaccine_covid2_date"]
+    "vaccine1_date": person["vaccine1_date"],
+    "vaccine2_date": person["vaccine2_date"]
     }
 
     resultsMedicine = PersonMedicine.query.filter_by(person_id=id)

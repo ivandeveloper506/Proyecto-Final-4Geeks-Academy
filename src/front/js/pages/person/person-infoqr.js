@@ -113,20 +113,20 @@ export default function PersonInfoQr() {
 					<div className="col-md-6">
 						<div className="row">
 							<div className="col-6">
-								<p>Primera Dosis:</p>
+								<p>COVID-19 1° Dosis:</p>
 							</div>
 							<div className="col-6">
-								<p>{personData != undefined ? personData["vaccine_covid1_date"] : ""}</p>
+								<p>{personData != undefined ? personData["vaccine1_date"] : ""}</p>
 							</div>
 						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="row">
 							<div className="col-6">
-								<p>Segunda Dosis:</p>
+								<p>COVID-19 2° Dosis:</p>
 							</div>
 							<div className="col-6">
-								<p>{personData != undefined ? personData["vaccine_covid2_date"] : ""}</p>
+								<p>{personData != undefined ? personData["vaccine2_date"] : ""}</p>
 							</div>
 						</div>
 					</div>

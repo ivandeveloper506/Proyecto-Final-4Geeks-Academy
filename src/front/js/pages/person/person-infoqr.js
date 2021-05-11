@@ -2,6 +2,10 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import "../../../styles/qrstyles.scss";
+import { format, compareAsc } from "date-fns";
+// import { addYears, formatWithOptions } from "date-fns/fp";
+import { es } from "date-fns/locale";
+// import toUpper from "lodash/fp/toUpper";
 
 export default function PersonInfoQr() {
 	const { store, actions } = useContext(Context);
@@ -19,6 +23,16 @@ export default function PersonInfoQr() {
 		console.log(store.PersonInfoQR.results);
 		personData = store.PersonInfoQR.results;
 		personMedicine = store.PersonInfoQR.medicine;
+	}
+
+	function getDateFormat(date, type) {
+		let options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+
+		if (type === "S") {
+			return date.toLocaleDateString("es-ES");
+		} else {
+			return date.toLocaleDateString("es-ES", options);
+		}
 	}
 
 	return (
@@ -116,7 +130,11 @@ export default function PersonInfoQr() {
 								<p>COVID-19 1° Dosis:</p>
 							</div>
 							<div className="col-6">
-								<p>{personData != undefined ? personData["vaccine1_date"] : ""}</p>
+								<p>
+									{personData != undefined
+										? getDateFormat(new Date(personData["vaccine1_date"]), "L")
+										: ""}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -126,7 +144,11 @@ export default function PersonInfoQr() {
 								<p>COVID-19 2° Dosis:</p>
 							</div>
 							<div className="col-6">
-								<p>{personData != undefined ? personData["vaccine2_date"] : ""}</p>
+								<p>
+									{personData != undefined
+										? getDateFormat(new Date(personData["vaccine2_date"]), "L")
+										: ""}
+								</p>
 							</div>
 						</div>
 					</div>

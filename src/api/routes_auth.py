@@ -194,7 +194,7 @@ def passwordReset(token):
             # app.send_email(subject='Recuperación de contraseña [Contraseña actualizada]',
             #            sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
             #            recipients=[data_request["email"]],
-            #            text_body=f'Actualizar su contraseña.',
+            #            text_body=f'Actualizar su contraseña.',s
             #            html_body=f'<p style="font-size:15px;">La contraseña ha sido actualizada exitosamente.</p>')
 
             app.send_email_gmail(subject='Recuperacion de contrasena [Contrasena actualizada]',

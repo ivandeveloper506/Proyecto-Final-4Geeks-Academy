@@ -13,6 +13,7 @@ export default function PasswordResetValidate(store, actions) {
 		},
 		allowOutsideClick: false,
 		allowEscapeKey: false,
+		closeOnClickOutside: false,
 		showCancelButton: true,
 		confirmButtonText: "Validar",
 		cancelButtonText: "Cancelar",
@@ -23,8 +24,7 @@ export default function PasswordResetValidate(store, actions) {
 			}
 
 			return true;
-		},
-		allowOutsideClick: () => !Swal.isLoading()
+		}
 	}).then(result => {
 		if (result.isConfirmed) {
 			Swal.fire({

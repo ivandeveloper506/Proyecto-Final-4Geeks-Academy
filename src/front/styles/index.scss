@@ -118,7 +118,7 @@ body{
 }
 
 .title-mant-class{
-    padding: 20px 0px 10px 20px;
+    padding: 10px;
 }
 
 .container-detail-class {
@@ -127,12 +127,12 @@ body{
     border-radius: 5px;
 }
 
-.body-table-class{
-    background: rgba(161,143,125, 0.3);
-}
+// .body-table-class{
+//     background: rgba(161,143,125, 0.3);
+// }
 
 .head-table-class{
-    background: rgba(161,143,125, 0.6);
+    background: rgba(161,143,125, 0.3);
 }
 
 .body-mant-class{
@@ -140,9 +140,9 @@ body{
 }
 
 .head-mant-class{
-    background: rgb(199,188,177);
+    background: white;
     border-radius: 5px;
-    height: 75px;
+    height: 60px;
     margin-bottom: 20px; 
     // margin-bottom: 50px; // RESPONSIVE
 }
@@ -151,12 +151,26 @@ body{
    height: 60px;
 }
 
+.search-people-class{
+    background: rgb(227,221,216);
+    padding: 10px 10px 10px 5px;
+    margin: 0px;
+    // margin: 0px 1px 0px 1px;
+    border-radius: 3px 3px 0px 0px;
+    // border: 1px solid grey;
+}
+
 .fa-pen:before,
-.fa-tables:before,
+.fa-tablets:before,
 .fa-syringe:before,
 .fa-qrcode:before,
-.fa-trash-alt:before {
-    font-size: 30px;
+.fa-trash:before {
+    font-size: 20px;
+}
+
+.button-table-class {
+    height: 40px;
+    width: 45px;
 }
 
 // FIN - Clases tablas de mantenimiento y detalle

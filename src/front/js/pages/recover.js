@@ -26,11 +26,28 @@ export default function Recover() {
 
 	const handlePasswordReset = e => {
 		if (password != passwordConfirm) {
-			Swal.fire({
-				icon: "error",
-				title: "Validando contraseña",
-				text: "Las contraseñas no coinciden"
-			});
+			// Swal.fire({
+			// 	icon: "error",
+			// 	title: "Validando contraseña",
+			// 	text: "Las contraseñas no coinciden",
+			// 	allowOutsideClick: false,
+			// 	allowEscapeKey: false,
+			// closeOnClickOutside: false,
+			// showLoaderOnConfirm: true
+			// });
+
+			// Swal.fire({
+			// 	title: "Ingrese código verificador enviado al correo",
+			// 	allowOutsideClick: false,
+			// 	allowEscapeKey: false,
+			// 	showCancelButton: true,
+			// 	confirmButtonText: "Validar",
+			// 	cancelButtonText: "Cancelar",
+			// 	closeOnClickOutside: false,
+			// 	showLoaderOnConfirm: true
+			// });
+
+			console.log("*** handlePasswordReset [PasswordDiferente ]***");
 
 			actions.activeOption("/recover");
 		} else {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -77,28 +77,31 @@ const useStyles = makeStyles(theme => ({
 
 export default function PrimarySearchAppBar() {
 	const { store, actions } = useContext(Context);
+	const [searchPerson, setSearchPerson] = useState("");
 	const classes = useStyles();
 	const history = useHistory();
+	const inputSearchRef = useRef(null);
 
-	// useEffect(() => {
-	// 	actions.actionCrud("new");
-	// }, []);
+	useEffect(() => {
+		inputSearchRef.current.focus();
+	}, []);
 
 	return (
 		<div className={classes.grow}>
 			<AppBar position="static">
 				<Toolbar>
 					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
-						</div>
-						<InputBase
-							placeholder="Buscar persona…"
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput
+						<input
+							ref={inputSearchRef}
+							onChange={event => {
+								setSearchPerson(event.target.value);
 							}}
-							inputProps={{ "aria-label": "search" }}
+							type="text"
+							className="form-control"
+							placeholder="Buscar persona..."
+							aria-label="Search Person"
+							name="SearchPerson"
+							id="SearchPerson"
 						/>
 					</div>
 					<div className={classes.grow} />

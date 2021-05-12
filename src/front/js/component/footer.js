@@ -43,7 +43,7 @@ export const Footer = () => (
 							</p>
 							<div className="row">
 								<div className="col">
-									<NavLink to="contact">
+									<NavLink to="/contact">
 										<i
 											className="fa fa-envelope fa-3x mr-3"
 											title="Formulario de Contacto"

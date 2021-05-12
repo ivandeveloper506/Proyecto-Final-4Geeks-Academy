@@ -162,8 +162,7 @@ export default function EnhancedTable() {
 		// Se obtienen los datos de los medicamentos de una vez
 		// actions.getPersonMedicine(1);
 
-		// Se configura la opción del home
-		actions.activeOption("/dashboard/person");
+		actions.activeOption("/dashboard/person/generateqr");
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -188,12 +187,12 @@ export default function EnhancedTable() {
 	}, []);
 
 	return (
-		<div className="row container-fluid">
+		<div className="row container-fluid container-person-class">
 			<div className="col-md-3" />
 			<div className="col-md-6">
 				<div className={classes.root}>
 					<Paper className={classes.paper}>
-						<div className="row container-fluid search-people-class">
+						{/* <div className="row container-fluid search-people-class">
 							<div className="col d-flex justify-content-center">
 								<Tooltip title="Crear Persona" aria-label="Crear Persona">
 									<NavLink to={`/dashboard/person/detail/`}>
@@ -203,7 +202,7 @@ export default function EnhancedTable() {
 									</NavLink>
 								</Tooltip>
 							</div>
-						</div>
+						</div> */}
 
 						<TableContainer>
 							<Table
@@ -232,7 +231,7 @@ export default function EnhancedTable() {
 														{row.full_name}
 													</TableCell>
 													<TableCell>
-														<Tooltip title="Editar registro">
+														{/* <Tooltip title="Editar registro">
 															<NavLink to={`/dashboard/person/detail/${index}`}>
 																<button className="m-2 btn btn-warning button-table-class">
 																	<i className="fas fa-pen"></i>
@@ -250,6 +249,14 @@ export default function EnhancedTable() {
 															<NavLink to={`/dashboard/person/medicine/${index}`}>
 																<button className="m-2 btn btn-primary button-table-class">
 																	<i className="fas fa-tablets"></i>
+																</button>
+															</NavLink>
+														</Tooltip> */}
+														<Tooltip title="Generar Código QR">
+															<NavLink
+																to={`/dashboard/person/generateqr/detail/${index}`}>
+																<button className="m-2 btn btn-success">
+																	<i className="fas fa-qrcode"></i>
 																</button>
 															</NavLink>
 														</Tooltip>

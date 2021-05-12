@@ -2,6 +2,7 @@ import os
 import uuid
 import secrets
 import string
+import smtplib
 from smtplib import SMTPException
 from threading import Thread
 from flask_mail import Mail, Message
@@ -90,15 +91,61 @@ def send_email(subject, sender, recipients, text_body,
     Thread(target=_send_async_email, args=(current_app._get_current_object(), msg)).start()
 # FIN - Funciones para envio de correos.
 
+# INICIO - Función para envio directo de de correos con gmail.
+def send_email_gmail(subject, to, text_body):
+    gmail_user = 'qrplusservices1@gmail.com'
+    gmail_password = 'Qr#services11052021'
+
+    sent_from = gmail_user
+    to = to
+    subject = subject
+    body = text_body
+
+    email_text = """\
+    From: %s
+    To: %s
+    Subject: %s
+
+    %s
+    """ % (sent_from, to, subject, body)
+
+    # Creamos la conexión segura con el servidor
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.ehlo()
+
+    # Nos autenticamos
+    server.login(gmail_user, gmail_password)
+
+    # Enviamos el correo
+    server.sendmail(sent_from, to, email_text)
+
+    # Cerramos la conexión
+    server.close()
+# FIN - Función para envio directo de de correos con gmail.
+
+def processString(txt):
+    specialChars = "#$%^&*áéíóúÁÉÍÓÚ" 
+    
+    for specialChar in specialChars:
+        txt = txt.replace(specialChar, '')
+
+    return txt
+
 # INICIO - Función para generar códigos alfanumericos aleatorios
 def codeGenerate():
-    alphabet = string.ascii_letters + string.digits
-    while True:
-        password = ''.join(secrets.choice(alphabet) for i in range(15))
-        if (any(c.islower() for c in password)
-                and any(c.isupper() for c in password)
-                and sum(c.isdigit() for c in password) >= 3):
-            break
+    password = ""
+    
+    # alphabet = string.ascii_letters + string.digits
+    # while True:
+    #     password = ''.join(secrets.choice(alphabet) for i in range(15))
+    #     if (any(c.islower() for c in password)
+    #             and any(c.isupper() for c in password)
+    #             and sum(c.isdigit() for c in password) >= 3):
+    #         break
+
+    for i in range(8):
+        password += secrets.choice(string.digits)
+
     return password
 # FIN - Función para generar códigos alfanumericos aleatorios
 

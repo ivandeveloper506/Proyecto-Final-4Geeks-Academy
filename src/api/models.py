@@ -71,8 +71,10 @@ class Person(db.Model):
     birth_date = db.Column(db.Date, nullable=False)
     telephone_number = db.Column(db.String(15),nullable=False)
     user_image = db.Column(db.String(2000))
-    emergency_contact = db.Column(db.String(255),nullable=False)
-    emergency_phone = db.Column(db.String(15),nullable=False)
+    emergency_contact = db.Column(db.String(255))
+    emergency_phone = db.Column(db.String(15))
+    vaccine1_date = db.Column(db.Date)
+    vaccine2_date = db.Column(db.Date)
     user_creation_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
     creation_date = db.Column(db.DateTime, nullable=False)
     update_date = db.Column(db.DateTime, nullable=False)
@@ -93,6 +95,8 @@ class Person(db.Model):
             "user_image": self.user_image,
             "emergency_contact": self.emergency_contact,
             "emergency_phone": self.emergency_phone,
+            "vaccine1_date": self.vaccine1_date,
+            "vaccine2_date": self.vaccine2_date,
             "user_creation_id": self.user_creation_id,
             "creation_date": self.creation_date,
             "update_date": self.update_date

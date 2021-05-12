@@ -38,7 +38,7 @@ def register():
 
     user = User.query.filter_by(email=data_request["email"]).first()
     
-    # Se valida que el email no haya sido registrado.
+    # Se valida que el email no haya sido registrado.s
     if user:
         return jsonify({"message": "Ya existe una cuenta asociada a ese email."}), 401
 

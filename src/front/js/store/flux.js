@@ -732,10 +732,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ userLogged: false });
 
+				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
+
 				// Se configura la opción del home
 				getActions().activeOption("/home");
-
-				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
 			},
 			getAPIExterna: async userID => {
 				await fetch("https://cima.aemps.es/cima/rest/psuministro", {

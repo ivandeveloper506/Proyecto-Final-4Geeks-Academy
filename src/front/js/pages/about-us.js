@@ -24,18 +24,57 @@ export default function AboutUs() {
 					<div className="col-md-6">
 						<div className="card-class">
 							<p>
-								{/* Un código QR es un código de barras bidimensional cuadrada que puede almacenar los datos
-								codificados. Hoy en día, los códigos QR se pueden ver en folletos, carteles, revistas,
-								etc. Usted puede detectar fácilmente estos códigos de barras de dos dimensiones a tu
-								alrededor. Nuestra empresa le proporciona el código de barras con la información que
-								usted necesite. Solo debe registrarse, completar la información y el código se creara,
-								si así de sencillo */}
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis ipsam consequatur
-								cumque non ea. Vel itaque esse ipsa voluptas quis facere adipisci fugit repudiandae
-								atque. Non porro nihil totam ab incidunt, corrupti possimus ut fugiat. Qui repellat
-								velit, hic similique, consectetur, nesciunt voluptatem atque ipsa optio in minus
-								provident animi!
+								QR+Service es la idea hecha realidad de un grupo de personas con formación profesional
+								que va desde la economía, aviación, electrónica, hasta la misma informática.
 							</p>
+							<p>
+								Unidos por una oportunidad gubernamental en el estudio de la programación, Iván,
+								Lilliana, Carlos y Jairo están en el nicho de las aplicaciones web desde mayo del 2021.
+							</p>
+							<p>
+								Con muchas ganas y diario esfuerzo, con el objetivo siempre en mente, este grupo de
+								individuos han sacado provecho de una oportunidad que los ubicó con nombre firme, en el
+								mercado de las aplicaciones.
+							</p>
+
+							<p>
+								Su punto de partida fue un proyecto de curso que alcanzó en un corto tiempo, mucha
+								popularidad gracias a su alcance social. Posterior a esto las ideas siguieron
+								evolucionando, y al día de hoy QR+Service es una aplicación con más de doscientas mil
+								descargas que va en aumento gracias a su variedad de aplicaciones. Recomendado por
+								instituciones gubernamentales, así como adquirido por empresas privadas, QR+Service
+								sigue avanzando por buen camino ahora acompañado de otras aplicaciones creadas por el
+								grupo.
+							</p>
+
+							<p>
+								Siguenos en nuestras redes sociales y entérate de las nuevas mejoras y otros productos
+								estrella de QR+Service.
+							</p>
+
+							{/* <p>
+                                QR+Service es la idea hecha realidad de un grupo de personas con formación profesional
+                                que va desde la economía, aviación, electrónica, hasta la misma informática.
+                       
+                                    Unidos por una oportunidad gubernamental en el estudio de la programación, Iván, Lilliana, Carlos y
+                                    Jairo están en el nicho de las aplicaciones web desde mayo del 2021.
+                         
+                                        Con muchas ganas y diario esfuerzo, con el objetivo siempre en mente, este grupo de individuos han sacado
+                                        provecho de una oportunidad que los ubicó con nombre firme, en el mercado de las
+                                        aplicaciones.
+                                        
+                                        Su punto de partida fue un proyecto de curso que alcanzó en un corto
+                                        tiempo, mucha popularidad gracias a su alcance social. Posterior a esto las ideas
+                                        siguieron evolucionando, y al día de hoy QR+Service es una aplicación con más de
+                                        doscientas mil descargas que va en aumento gracias a su variedad de aplicaciones.
+                                        Recomendado por instituciones gubernamentales, así como adquirido por empresas privadas,
+                                        QR+Service sigue avanzando por buen camino ahora acompañado de otras aplicaciones
+                                        creadas por el grupo.
+                                        
+                                        Siguenos en nuestras redes sociales y entérate de las nuevas
+                                        mejoras y otros productos estrella de QR+Service.
+               
+                                </p> */}
 						</div>
 					</div>
 				</div>

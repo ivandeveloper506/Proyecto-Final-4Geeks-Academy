@@ -28,7 +28,7 @@ def indexPerson(id):
 
     return jsonify(Person.serialize(person)), 200
 
-# [GET] - Ruta para obtener un [Person]
+# [GET] - Ruta para obtener las [Person] para un usuario especifico
 @routes_person.route('/api/person/users/<int:id>', methods=['GET'])
 @jwt_required()
 def indexPersonUser(id):
@@ -56,6 +56,8 @@ def store():
     user_image = data_request["user_image"],
     emergency_contact = data_request["emergency_contact"],
     emergency_phone = data_request["emergency_phone"],
+    vaccine1_date = data_request["vaccine1_date"],
+    vaccine2_date = data_request["vaccine2_date"],
     user_creation_id = data_request["user_creation_id"],
     creation_date = datetime.datetime.now(),
     update_date = datetime.datetime.now())
@@ -89,6 +91,8 @@ def update(id):
     person.user_image = data_request["user_image"]
     person.emergency_contact = data_request["emergency_contact"]
     person.emergency_phone = data_request["emergency_phone"]
+    person.vaccine1_date = data_request["vaccine1_date"]
+    person.vaccine2_date = data_request["vaccine2_date"]
     person.update_date = datetime.datetime.now()
 
     try: 

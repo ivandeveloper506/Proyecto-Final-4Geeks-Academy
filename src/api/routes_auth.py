@@ -38,7 +38,7 @@ def register():
 
     user = User.query.filter_by(email=data_request["email"]).first()
     
-    # Se valida que el email no haya sido registrado.
+    # Se valida que el email no haya sido registrado.s
     if user:
         return jsonify({"message": "Ya existe una cuenta asociada a ese email."}), 401
 
@@ -79,56 +79,20 @@ def register():
 
         nombreBienvenida = data_request["name"] + " " + data_request["first_surname"]
 
+        nombreBienvenida = app.processString(nombreBienvenida)
+
         # Se envia correo de bienvenida al usuario que se esta registrando.
-        app.send_email(subject='Bienvenido(a) a QR+Services',
-                       sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
-                       recipients=[data_request["email"]],
-                       text_body=f'Hola {nombreBienvenida}, bienvenido(a) a QR+Services',
-                       html_body=f'<p>Hola <strong>{nombreBienvenida}</strong>, bienvenido(a) a QR+Services.</p>')
+        # app.send_email(subject='Bienvenido(a) a QR+Services',
+        #                sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
+        #                recipients=[data_request["email"]],
+        #                text_body=f'Hola {nombreBienvenida}, bienvenido(a) a QR+Services',
+        #                html_body=f'<p>Hola <strong>{nombreBienvenida}</strong>, bienvenido(a) a QR+Services.</p>')
+
+        app.send_email_gmail(subject='Bienvenido(a) a QR+Services',
+                       to=data_request["email"],
+                       text_body='Hola ' + nombreBienvenida + ', bienvenido(a) a QR+Services')
         
         return jsonify(User.serialize(user)), 201
-    
-    except AssertionError as exception_message: 
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
-
-# [PUT] - Ruta para modificar el activo de un [user]
-@routes_auth.route('/api/users/active/<int:id>', methods=['PUT'])
-@jwt_required()
-def active(id):
-    user = User.query.get(id)
-
-    if user is None:
-        raise APIException('El usuario con el id especificado, no fue encontrado.',status_code=403)
-
-    data_request = request.get_json()
-
-    user.active = data_request["active"]
-
-    try: 
-        db.session.commit()
-        
-        return jsonify(User.serialize(user)), 200
-    
-    except AssertionError as exception_message: 
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
-
-        # [POST] - Ruta para registro de un [message]
-@routes_auth.route('/api/message/register', methods=['POST'])
-def registerMensaje():
-    data_request = request.get_json()
-    
-    mess = Message(name = data_request["name"],
-    phone = data_request["phone"],
-    email = data_request["email"],
-    message = data_request["message"],
-    creation_date = datetime.datetime.now(),
-    update_date = datetime.datetime.now())
-
-    try:
-        db.session.add(mess)
-        db.session.commit()
-        
-        return jsonify(Message.serialize(mess)), 201
     
     except AssertionError as exception_message: 
         return jsonify(msg='Error: {}. '.format(exception_message)), 400
@@ -165,11 +129,15 @@ def forgot():
         passwordResetInfo = PasswordReset.serialize(passwordReset)
 
         # Se envia correo para recuperación de contraseña.
-        app.send_email(subject='Recuperación de contraseña [Código verificador]',
-                       sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
-                       recipients=[data_request["email"]],
-                       text_body=f'Recuperar su contraseña.',
-                       html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código de verificación: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
+        # app.send_email(subject='Recuperación de contraseña [Código verificador]',
+        #                sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
+        #                recipients=[data_request["email"]],
+        #                text_body=f'Recuperar su contraseña.',
+        #                html_body=f'<p style="font-size:15px;">Recupere su contraseña ingresando el siguiente Código de verificación: &nbsp;&nbsp;<strong style="color:blue; font-size:15px;">{codeForgot}</strong></p>')
+
+        app.send_email_gmail(subject='Recuperacion de contrasena [Codigo verificador]',
+                       to=data_request["email"],
+                       text_body='Recupere su contrasena ingresando el siguiente Codigo de verificacion:  ' + codeForgot)
 
         return jsonify({"message": "El email de recuperación ha sido enviado exitosamente.","results": passwordResetInfo}), 200
         
@@ -223,16 +191,18 @@ def passwordReset(token):
             db.session.commit()
 
             # Se envia correo para recuperación de contraseña.
-            app.send_email(subject='Recuperación de contraseña [Contraseña actualizada]',
-                       sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
-                       recipients=[data_request["email"]],
-                       text_body=f'Actualizar su contraseña.',
-                       html_body=f'<p style="font-size:15px;">La contraseña ha sido actualizada exitosamente.</p>')
+            # app.send_email(subject='Recuperación de contraseña [Contraseña actualizada]',
+            #            sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
+            #            recipients=[data_request["email"]],
+            #            text_body=f'Actualizar su contraseña.',s
+            #            html_body=f'<p style="font-size:15px;">La contraseña ha sido actualizada exitosamente.</p>')
+
+            app.send_email_gmail(subject='Recuperacion de contrasena [Contrasena actualizada]',
+                       to=data_request["email"],
+                       text_body='La contrasena ha sido actualizada exitosamente.')
         
             return jsonify({"message": "¡La contraseña fue actualizada exitosamente!"}), 200
     
         except AssertionError as exception_message: 
             return jsonify(msg='Error: {}. '.format(exception_message)), 400
-# FIN - Definición de EndPoints para el Modelo [User] para Login y Registro - FIN
-        return jsonify(msg='Error: {}. '.format(exception_message)), 400
 # FIN - Definición de EndPoints para el Modelo [User] para Login y Registro - FIN

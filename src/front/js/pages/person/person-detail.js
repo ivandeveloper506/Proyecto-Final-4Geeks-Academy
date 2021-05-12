@@ -10,7 +10,6 @@ import Fab from "@material-ui/core/Fab";
 import { green } from "@material-ui/core/colors";
 import Tooltip from "@material-ui/core/Tooltip";
 import Divider from "@material-ui/core/Divider";
-
 import { Form } from "react-bootstrap";
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +28,7 @@ let action = "";
 export default function PersonDetail() {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-	const personId = parseInt(params.id);
+	const personId = parseInt(params.personId);
 
 	if (personId >= 0) {
 		action = "edit";
@@ -48,10 +47,16 @@ export default function PersonDetail() {
 	const [userImage, setUserImage] = useState("");
 	const [emergencyContact, setEmergencyContact] = useState("");
 	const [emergencyPhone, setEmergencyPhone] = useState("");
+	const [vaccine1Date, setVaccine1Date] = useState("");
+	const [vaccine2Date, setVaccine2Date] = useState("");
 	const inputNameRef = useRef("");
 
 	const handleSave = e => {
 		e.preventDefault();
+
+		console.log("*** handleSave [person] ***");
+		console.log(vaccine1Date);
+		console.log(vaccine2Date);
 
 		// Se manda a crear el usuario
 		const personBody = {
@@ -64,6 +69,8 @@ export default function PersonDetail() {
 			user_image: userImage,
 			emergency_contact: emergencyContact,
 			emergency_phone: emergencyPhone,
+			vaccine1_date: vaccine1Date,
+			vaccine2_date: vaccine2Date,
 			user_creation_id: store.userProfile.id
 		};
 
@@ -83,6 +90,8 @@ export default function PersonDetail() {
 		setTelephoneNumber("");
 		setEmergencyContact("");
 		setUserImage("");
+		setVaccine1Date("");
+		setVaccine2Date("");
 
 		if (action === "edit") {
 			{
@@ -98,12 +107,15 @@ export default function PersonDetail() {
 				setTelephoneNumber(personDetail.telephone_number);
 				setEmergencyContact(personDetail.emergency_contact);
 				setUserImage(personDetail.user_image);
+				setVaccine1Date(personDetail.vaccine1_date);
+				setVaccine2Date(personDetail.vaccine2_date);
 			}
 		}
 	};
 
 	useEffect(() => {
 		getPerson();
+		inputNameRef.current.focus();
 	}, []);
 
 	return (
@@ -115,26 +127,35 @@ export default function PersonDetail() {
 							<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
 						</Form.Group>
 						<Form.Group className="col-md-3">
-							<button type="submit" className="btn btn-success">
-								<i className="fas fa-save"></i> Guardar
-							</button>
+							<Tooltip title="Guardar datos" aria-label="Guardar datos">
+								<button type="submit" className="btn btn-success">
+									<i className="fas fa-save"></i> Guardar
+								</button>
+							</Tooltip>
 
 							<NavLink to="/dashboard/person/">
-								<button className="btn btn-primary ml-3">
-									<i className="fas fa-arrow-left"></i> Regresar
-								</button>
+								<Tooltip title="Regresar" aria-label="Regresar">
+									<button className="btn btn-primary ml-3">
+										<i className="fas fa-arrow-left"></i> Regresar
+									</button>
+								</Tooltip>
 							</NavLink>
 						</Form.Group>
 					</div>
 
 					<div className="form-row">
 						<Form.Group className="col-md-4">
-							<Form.Label>Nombre</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Nombre
+							</Form.Label>
 							<Form.Control
 								className="bg-white"
 								onChange={e => setName(e.target.value)}
 								value={name}
-								// ref={inputNameRef}
+								ref={inputNameRef}
 								required="true"
 								type="text"
 								id="name"
@@ -143,7 +164,12 @@ export default function PersonDetail() {
 							/>
 						</Form.Group>
 						<Form.Group className="col-md-4">
-							<Form.Label>Primer apellido</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Primer apellido
+							</Form.Label>
 							<Form.Control
 								onChange={e => setFirstSurname(e.target.value)}
 								value={firstSurname}
@@ -173,7 +199,6 @@ export default function PersonDetail() {
 							<Form.Control
 								onChange={e => setKnownAs(e.target.value)}
 								value={knownAs}
-								required="true"
 								type="text"
 								id="knownAs"
 								label="Conocido como"
@@ -181,7 +206,12 @@ export default function PersonDetail() {
 							/>
 						</Form.Group>
 						<Form.Group className="col-md-4">
-							<Form.Label>Fecha nacimiento</Form.Label>
+							<Form.Label>
+								<span className="text-danger">
+									<strong>*</strong>
+								</span>{" "}
+								Fecha nacimiento
+							</Form.Label>
 							<Form.Control
 								onChange={e => setBirthDate(e.target.value)}
 								value={birthDate}
@@ -211,7 +241,6 @@ export default function PersonDetail() {
 							<Form.Control
 								onChange={e => setEmergencyContact(e.target.value)}
 								value={emergencyContact}
-								required="true"
 								type="text"
 								id="emergencyContact"
 								label="Contacto de emergencia"
@@ -223,11 +252,33 @@ export default function PersonDetail() {
 							<Form.Control
 								onChange={e => setEmergencyPhone(e.target.value)}
 								value={emergencyPhone}
-								required="true"
 								type="number"
 								id="emergencyPhone"
 								label="Teléfono de emergencia"
 								placeholder="Ingrese el teléfono de emergencia..."
+							/>
+						</Form.Group>
+					</div>
+
+					<div className="form-row">
+						<Form.Group className="col-md-6">
+							<Form.Label>COVID-19 1° Dosis</Form.Label>
+							<Form.Control
+								onChange={e => setVaccine1Date(e.target.value)}
+								value={vaccine1Date}
+								type="date"
+								id="vaccine1Date"
+								label="COVID-19 1° Dosis"
+							/>
+						</Form.Group>
+						<Form.Group className="col-md-6">
+							<Form.Label>COVID-19 2° Dosis</Form.Label>
+							<Form.Control
+								onChange={e => setVaccine2Date(e.target.value)}
+								value={vaccine2Date}
+								type="date"
+								id="vaccine2Date"
+								label="COVID-19 2° Dosis"
 							/>
 						</Form.Group>
 					</div>

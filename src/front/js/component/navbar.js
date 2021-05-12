@@ -15,20 +15,6 @@ export const NavbarMain = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		// if (store.userLogged) {
-		// 	history.push(store.activeOption);
-		// } else {
-		// 	history.push("/");
-		// }
-
-		// if (store.userPasswordReset) {
-		// 	history.push(store.activeOption);
-		// }
-
-		// if (store.userPasswordValidate) {
-		// 	history.push(store.activeOption);
-		// }
-
 		history.push(store.activeOption);
 	});
 
@@ -47,52 +33,55 @@ export const NavbarMain = () => {
 	};
 
 	return (
-		<div className="text-white">
-			{store.userLogged ? (
-				<Navbar expand="lg">
-					<NavLink className="navbar-item-logo-class" to="/dashboard">
-						<AppLogo />
-					</NavLink>
-					<Navbar.Toggle className="bg-white" />
-					<Navbar.Collapse>
-						<Nav className="mr-auto">
-							<NavLink className="navbar-item-class" to="/dashboard/person">
-								<i className="fas fa-users"></i> Personas
-							</NavLink>
-							<NavLink className="navbar-item-class" to="/dashboard/person-information">
-								<i className="fas fa-address-book"></i> Información Personas
-							</NavLink>
-							<NavLink className="navbar-item-class" to="/dashboard/person-generate-qr">
-								<i className="fas fa-qrcode"></i> Generar QR
-							</NavLink>
-						</Nav>
-						<AvatarLoginUser />
-					</Navbar.Collapse>
-				</Navbar>
+		<div>
+			{store.infoQRActive ? (
+				""
 			) : (
-				<Navbar expand="lg">
-					<NavLink className="navbar-item-logo-class" to="/">
-						<AppLogo />
-					</NavLink>
-					<Navbar.Toggle className="bg-white" />
-					<Navbar.Collapse>
-						<Nav className="mr-auto">
-							<NavLink className="navbar-item-class" to="/home">
-								<i className="fas fa-home"></i> Inicio
+				<div className="text-white">
+					{store.userLogged ? (
+						<Navbar expand="lg">
+							<NavLink className="navbar-item-logo-class" to="/dashboard/person">
+								<AppLogo />
 							</NavLink>
-							<NavLink className="navbar-item-class" to="/about-us">
-								<i className="fas fa-users"></i> Quiénes somos
+							<Navbar.Toggle className="bg-white" />
+							<Navbar.Collapse>
+								<Nav className="mr-auto">
+									<NavLink className="navbar-item-class" to="/dashboard/person">
+										<i className="fas fa-users"></i> Personas
+									</NavLink>
+									<NavLink className="navbar-item-class" to="/dashboard/person/generateqr">
+										<i className="fas fa-qrcode"></i> Generar QR
+									</NavLink>
+								</Nav>
+								<AvatarLoginUser />
+							</Navbar.Collapse>
+						</Navbar>
+					) : (
+						<Navbar expand="lg">
+							<NavLink className="navbar-item-logo-class" to="/">
+								<AppLogo />
 							</NavLink>
-							<NavLink className="navbar-item-class" to="/services">
-								<i className="fas fa-boxes"></i> Servicios
-							</NavLink>
-							<NavLink className="navbar-item-class" to="/contact">
-								<i className="fas fa-envelope"></i> Contáctenos
-							</NavLink>
-						</Nav>
-						<AvatarLoginUser />
-					</Navbar.Collapse>
-				</Navbar>
+							<Navbar.Toggle className="bg-white" />
+							<Navbar.Collapse>
+								<Nav className="mr-auto">
+									<NavLink className="navbar-item-class" to="/home">
+										<i className="fas fa-home"></i> Inicio
+									</NavLink>
+									<NavLink className="navbar-item-class" to="/about-us">
+										<i className="fas fa-users"></i> Quiénes somos
+									</NavLink>
+									<NavLink className="navbar-item-class" to="/services">
+										<i className="fas fa-boxes"></i> Servicios
+									</NavLink>
+									<NavLink className="navbar-item-class" to="/contact">
+										<i className="fas fa-envelope"></i> Contáctenos
+									</NavLink>
+								</Nav>
+								<AvatarLoginUser />
+							</Navbar.Collapse>
+						</Navbar>
+					)}
+				</div>
 			)}
 		</div>
 	);

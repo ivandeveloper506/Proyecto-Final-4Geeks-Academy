@@ -26,14 +26,23 @@ export default function PasswordResetValidate(store, actions) {
 			return true;
 		}
 	}).then(result => {
+		console.log("*** validando password result***");
+		console.log(result);
+
 		if (result.isConfirmed) {
 			Swal.fire({
 				title: `¡Código validado exitosamente!`
 			});
 		}
 
-		actions.userPasswordValidate(true);
-		actions.userPasswordReset(false);
+		if (result.isDismissed) {
+			actions.userPasswordValidate(false);
+			actions.userPasswordReset(false);
+			actions.activeOption("/recover");
+		} else {
+			actions.userPasswordValidate(true);
+			actions.userPasswordReset(false);
+		}
 
 		actions.activeOption("/recover");
 	});

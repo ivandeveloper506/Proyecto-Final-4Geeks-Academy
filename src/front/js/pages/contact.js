@@ -24,7 +24,7 @@ export default function Recover() {
 
 		// actions.registrarMensaje(messageBody);
 
-		alert("Ingreso a enviar mensaje");
+		// alert("Ingreso a enviar mensaje");
 	};
 
 	useEffect(() => {

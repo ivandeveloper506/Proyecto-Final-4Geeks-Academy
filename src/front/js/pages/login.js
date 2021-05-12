@@ -17,6 +17,10 @@ export default function Login() {
 
 	useEffect(() => {
 		inputEmailRef.current.focus();
+		actions.userPasswordReset(false);
+		actions.userPasswordValidate(false);
+
+		actions.activeOption("/login");
 	}, []);
 
 	return (

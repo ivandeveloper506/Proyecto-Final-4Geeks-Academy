@@ -96,10 +96,10 @@ export default function PersonMedicineDetail() {
 		}
 	};
 
-	const handleDescription = e => {
-		alert("Medicamento: " + e);
-		setDescription(e);
-	};
+	// const handleDescription = e => {
+	// 	alert("Medicamento: " + e);
+	// 	setDescription(e);
+	// };
 
 	useEffect(() => {
 		getPersonMedicine();

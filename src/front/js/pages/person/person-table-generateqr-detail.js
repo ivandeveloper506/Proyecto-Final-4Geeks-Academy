@@ -43,7 +43,7 @@ export default function PersonGenerateQr() {
 			<div className="col-md-2" />
 			<div className="col-md-8 container-fluid qr-main-class">
 				<div className="row qr-title-main-class">
-					<div className="col-md-7">
+					<div className="col-md-7 mt-3">
 						<h6>Generar Código QR [{personDetail.full_name}]</h6>
 					</div>
 					<div className="col-md-5">
@@ -62,8 +62,7 @@ export default function PersonGenerateQr() {
 					</div>
 				</div>
 				<div className="row mt-3">
-					<div className="col-md-5">
-						{/* <p>Generar código QR</p> */}
+					<div className="col-md-5 mt-3 text-justify">
 						{store.QRCodePerson.length === 0 ? (
 							<p>
 								Utilice la opión del botón Generar para generar el Código QR con la información de la
@@ -76,8 +75,6 @@ export default function PersonGenerateQr() {
 							</p>
 						)}
 					</div>
-					{/* <div className=""></div> */}
-
 					<div className="col-md person-qr-info-class">
 						<div className="row">
 							<div className="col">

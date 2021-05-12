@@ -13,14 +13,6 @@ export default function PersonGenerateQr() {
 	let personDetail = store.persons[personId];
 
 	const handleGenerate = index => {
-		// let personDelete = store.persons[index];
-
-		alert("Entro a generar el código QR");
-
-		console.log("*** handleGenerate ***");
-		console.log(personDetail);
-		console.log(`${store.URLCodeQR}${personDetail.id}`);
-
 		// Se manda a crear el usuario
 		const personQRBody = {
 			url: `${store.URLCodeQR}${personDetail.id}`,
@@ -32,13 +24,11 @@ export default function PersonGenerateQr() {
 	};
 
 	useEffect(() => {
-		console.log("*** PersonGenerateQr [useEffect] - Entro a generar el código QR ***");
-
 		const personQRBody = {
 			person_id: personDetail.id
 		};
 
-		actions.getQRCodePerson(personQRBody); // TODO: REVISAR, SE CAE CUANDO NO HA SIDO GENERADO
+		actions.getQRCodePerson(personQRBody);
 
 		console.log("*** PersonGenerateQr [store.QRCodePerson] ***");
 		console.log(store.QRCodePerson);

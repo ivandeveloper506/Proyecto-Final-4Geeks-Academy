@@ -134,7 +134,7 @@ export default function PersonMedicineDetail() {
 								<span className="text-danger">
 									<strong>*</strong>
 								</span>{" "}
-								Descripción 1
+								Descripción
 							</Form.Label>
 							<div>
 								<Autocomplete
@@ -144,9 +144,17 @@ export default function PersonMedicineDetail() {
 									ref={inputDescriptionRef}
 									required
 									id="description"
-									placeholder="Ingrese el medicamento o seleccionelo de la lista..."
+									// placeholder="Ingrese el medicamento o seleccionelo de la lista..."
 									options={store.infoAPIExterna.map(option => option.nombre)}
-									renderInput={params => <TextField {...params} margin="normal" variant="outlined" />}
+									renderInput={params => (
+										<TextField
+											{...params}
+											// label="Ingrese el medicamento o seleccionelo de la lista..."
+											placeholder="Ingrese el medicamento o seleccionelo de la lista..."
+											margin="normal"
+											variant="outlined"
+										/>
+									)}
 								/>
 							</div>
 							{/* <InputSearchMedicine /> */}

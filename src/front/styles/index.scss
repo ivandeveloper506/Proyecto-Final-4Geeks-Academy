@@ -173,6 +173,12 @@ body{
     width: 45px;
 }
 
+.MuiInputBase-root {
+    background: white;
+    width: 800px;
+    // height: calc(1.5em + 0.75rem + 2px);
+}
+
 // FIN - Clases tablas de mantenimiento y detalle
 
 /* ESTILOS MEDIA QUERY */

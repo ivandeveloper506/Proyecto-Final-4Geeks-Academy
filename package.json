@@ -78,6 +78,7 @@
 	"dependencies": {
 		"@material-ui/core": "^4.11.4",
 		"@material-ui/icons": "^4.11.2",
+		"@material-ui/lab": "^4.0.0-alpha.58",
 		"bootstrap": "^4.6.0",
 		"date-fns": "^2.21.3",
 		"material-ui-search-bar": "^1.0.0",

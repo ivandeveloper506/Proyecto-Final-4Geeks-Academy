@@ -1,14 +1,15 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-coral-mink-iq9kv4l6.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-gold-capybara-lvnx3cif.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3000-coral-mink-iq9kv4l6.ws-us04.gitpod.io/person/infoqr/",
+			URLCodeQR: "https://3000-gold-capybara-lvnx3cif.ws-us04.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			PersonInfoQR: [],
+			infoAPIExterna: [],
 			message: null,
 			userProfile: [],
 			persons: [],
@@ -739,9 +740,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getAPIExterna: async userID => {
 				await fetch("https://cima.aemps.es/cima/rest/psuministro", {
 					method: "GET"
-					// headers: {
-					// 	"Content-Type": "application/json"
-					// }
 				})
 					.then(response => {
 						if (response.status === 200) {
@@ -751,7 +749,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.then(data => {
-						// setStore({ persons: data });
+						setStore({ infoAPIExterna: data.resultados });
 
 						console.log("*** getAPIExterna ***");
 						console.log(data.resultados);

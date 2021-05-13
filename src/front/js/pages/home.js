@@ -35,7 +35,9 @@ export const Home = () => {
 				<div className="home-button-action-class">
 					<NavLink to="register">
 						<Button className="button-register-class" variant="btn btn-warning btn-lg">
-							Reg&iacute;strese y genere su QR <i className="fas fa-pen"></i>
+							<p>
+								Reg&iacute;strese y genere su QR <i className="fas fa-pen"></i>
+							</p>
 						</Button>
 					</NavLink>
 				</div>

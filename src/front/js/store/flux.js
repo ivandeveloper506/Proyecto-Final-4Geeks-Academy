@@ -65,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"top-end",
 							"error",
 							"Oops...",
-							"Ha ocurrido un error y no se pudo iniciar sesión.",
+							"Ha ocurrido un error y no se pudo iniciar sesión. El email o la contraseña no son válidos.",
 							false,
 							true,
 							2000

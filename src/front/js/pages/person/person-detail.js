@@ -70,11 +70,6 @@ export default function PersonDetail() {
 			emergency_contact: emergencyContact,
 			emergency_phone: emergencyPhone,
 			user_creation_id: store.userProfile.id,
-
-			// if (vaccine1Date === ""){
-			//     vaccine1Date
-			// }
-
 			vaccine1_date: vaccine1Date,
 			vaccine2_date: vaccine2Date
 		};
@@ -126,11 +121,14 @@ export default function PersonDetail() {
 	return (
 		<div className="container container-detail-class body-mant-class">
 			<div>
+				<Form.Group className="col-md-9 mt-3">
+					<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
+				</Form.Group>
 				<Form className="mt-3" onSubmit={handleSave}>
 					<div className="form-row title-mant-class head-mant-class">
-						<Form.Group className="col-md-9">
+						{/* <Form.Group className="col-md-9">
 							<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
-						</Form.Group>
+						</Form.Group> */}
 						<Form.Group className="col-md-3">
 							<Tooltip title="Guardar datos" aria-label="Guardar datos">
 								<button type="submit" className="btn btn-success">

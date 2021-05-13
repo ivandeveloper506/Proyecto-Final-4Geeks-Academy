@@ -82,15 +82,15 @@ def register():
         nombreBienvenida = app.processString(nombreBienvenida)
 
         # Se envia correo de bienvenida al usuario que se esta registrando.
-        # app.send_email(subject='Bienvenido(a) a QR+Services',
+        # app.send_email(subject='Bienvenido(a) a medicQR',
         #                sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
         #                recipients=[data_request["email"]],
-        #                text_body=f'Hola {nombreBienvenida}, bienvenido(a) a QR+Services',
-        #                html_body=f'<p>Hola <strong>{nombreBienvenida}</strong>, bienvenido(a) a QR+Services.</p>')
+        #                text_body=f'Hola {nombreBienvenida}, bienvenido(a) a medicQR',
+        #                html_body=f'<p>Hola <strong>{nombreBienvenida}</strong>, bienvenido(a) a medicQR.</p>')
 
-        app.send_email_gmail(subject='Bienvenido(a) a QR+Services',
+        app.send_email_gmail(subject='Bienvenido(a) a medicQR',
                        to=data_request["email"],
-                       text_body='Hola ' + nombreBienvenida + ', bienvenido(a) a QR+Services')
+                       text_body='Hola ' + nombreBienvenida + ', bienvenido(a) a medicQR')
         
         return jsonify(User.serialize(user)), 201
     

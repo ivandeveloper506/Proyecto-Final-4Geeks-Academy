@@ -31,7 +31,7 @@ export default function Conctat() {
 					</div>
 					<div className="col-md-6">
 						<div className="card-class">
-							<h2 className="p-3">QR+Services</h2>
+							<h2 className="p-3">medicQR</h2>
 							<p>
 								Es una aplicación que te permite registrar tus datos personales, la lista de
 								medicamentos y un registro de control de vacunas. Información que permitirá generar un
@@ -44,7 +44,7 @@ export default function Conctat() {
 				<div className="row mt-3">
 					<div className="col text-white">
 						<QRCode
-							value="QR+Service. ¡Registrese y sea parte de este gran beneficio!"
+							value="medicQR. ¡Registrese y comparta facilmente su información médica!"
 							size="200"
 							ecLevel="H"
 							qrStyle="squares"
@@ -58,7 +58,7 @@ export default function Conctat() {
 				<div className="row mt-3">
 					<div className="col-md-7">
 						<div className="card-class">
-							<h2 className="p-3">¿Para que puedo usar QR+Services?</h2>
+							<h2 className="p-3">¿Para que puedo usar medicQR?</h2>
 
 							<Table variant="transparent">
 								<tbody>

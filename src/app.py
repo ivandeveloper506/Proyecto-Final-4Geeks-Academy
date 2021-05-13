@@ -23,7 +23,7 @@ mail_settings = {
     "MAIL_USE_SSL": True,
 	"MAIL_USERNAME": 'qrplusservices@gmail.com',
 	"MAIL_PASSWORD":'Qr#services052021',
-    "DONT_REPLY_FROM_EMAIL": ('QR+Services', 'qrplusservices@gmail.com')
+    "DONT_REPLY_FROM_EMAIL": ('medicQR', 'qrplusservices@gmail.com')
 }
 
 ENV = os.getenv("FLASK_ENV")

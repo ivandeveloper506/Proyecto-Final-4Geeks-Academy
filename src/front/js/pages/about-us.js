@@ -24,8 +24,8 @@ export default function AboutUs() {
 					<div className="col-md-6">
 						<div className="card-class">
 							<p>
-								QR+Service es la idea hecha realidad de un grupo de personas con formación profesional
-								que va desde la economía, aviación, electrónica, hasta la misma informática.
+								medicQR es la idea hecha realidad de un grupo de personas con formación profesional que
+								va desde la economía, aviación, electrónica, hasta la misma informática.
 							</p>
 							<p>
 								Unidos por una oportunidad gubernamental en el estudio de la programación, Iván,
@@ -40,19 +40,19 @@ export default function AboutUs() {
 							<p>
 								Su punto de partida fue un proyecto de curso que alcanzó en un corto tiempo, mucha
 								popularidad gracias a su alcance social. Posterior a esto las ideas siguieron
-								evolucionando, y al día de hoy QR+Service es una aplicación con más de doscientas mil
+								evolucionando, y al día de hoy medicQR es una aplicación con más de doscientas mil
 								descargas que va en aumento gracias a su variedad de aplicaciones.
 							</p>
 
 							<p>
 								Recomendado por instituciones gubernamentales, así como adquirido por empresas privadas,
-								QR+Service sigue avanzando por buen camino ahora acompañado de otras aplicaciones
-								creadas por el grupo.
+								medicQR sigue avanzando por buen camino ahora acompañado de otras aplicaciones creadas
+								por el grupo.
 							</p>
 
 							<p>
 								Siguenos en nuestras redes sociales y entérate de las nuevas mejoras y otros productos
-								estrella de QR+Service.
+								estrella de medicQR.
 							</p>
 						</div>
 					</div>

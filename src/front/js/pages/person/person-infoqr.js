@@ -155,7 +155,7 @@ export default function PersonInfoQr() {
 			<div className="row m-3">
 				<div className="col d-flex justify-content-center">
 					<NavLink className="text-primary" to="/home">
-						<h4>Ir a Qr+Services</h4>
+						<h4>Ir a medicQR</h4>
 					</NavLink>
 				</div>
 			</div>

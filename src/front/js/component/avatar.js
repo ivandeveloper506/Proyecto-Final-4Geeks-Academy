@@ -23,11 +23,12 @@ export default function Avatar() {
 
 	const logout = () => {
 		actions.logout();
+
+		// Se configura la opción del home
+		actions.activeOption("/home");
 	};
 
 	const userEdit = () => {
-		console.log("*** Editar Usuario ***");
-
 		console.log(store.userProfile.user_image);
 	};
 

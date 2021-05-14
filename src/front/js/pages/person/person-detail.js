@@ -47,8 +47,8 @@ export default function PersonDetail() {
 	const [userImage, setUserImage] = useState("");
 	const [emergencyContact, setEmergencyContact] = useState("");
 	const [emergencyPhone, setEmergencyPhone] = useState("");
-	const [vaccine1Date, setVaccine1Date] = useState("");
-	const [vaccine2Date, setVaccine2Date] = useState("");
+	const [vaccine1Date, setVaccine1Date] = useState(null);
+	const [vaccine2Date, setVaccine2Date] = useState(null);
 	const inputNameRef = useRef("");
 
 	const handleSave = e => {
@@ -69,9 +69,9 @@ export default function PersonDetail() {
 			user_image: userImage,
 			emergency_contact: emergencyContact,
 			emergency_phone: emergencyPhone,
+			user_creation_id: store.userProfile.id,
 			vaccine1_date: vaccine1Date,
-			vaccine2_date: vaccine2Date,
-			user_creation_id: store.userProfile.id
+			vaccine2_date: vaccine2Date
 		};
 
 		if (action === "edit") {
@@ -90,8 +90,8 @@ export default function PersonDetail() {
 		setTelephoneNumber("");
 		setEmergencyContact("");
 		setUserImage("");
-		setVaccine1Date("");
-		setVaccine2Date("");
+		setVaccine1Date(null);
+		setVaccine2Date(null);
 
 		if (action === "edit") {
 			{
@@ -121,11 +121,14 @@ export default function PersonDetail() {
 	return (
 		<div className="container container-detail-class body-mant-class">
 			<div>
+				<Form.Group className="col-md-9 mt-3">
+					<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
+				</Form.Group>
 				<Form className="mt-3" onSubmit={handleSave}>
 					<div className="form-row title-mant-class head-mant-class">
-						<Form.Group className="col-md-9">
+						{/* <Form.Group className="col-md-9">
 							<h2>{action === "new" ? "Registrar Persona" : "Editar Persona"}</h2>
-						</Form.Group>
+						</Form.Group> */}
 						<Form.Group className="col-md-3">
 							<Tooltip title="Guardar datos" aria-label="Guardar datos">
 								<button type="submit" className="btn btn-success">

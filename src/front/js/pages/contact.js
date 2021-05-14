@@ -21,10 +21,6 @@ export default function Recover() {
 			phone: phone,
 			message: message
 		};
-
-		// actions.registrarMensaje(messageBody);
-
-		alert("Ingreso a enviar mensaje");
 	};
 
 	useEffect(() => {

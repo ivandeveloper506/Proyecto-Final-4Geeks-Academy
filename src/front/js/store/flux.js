@@ -1,14 +1,15 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-coffee-yak-0j46wvmi.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-tan-woodpecker-jyl1s6rt.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3000-coffee-yak-0j46wvmi.ws-us04.gitpod.io/person/infoqr/",
+			URLCodeQR: "https://3000-tan-woodpecker-jyl1s6rt.ws-us04.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			PersonInfoQR: [],
+			infoAPIExterna: [],
 			message: null,
 			userProfile: [],
 			persons: [],
@@ -64,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"top-end",
 							"error",
 							"Oops...",
-							"Ha ocurrido un error y no se pudo iniciar sesión.",
+							"Ha ocurrido un error y no se pudo iniciar sesión. El email o la contraseña no son válidos.",
 							false,
 							true,
 							2000
@@ -731,17 +732,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ userLogged: false });
 
+				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
+
 				// Se configura la opción del home
 				getActions().activeOption("/home");
-
-				ShowAlert("top-end", "success", "", "¡Sesión cerrada exitosamente!", false, true, 2000);
 			},
 			getAPIExterna: async userID => {
 				await fetch("https://cima.aemps.es/cima/rest/psuministro", {
 					method: "GET"
-					// headers: {
-					// 	"Content-Type": "application/json"
-					// }
 				})
 					.then(response => {
 						if (response.status === 200) {
@@ -751,7 +749,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.then(data => {
-						// setStore({ persons: data });
+						setStore({ infoAPIExterna: data.resultados });
 
 						console.log("*** getAPIExterna ***");
 						console.log(data.resultados);

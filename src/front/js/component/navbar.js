@@ -21,7 +21,7 @@ export const NavbarMain = () => {
 	const AppLogo = () => {
 		return (
 			<QRCode
-				value="QR+Service"
+				value="medicQR"
 				size="55"
 				ecLevel="M"
 				qrStyle="dots"

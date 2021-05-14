@@ -11,6 +11,7 @@ import { green } from "@material-ui/core/colors";
 import Tooltip from "@material-ui/core/Tooltip";
 import Divider from "@material-ui/core/Divider";
 import { Form } from "react-bootstrap";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -123,24 +124,35 @@ export default function PersonMedicineDetail() {
 						</Form.Group>
 					</div>
 					<div className="form-row">
-						<Form.Group className="col">
+						<Form.Group className="col-12">
 							<Form.Label>
 								<span className="text-danger">
 									<strong>*</strong>
 								</span>{" "}
 								Descripción
 							</Form.Label>
-							<Form.Control
-								className="bg-white"
-								onChange={e => setDescription(e.target.value)}
-								value={description}
-								ref={inputDescriptionRef}
-								required
-								type="text"
-								id="description"
-								label="Descripción"
-								placeholder="Ingrese la descripción..."
-							/>
+							<div>
+								<Autocomplete
+									freeSolo
+									onChange={e => setDescription(e.target.value)}
+									value={description}
+									ref={inputDescriptionRef}
+									required
+									id="description"
+									// placeholder="Ingrese el medicamento o seleccionelo de la lista..."
+									options={store.infoAPIExterna.map(option => option.nombre)}
+									renderInput={params => (
+										<TextField
+											{...params}
+											// label="Ingrese el medicamento o seleccionelo de la lista..."
+											placeholder="Ingrese el medicamento o seleccionelo de la lista..."
+											margin="normal"
+											variant="outlined"
+										/>
+									)}
+								/>
+							</div>
+							{/* <InputSearchMedicine /> */}
 						</Form.Group>
 					</div>
 

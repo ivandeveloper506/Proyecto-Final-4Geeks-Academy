@@ -20,7 +20,7 @@ export const Footer = () => (
 							<p>
 								Un QR es su enlace físico. Es una acción rápida y sencilla. Un QR es fácil de crear y
 								existen diferentes versiones y tipos, así como los hay estáticos y dinámicos. Inclusive
-								un QR puede hasta sufrir daños y aún funcionar. No lo piense más, QR+Service es su mejor
+								un QR puede hasta sufrir daños y aún funcionar. No lo piense más, medicQR es su mejor
 								opción.
 							</p>
 						</div>
@@ -58,13 +58,13 @@ export const Footer = () => (
 				<div className="col-md-4">
 					<div className="row">
 						<div className="col">
-							<h3>QR+Service</h3>
+							<h3>medicQR</h3>
 						</div>
 					</div>
 					<div className="row p-2">
 						<div className="col">
 							<QRCode
-								value="QR+Service. ¡Su mejor elección!"
+								value="medicQR. ¡La mejor forma de compartir información médica!"
 								size="100"
 								ecLevel="H"
 								qrStyle="dots"

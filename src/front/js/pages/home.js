@@ -15,8 +15,9 @@ export const Home = () => {
 		<div className="container-fluid main-div-class">
 			<div className="row">
 				<div className="container home-title-class">
-					<h1>QR+Service</h1>
-					<p>Regístrese y conozca el servicio que ponemos a su disposición</p>
+					<h1>medicQR</h1>
+					<p>Registra, gestiona y comparta f&aacute;cilmente</p>
+					<p>Informaci&oacute;n m&eacute;dica con C&oacute;digos QR</p>
 				</div>
 
 				<div className="col-md-8 home-left-class m-2 p-0">
@@ -30,7 +31,9 @@ export const Home = () => {
 				<div className="home-button-action-class">
 					<NavLink to="register">
 						<Button className="button-register-class" variant="btn btn-warning btn-lg">
-							Quiero registrarme <i className="fas fa-pen " />
+							<p>
+								Reg&iacute;strese y genere su QR <i className="fas fa-pen"></i>
+							</p>
 						</Button>
 					</NavLink>
 				</div>

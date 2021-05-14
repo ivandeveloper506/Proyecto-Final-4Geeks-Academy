@@ -68,9 +68,7 @@ export default function Login() {
 							<div className="m-3 form-check">
 								<div className="row">
 									<div className="col-6 d-flex justify-content-start">
-										{/* <input type="checkbox" className="form-check-input" id="exampleCheck1" /> */}
 										<h6>
-											{/* <label className="form-check-label text-white">Recuérdame</label> */}
 											<Link to="/recover">
 												<h6>
 													<span className="text-warning">¿Olvidó su contraseña?</span>
@@ -88,13 +86,7 @@ export default function Login() {
 									</div>
 								</div>
 
-								<div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
-									{/* <Link to="/recover">
-										<h6>
-											<span className="text-warning">¿Olvidó su contraseña?</span>
-										</h6>
-									</Link> */}
-								</div>
+								<div className="mt-3 row d-flex flex-row align-items-center justify-content-center"></div>
 							</div>
 						</form>
 					</div>

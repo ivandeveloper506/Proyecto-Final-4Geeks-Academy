@@ -16,10 +16,6 @@ export const Home = () => {
 			<div className="row">
 				<div className="container home-title-class">
 					<h1>medicQR</h1>
-					{/* <p>
-						Registra, gestiona y comparta f&aacute;cilmente informaci&oacute;n m&eacute;dica con
-						C&oacute;digos QR
-					</p> */}
 					<p>Registra, gestiona y comparta f&aacute;cilmente</p>
 					<p>Informaci&oacute;n m&eacute;dica con C&oacute;digos QR</p>
 				</div>

@@ -149,7 +149,7 @@ const EnhancedTableToolbar = props => {
 	return (
 		<Toolbar>
 			<Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-				Personas
+				Medicamentos
 			</Typography>
 
 			<Tooltip title="Crear Persona">

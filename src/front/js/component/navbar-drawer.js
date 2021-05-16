@@ -21,6 +21,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import PersonDrawer from "../pages/person/person-drawer";
+import MedicineDrawer from "../pages/person/medicine-drawer";
 
 const drawerWidth = 240;
 
@@ -171,7 +172,15 @@ export default function PersistentDrawerLeft() {
 					[classes.contentShift]: open
 				})}>
 				<div className={classes.drawerHeader} />
-				<PersonDrawer />
+				{/* <PersonDrawer /> */}
+				<div className="row">
+					<div className="col-md-6">
+						<PersonDrawer />
+					</div>
+					<div className="col-md-6">
+						<MedicineDrawer />
+					</div>
+				</div>
 
 				{/* <h1>Esto es una prueba</h1> */}
 				{/* <Typography paragraph>

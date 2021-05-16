@@ -9,6 +9,8 @@ import { Navbar } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import AvatarLoginUser from "./avatar-login-user";
 import { QRCode } from "react-qrcode-logo";
+import NavbarDrawer from "./navbar-drawer";
+import Drawer from "./drawer";
 
 export const NavbarMain = () => {
 	const { store, actions } = useContext(Context);
@@ -39,23 +41,24 @@ export const NavbarMain = () => {
 			) : (
 				<div className="text-white">
 					{store.userLogged ? (
-						<Navbar expand="lg">
-							<NavLink className="navbar-item-logo-class" to="/dashboard/person">
-								<AppLogo />
-							</NavLink>
-							<Navbar.Toggle className="bg-white" />
-							<Navbar.Collapse>
-								<Nav className="mr-auto">
-									<NavLink className="navbar-item-class" to="/dashboard/person">
-										<i className="fas fa-users"></i> Personas
-									</NavLink>
-									<NavLink className="navbar-item-class" to="/dashboard/person/generateqr">
-										<i className="fas fa-qrcode"></i> Generar QR
-									</NavLink>
-								</Nav>
-								<AvatarLoginUser />
-							</Navbar.Collapse>
-						</Navbar>
+						// <Navbar expand="lg">
+						// 	<NavLink className="navbar-item-logo-class" to="/dashboard/person">
+						// 		<AppLogo />
+						// 	</NavLink>
+						// 	<Navbar.Toggle className="bg-white" />
+						// 	<Navbar.Collapse>
+						// 		<Nav className="mr-auto">
+						// 			<NavLink className="navbar-item-class" to="/dashboard/person">
+						// 				<i className="fas fa-users"></i> Personas
+						// 			</NavLink>
+						// 			<NavLink className="navbar-item-class" to="/dashboard/person/generateqr">
+						// 				<i className="fas fa-qrcode"></i> Generar QR
+						// 			</NavLink>
+						// 		</Nav>
+						// 		<AvatarLoginUser />
+						// 	</Navbar.Collapse>
+						// </Navbar>
+						<NavbarDrawer />
 					) : (
 						<Navbar expand="lg">
 							<NavLink className="navbar-item-logo-class" to="/">

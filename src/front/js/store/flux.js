@@ -1,7 +1,7 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-tan-woodpecker-jyl1s6rt.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-scarlet-aphid-cr9i4whj.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -58,7 +58,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						getActions().userPasswordValidate(false);
 
 						// Se configura la opción del home
-						getActions().activeOption("/dashboard/person");
+						// getActions().activeOption("/dashboard/person");
+						getActions().activeOption("/dashboard");
 					})
 					.catch(error => {
 						ShowAlert(

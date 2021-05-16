@@ -64,7 +64,7 @@ const Layout = () => {
 					</Route>
 					{/* <Route exact path="*" component={NotFoundPage} /> */}
 				</Switch>
-				{store.infoQRActive ? "" : <Footer />}
+				{store.infoQRActive ? "" : store.userLogged ? "" : <Footer />}
 			</BrowserRouter>
 		</div>
 	);

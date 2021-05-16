@@ -20,10 +20,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { green } from "@material-ui/core/colors";
 
 function createData(name, calories, fat, carbs, protein) {
 	return { name, calories, fat, carbs, protein };
@@ -88,6 +84,14 @@ function EnhancedTableHead(props) {
 	return (
 		<TableHead>
 			<TableRow>
+				<TableCell padding="checkbox">
+					<Checkbox
+						indeterminate={numSelected > 0 && numSelected < rowCount}
+						checked={rowCount > 0 && numSelected === rowCount}
+						onChange={onSelectAllClick}
+						inputProps={{ "aria-label": "select all desserts" }}
+					/>
+				</TableCell>
 				{headCells.map(headCell => (
 					<TableCell
 						key={headCell.id}
@@ -147,18 +151,33 @@ const EnhancedTableToolbar = props => {
 	const { numSelected } = props;
 
 	return (
-		<Toolbar>
-			<Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-				Personas
-			</Typography>
+		<Toolbar
+			className={clsx(classes.root, {
+				[classes.highlight]: numSelected > 0
+			})}>
+			{numSelected > 0 ? (
+				<Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+					{numSelected} selected
+				</Typography>
+			) : (
+				<Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+					Nutrition
+				</Typography>
+			)}
 
-			<Tooltip title="Crear Persona">
-				<BottomNavigationAction
-					label="Favorites"
-					icon={<AddCircleIcon />}
-					style={{ color: green[500], fontSize: 30 }}
-				/>
-			</Tooltip>
+			{numSelected > 0 ? (
+				<Tooltip title="Delete">
+					<IconButton aria-label="delete">
+						<DeleteIcon />
+					</IconButton>
+				</Tooltip>
+			) : (
+				<Tooltip title="Filter list">
+					<IconButton aria-label="filter list">
+						<FilterListIcon />
+					</IconButton>
+				</Tooltip>
+			)}
 		</Toolbar>
 	);
 };
@@ -284,6 +303,12 @@ export default function EnhancedTable() {
 											tabIndex={-1}
 											key={row.name}
 											selected={isItemSelected}>
+											<TableCell padding="checkbox">
+												<Checkbox
+													checked={isItemSelected}
+													inputProps={{ "aria-labelledby": labelId }}
+												/>
+											</TableCell>
 											<TableCell component="th" id={labelId} scope="row" padding="none">
 												{row.name}
 											</TableCell>

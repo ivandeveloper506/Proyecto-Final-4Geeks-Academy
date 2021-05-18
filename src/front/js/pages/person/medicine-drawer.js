@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { Context } from "../../store/appContext";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -10,40 +11,19 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import SearchIcon from "@material-ui/icons/Search";
+import EditIcon from "@material-ui/icons/Edit";
+import Swal from "sweetalert2";
+import SearchBar from "material-ui-search-bar";
+import Divider from "@material-ui/core/Divider";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { green } from "@material-ui/core/colors";
-
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-	createData("Cupcake", 305, 3.7, 67, 4.3),
-	createData("Donut", 452, 25.0, 51, 4.9),
-	createData("Eclair", 262, 16.0, 24, 6.0),
-	createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-	createData("Gingerbread", 356, 16.0, 49, 3.9),
-	createData("Honeycomb", 408, 3.2, 87, 6.5),
-	createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-	createData("Jelly Bean", 375, 0.0, 94, 0.0),
-	createData("KitKat", 518, 26.0, 65, 7.0),
-	createData("Lollipop", 392, 0.2, 98, 0.0),
-	createData("Marshmallow", 318, 0, 81, 2.0),
-	createData("Nougat", 360, 19.0, 9, 37.0),
-	createData("Oreo", 437, 18.0, 63, 4.0)
-];
+import Typography from "@material-ui/core/Typography";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -72,24 +52,27 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-	{ id: "name", numeric: false, disablePadding: true, label: "Dessert (100g serving)" },
-	{ id: "calories", numeric: true, disablePadding: false, label: "Calories" },
-	{ id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
-	{ id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
-	{ id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" }
+	{
+		id: "full_name",
+		numeric: false,
+		disablePadding: false,
+		label: "Persona"
+	},
+	{ id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
 ];
 
 function EnhancedTableHead(props) {
-	const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+	const { classes, order, orderBy, onRequestSort } = props;
 	const createSortHandler = property => event => {
 		onRequestSort(event, property);
 	};
 
 	return (
-		<TableHead>
+		<TableHead className="head-table-class">
 			<TableRow>
 				{headCells.map(headCell => (
 					<TableCell
+						className="cell-table-class"
 						key={headCell.id}
 						align={headCell.numeric ? "right" : "left"}
 						padding={headCell.disablePadding ? "none" : "default"}
@@ -119,52 +102,8 @@ EnhancedTableHead.propTypes = {
 	onSelectAllClick: PropTypes.func.isRequired,
 	order: PropTypes.oneOf(["asc", "desc"]).isRequired,
 	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired
-};
-
-const useToolbarStyles = makeStyles(theme => ({
-	root: {
-		paddingLeft: theme.spacing(2),
-		paddingRight: theme.spacing(1)
-	},
-	highlight:
-		theme.palette.type === "light"
-			? {
-					color: theme.palette.secondary.main,
-					backgroundColor: lighten(theme.palette.secondary.light, 0.85)
-			  }
-			: {
-					color: theme.palette.text.primary,
-					backgroundColor: theme.palette.secondary.dark
-			  },
-	title: {
-		flex: "1 1 100%"
-	}
-}));
-
-const EnhancedTableToolbar = props => {
-	const classes = useToolbarStyles();
-	const { numSelected } = props;
-
-	return (
-		<Toolbar>
-			<Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-				Medicamentos
-			</Typography>
-
-			<Tooltip title="Crear Persona">
-				<BottomNavigationAction
-					label="Favorites"
-					icon={<AddCircleIcon />}
-					style={{ color: green[500], fontSize: 30 }}
-				/>
-			</Tooltip>
-		</Toolbar>
-	);
-};
-
-EnhancedTableToolbar.propTypes = {
-	numSelected: PropTypes.number.isRequired
+	rowCount: PropTypes.number.isRequired,
+	personId: PropTypes.personId
 };
 
 const useStyles = makeStyles(theme => ({
@@ -173,10 +112,12 @@ const useStyles = makeStyles(theme => ({
 	},
 	paper: {
 		width: "100%",
-		marginBottom: theme.spacing(2)
+		maxWidth: 800,
+		marginBottom: theme.spacing(1)
 	},
 	table: {
-		minWidth: 750
+		minWidth: 200,
+		maxWidth: 800
 	},
 	visuallyHidden: {
 		border: 0,
@@ -187,17 +128,20 @@ const useStyles = makeStyles(theme => ({
 		padding: 0,
 		position: "absolute",
 		top: 20,
-		width: 1
+		width: 1,
+		paddingLeft: 0
 	}
 }));
 
 export default function EnhancedTable() {
+	const { store, actions } = useContext(Context);
+	const [searchPerson, setSearchPerson] = useState("");
 	const classes = useStyles();
 	const [order, setOrder] = React.useState("asc");
 	const [orderBy, setOrderBy] = React.useState("calories");
 	const [selected, setSelected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
-	const [dense, setDense] = React.useState(false);
+	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 	const handleRequestSort = (event, property) => {
@@ -206,30 +150,21 @@ export default function EnhancedTable() {
 		setOrderBy(property);
 	};
 
-	const handleSelectAllClick = event => {
-		if (event.target.checked) {
-			const newSelecteds = rows.map(n => n.name);
-			setSelected(newSelecteds);
-			return;
-		}
-		setSelected([]);
+	const handleDelete = index => {
+		let personDelete = store.personMedicine[index];
+
+		actions.handlePersonDelete(personDelete.id, store.userProfile.id);
 	};
 
-	const handleClick = (event, name) => {
-		const selectedIndex = selected.indexOf(name);
-		let newSelected = [];
+	const retrievePerson = () => {
+		// Se obtienen los datos de las personas asociadas al usuario.
+		actions.getPerson(store.userProfile.id);
 
-		if (selectedIndex === -1) {
-			newSelected = newSelected.concat(selected, name);
-		} else if (selectedIndex === 0) {
-			newSelected = newSelected.concat(selected.slice(1));
-		} else if (selectedIndex === selected.length - 1) {
-			newSelected = newSelected.concat(selected.slice(0, -1));
-		} else if (selectedIndex > 0) {
-			newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-		}
+		// Se obtienen los datos de los medicamentos de una vez
+		// actions.getPersonMedicine(1);
 
-		setSelected(newSelected);
+		// Se configura la opción del home
+		actions.activeOption("/dashboard/person");
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -247,12 +182,28 @@ export default function EnhancedTable() {
 
 	const isSelected = name => selected.indexOf(name) !== -1;
 
-	const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.personMedicine.length - page * rowsPerPage);
+
+	useEffect(() => {
+		retrievePerson();
+	}, []);
 
 	return (
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
-				<EnhancedTableToolbar numSelected={selected.length} />
+				<div className="row">
+					<div className="col d-flex align-items-center">
+						<h4 className="ml-3">Medicamentos</h4>
+					</div>
+					<div className="col d-flex justify-content-end m-2">
+						<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
+							<NavLink to={`/dashboard/person/detail/`}>
+								<AddCircleIcon className="new-icon-person-class" />
+							</NavLink>
+						</Tooltip>
+					</div>
+				</div>
+
 				<TableContainer>
 					<Table
 						className={classes.table}
@@ -264,33 +215,37 @@ export default function EnhancedTable() {
 							numSelected={selected.length}
 							order={order}
 							orderBy={orderBy}
-							onSelectAllClick={handleSelectAllClick}
 							onRequestSort={handleRequestSort}
-							rowCount={rows.length}
+							rowCount={store.personMedicine.length}
 						/>
-						<TableBody>
-							{stableSort(rows, getComparator(order, orderBy))
+						<TableBody className="body-table-class">
+							{stableSort(store.personMedicine, getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
 									const isItemSelected = isSelected(row.name);
 									const labelId = `enhanced-table-checkbox-${index}`;
 
 									return (
-										<TableRow
-											hover
-											onClick={event => handleClick(event, row.name)}
-											role="checkbox"
-											aria-checked={isItemSelected}
-											tabIndex={-1}
-											key={row.name}
-											selected={isItemSelected}>
-											<TableCell component="th" id={labelId} scope="row" padding="none">
-												{row.name}
+										<TableRow hover tabIndex={-1} key={index}>
+											<TableCell component="th" id={labelId} scope="row" padding="20">
+												{row.full_name}
 											</TableCell>
-											<TableCell align="right">{row.calories}</TableCell>
-											<TableCell align="right">{row.fat}</TableCell>
-											<TableCell align="right">{row.carbs}</TableCell>
-											<TableCell align="right">{row.protein}</TableCell>
+											<TableCell>
+												<Tooltip title="Editar registro">
+													<NavLink to={`/dashboard/person/detail/${index}`}>
+														<button className="m-2 btn btn-warning button-table-class">
+															<i className="fas fa-pen"></i>
+														</button>
+													</NavLink>
+												</Tooltip>
+												<Tooltip title="Eliminar registro">
+													<button
+														className="m-2 btn btn-danger button-table-class"
+														onClick={event => handleDelete(index)}>
+														<i className="fas fa-trash"></i>
+													</button>
+												</Tooltip>
+											</TableCell>
 										</TableRow>
 									);
 								})}
@@ -303,9 +258,9 @@ export default function EnhancedTable() {
 					</Table>
 				</TableContainer>
 				<TablePagination
-					rowsPerPageOptions={[5, 10, 25]}
+					rowsPerPageOptions={5}
 					component="div"
-					count={rows.length}
+					count={store.personMedicine.length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onChangePage={handleChangePage}

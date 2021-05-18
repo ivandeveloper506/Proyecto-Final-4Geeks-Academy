@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { Context } from "../../store/appContext";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -18,16 +20,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein };
-}
-
-const rows = [createData("Cupcake"), createData("Donut"), createData("Eclair")];
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -78,7 +73,7 @@ function EnhancedTableHead(props) {
 					<TableCell
 						key={headCell.id}
 						align={headCell.numeric ? "right" : "left"}
-						padding={headCell.disablePadding ? "none" : "default"}
+						padding={headCell.disablePadding ? "5" : "default"}
 						sortDirection={orderBy === headCell.id ? order : false}>
 						<TableSortLabel
 							active={orderBy === headCell.id}
@@ -139,8 +134,8 @@ const EnhancedTableToolbar = props => {
 			</Typography>
 
 			<Tooltip title="Crear Persona">
-				<IconButton aria-label="filter list">
-					<AddCircleIcon fontSize="large" />
+				<IconButton aria-label="Crear Persona">
+					<AddCircleIcon className="new-icon-person-class" />
 				</IconButton>
 			</Tooltip>
 		</Toolbar>
@@ -156,16 +151,11 @@ const useStyles = makeStyles(theme => ({
 		width: "100%"
 	},
 	paper: {
-		// width: "100%",
-		// marginBottom: theme.spacing(2)
 		width: "100%",
-		maxWidth: 800,
-		marginBottom: theme.spacing(1)
+		marginBottom: theme.spacing(2)
 	},
 	table: {
-		// minWidth: 750
-		minWidth: 200,
-		maxWidth: 800
+		minWidth: 750
 	},
 	visuallyHidden: {
 		border: 0,
@@ -181,6 +171,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function EnhancedTable() {
+	const { store, actions } = useContext(Context);
 	const classes = useStyles();
 	const [order, setOrder] = React.useState("asc");
 	const [orderBy, setOrderBy] = React.useState("calories");
@@ -236,7 +227,28 @@ export default function EnhancedTable() {
 
 	const isSelected = name => selected.indexOf(name) !== -1;
 
-	const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.persons.length - page * rowsPerPage);
+
+	const handleDelete = index => {
+		let personDelete = store.persons[index];
+
+		actions.handlePersonDelete(personDelete.id, store.userProfile.id);
+	};
+
+	const retrievePerson = () => {
+		// Se obtienen los datos de las personas asociadas al usuario.
+		actions.getPerson(store.userProfile.id);
+
+		// Se obtienen los datos de los medicamentos de una vez
+		// actions.getPersonMedicine(1);
+
+		// Se configura la opción del home
+		actions.activeOption("/dashboard/person");
+	};
+
+	useEffect(() => {
+		retrievePerson();
+	}, []);
 
 	return (
 		<div className={classes.root}>
@@ -255,10 +267,10 @@ export default function EnhancedTable() {
 							orderBy={orderBy}
 							onSelectAllClick={handleSelectAllClick}
 							onRequestSort={handleRequestSort}
-							rowCount={rows.length}
+							rowCount={store.persons.length}
 						/>
 						<TableBody>
-							{stableSort(rows, getComparator(order, orderBy))
+							{stableSort(store.persons, getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
 									const isItemSelected = isSelected(row.name);
@@ -273,35 +285,25 @@ export default function EnhancedTable() {
 											tabIndex={-1}
 											key={row.name}
 											selected={isItemSelected}>
-											<TableCell component="th" id={labelId} scope="row" padding="10">
-												{row.name}
+											<TableCell component="th" id={labelId} scope="row" padding="5">
+												{row.full_name}
 											</TableCell>
 											<TableCell>
-												<Tooltip title="Editar persona">
-													<IconButton color="secondary" aria-label="editRow">
-														<EditIcon fontSize="large" />
-													</IconButton>
+												<Tooltip title="Editar registro">
+													<NavLink to={`/dashboard/person/detail/${index}`}>
+														<button className="m-2 btn btn-warning button-table-class">
+															<i className="fas fa-pen"></i>
+														</button>
+													</NavLink>
 												</Tooltip>
-												<Tooltip title="Eliminar persona">
-													<IconButton color="secondary" aria-label="deleteRow">
-														<DeleteIcon fontSize="large" />
-													</IconButton>
+												<Tooltip title="Eliminar registro">
+													<button
+														className="m-2 btn btn-danger button-table-class"
+														onClick={event => handleDelete(index)}>
+														<i className="fas fa-trash"></i>
+													</button>
 												</Tooltip>
 											</TableCell>
-
-											{/* <TableCell component="th" id={labelId} scope="row" padding="none">
-												<IconButton color="secondary" aria-label="editRow">
-													<EditIcon />
-												</IconButton>
-											</TableCell>
-
-
-                                            
-											<TableCell component="th" id={labelId} scope="row" padding="none">
-												<IconButton color="secondary" aria-label="deleteRow">
-													<DeleteIcon />
-												</IconButton>
-											</TableCell> */}
 										</TableRow>
 									);
 								})}
@@ -316,13 +318,14 @@ export default function EnhancedTable() {
 				<TablePagination
 					rowsPerPageOptions={[5, 10, 25]}
 					component="div"
-					count={rows.length}
+					count={store.persons.length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onChangePage={handleChangePage}
 					onChangeRowsPerPage={handleChangeRowsPerPage}
 				/>
 			</Paper>
+			<FormControlLabel control={<Switch checked={dense} onChange={handleChangeDense} />} label="Dense padding" />
 		</div>
 	);
 }

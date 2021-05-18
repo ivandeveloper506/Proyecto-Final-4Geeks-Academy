@@ -215,6 +215,8 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
+import PersonDrawer from "../pages/person/person-drawer";
+import MedicineDrawer from "../pages/person/medicine-drawer";
 
 const useStyles = makeStyles({
 	list: {
@@ -273,12 +275,23 @@ export default function TemporaryDrawer() {
 	return (
 		<div>
 			<IconButton onClick={toggleDrawer("left", true)} aria-label="filter list">
-				<MenuIcon fontSize="large" />
+				<MenuIcon className="menu-drawer-class" />
 			</IconButton>
 
 			<Drawer anchor={"left"} open={state["left"]} onClose={toggleDrawer("left", false)}>
 				{list("left")}
 			</Drawer>
+
+			<div className="container">
+				<div className="row">
+					<div className="col-md-6">
+						<PersonDrawer />
+					</div>
+					<div className="col-md-6">
+						<MedicineDrawer />
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }

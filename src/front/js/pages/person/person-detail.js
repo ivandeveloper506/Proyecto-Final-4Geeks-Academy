@@ -305,6 +305,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
+import { Form } from "react-bootstrap";
+
+import PersonDetailHandle from "./person-detail-handle";
 
 const useStyles = makeStyles(theme => ({
 	appBar: {
@@ -348,15 +351,23 @@ export default function FullScreenDialog() {
 						</Button>
 					</Toolbar>
 				</AppBar>
-				<List>
-					<ListItem button>
-						<ListItemText primary="Phone ringtone" secondary="Titania" />
-					</ListItem>
-					<Divider />
-					<ListItem button>
-						<ListItemText primary="Default notification ringtone" secondary="Tethys" />
-					</ListItem>
-				</List>
+				<Form.Group className="col-md-4">
+					<Form.Label>
+						<span className="text-danger">
+							<strong>*</strong>
+						</span>{" "}
+						Primer apellido
+					</Form.Label>
+					<Form.Control
+						// onChange={e => setFirstSurname(e.target.value)}
+						// value={firstSurname}
+						required="true"
+						type="text"
+						id="firstSurname"
+						label="Primer apellido"
+						placeholder="Ingrese el primer apellido..."
+					/>
+				</Form.Group>
 			</Dialog>
 		</div>
 	);

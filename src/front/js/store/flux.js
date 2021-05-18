@@ -1,12 +1,12 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-gray-loon-jyuj2gke.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-moccasin-spider-yjs8yceo.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3000-teal-roundworm-x0tnn5gs.ws-us04.gitpod.io/person/infoqr/",
+			URLCodeQR: "hhttps://3000-moccasin-spider-yjs8yceo.ws-us04.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			PersonInfoQR: [],
 			infoAPIExterna: [],

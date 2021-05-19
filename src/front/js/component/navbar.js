@@ -9,8 +9,6 @@ import { Navbar } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import AvatarLoginUser from "./avatar-login-user";
 import { QRCode } from "react-qrcode-logo";
-import NavbarDrawer from "./navbar-drawer";
-import Drawer from "./drawer";
 
 export const NavbarMain = () => {
 	const { store, actions } = useContext(Context);
@@ -59,7 +57,6 @@ export const NavbarMain = () => {
 							</Navbar.Collapse>
 						</Navbar>
 					) : (
-						// <NavbarDrawer />
 						<Navbar expand="lg">
 							<NavLink className="navbar-item-logo-class" to="/">
 								<AppLogo />

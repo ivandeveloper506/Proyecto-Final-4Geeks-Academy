@@ -21,7 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userPasswordValidate: false,
 			userEmailPasswordReset: "",
 			activeOption: "",
-			infoQRActive: false
+			infoQRActive: false,
+			personIDSelected: 0
 		},
 		actions: {
 			login: async (email, password) => {
@@ -52,6 +53,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						// Se obtienen los datos del usuario conectado.
 						getActions().getProfileUser(data.user_id);
+
+						getActions().getPerson(data.user_id);
 
 						// Se configuran el false las variables de recuperación de contraseña
 						getActions().userPasswordReset(false);
@@ -147,9 +150,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						getActions().userEmailPasswordReset(userBody.email);
 
 						getActions().activeOption("/recover");
-
-						console.log("*** forgot password ***");
-						console.log(data.results);
 					})
 					.catch(error => {
 						alert("DANGER[error] - Ha ocurrido un error al tratar de recuperar la contraseña.");
@@ -291,9 +291,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.then(data => {
-						console.log("*** getPersonMedicine [then(data] ***");
-						console.log(data);
-
 						setStore({ personMedicine: data });
 					})
 					.catch(error => {
@@ -728,6 +725,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			infoQRActive: active => {
 				setStore({ infoQRActive: active });
 			},
+			personIDSelected: id => {
+				setStore({ personIDSelected: id });
+			},
 			logout: () => {
 				localStorage.setItem("x-access-token", null);
 
@@ -751,9 +751,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(data => {
 						setStore({ infoAPIExterna: data.resultados });
-
-						console.log("*** getAPIExterna ***");
-						console.log(data.resultados);
 					})
 					.catch(error => {
 						alert("Error con API Externa");

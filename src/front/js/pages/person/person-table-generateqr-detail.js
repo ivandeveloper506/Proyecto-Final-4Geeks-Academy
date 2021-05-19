@@ -30,11 +30,6 @@ export default function PersonGenerateQr() {
 
 		actions.getQRCodePerson(personQRBody);
 
-		console.log("*** PersonGenerateQr [store.QRCodePerson] ***");
-		console.log(store.QRCodePerson);
-		console.log("*** PersonGenerateQr [store.QRCodePerson.length] ***");
-		console.log(store.QRCodePerson.length);
-
 		actions.activeOption(`/dashboard/person/generateqr/detail/${personId}`);
 	}, []);
 

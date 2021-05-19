@@ -99,11 +99,9 @@ EnhancedTableHead.propTypes = {
 	classes: PropTypes.object.isRequired,
 	numSelected: PropTypes.number.isRequired,
 	onRequestSort: PropTypes.func.isRequired,
-	onSelectAllClick: PropTypes.func.isRequired,
 	order: PropTypes.oneOf(["asc", "desc"]).isRequired,
 	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired,
-	personId: PropTypes.personId
+	rowCount: PropTypes.number.isRequired
 };
 
 const useStyles = makeStyles(theme => ({
@@ -147,10 +145,15 @@ export default function EnhancedTable() {
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-	console.log(" medicine-drawer [EnhancedTable] ");
-	console.log(store.persons);
+	let personExist = false;
 
-	const personId = store.persons[personIdParam].id;
+	if (store.persons.length > 0) {
+		personExist = true;
+	}
+
+	if (personExist) {
+		const personId = store.persons[personIdParam].id;
+	}
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -169,24 +172,14 @@ export default function EnhancedTable() {
 	};
 
 	const retrievePersonMedicine = () => {
-		const personBody = {
-			person_id: personId
-		};
+		if (personExist) {
+			const personBody = {
+				person_id: personId
+			};
 
-		actions.getPersonMedicine(personBody);
-		actions.activeOption(`/dashboard/person/medicine/${personIdParam}`);
-
-		console.log("*** retrievePersonMedicine - [store.personMedicine] ***");
-		console.log(store.personMedicine);
-		console.log(personId);
-
-		// store.personMedicine.filter(item => {
-		// 	console.log(item);
-		// 	console.log(item.person_id);
-		// 	console.log(personId);
-
-		// 	item.person_id === personId;
-		// });
+			actions.getPersonMedicine(personBody);
+			actions.activeOption(`/dashboard/person/medicine/${personIdParam}`);
+		}
 	};
 
 	const handleChangePage = (event, newPage) => {

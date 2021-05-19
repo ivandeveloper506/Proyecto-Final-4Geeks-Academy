@@ -54,10 +54,6 @@ export default function PersonDetail() {
 	const handleSave = e => {
 		e.preventDefault();
 
-		console.log("*** handleSave [person] ***");
-		console.log(vaccine1Date);
-		console.log(vaccine2Date);
-
 		// Se manda a crear el usuario
 		const personBody = {
 			name: name,

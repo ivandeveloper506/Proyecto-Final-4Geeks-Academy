@@ -170,18 +170,6 @@ export default function EnhancedTable() {
 
 		actions.getPersonMedicine(personBody);
 		actions.activeOption(`/dashboard/person/medicine/${personIdParam}`);
-
-		console.log("*** retrievePersonMedicine - [store.personMedicine] ***");
-		console.log(store.personMedicine);
-		console.log(personId);
-
-		// store.personMedicine.filter(item => {
-		// 	console.log(item);
-		// 	console.log(item.person_id);
-		// 	console.log(personId);
-
-		// 	item.person_id === personId;
-		// });
 	};
 
 	const handleChangePage = (event, newPage) => {

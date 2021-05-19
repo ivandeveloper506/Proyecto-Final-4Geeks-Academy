@@ -99,11 +99,9 @@ EnhancedTableHead.propTypes = {
 	classes: PropTypes.object.isRequired,
 	numSelected: PropTypes.number.isRequired,
 	onRequestSort: PropTypes.func.isRequired,
-	onSelectAllClick: PropTypes.func.isRequired,
 	order: PropTypes.oneOf(["asc", "desc"]).isRequired,
 	orderBy: PropTypes.string.isRequired,
-	rowCount: PropTypes.number.isRequired,
-	personId: PropTypes.personId
+	rowCount: PropTypes.number.isRequired
 };
 
 const useStyles = makeStyles(theme => ({
@@ -180,6 +178,10 @@ export default function EnhancedTable() {
 		setDense(event.target.checked);
 	};
 
+	const handleClick = (event, index) => {
+		actions.personIDSelected(index);
+	};
+
 	const isSelected = name => selected.indexOf(name) !== -1;
 
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.persons.length - page * rowsPerPage);
@@ -226,8 +228,12 @@ export default function EnhancedTable() {
 									const labelId = `enhanced-table-checkbox-${index}`;
 
 									return (
-										<TableRow hover tabIndex={-1} key={index}>
-											<TableCell component="th" id={labelId} scope="row" padding="20">
+										<TableRow
+											hover
+											tabIndex={-1}
+											key={index}
+											onClick={event => handleClick(event, index)}>
+											<TableCell component="th" id={labelId} scope="row">
 												{row.full_name}
 											</TableCell>
 											<TableCell>
@@ -258,7 +264,7 @@ export default function EnhancedTable() {
 					</Table>
 				</TableContainer>
 				<TablePagination
-					rowsPerPageOptions={5}
+					rowsPerPageOptions={[5]}
 					component="div"
 					count={store.persons.length}
 					rowsPerPage={rowsPerPage}

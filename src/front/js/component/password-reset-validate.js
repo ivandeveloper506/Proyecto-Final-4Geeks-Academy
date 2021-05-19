@@ -26,9 +26,6 @@ export default function PasswordResetValidate(store, actions) {
 			return true;
 		}
 	}).then(result => {
-		console.log("*** validando password result***");
-		console.log(result);
-
 		if (result.isConfirmed) {
 			Swal.fire({
 				title: `¡Código validado exitosamente!`

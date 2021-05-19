@@ -1,12 +1,12 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-moccasin-spider-yjs8yceo.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-indigo-smelt-jzj176rc.ws-us04.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "hhttps://3000-moccasin-spider-yjs8yceo.ws-us04.gitpod.io/person/infoqr/",
+			URLCodeQR: "https://3000-indigo-smelt-jzj176rc.ws-us04.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			PersonInfoQR: [],
 			infoAPIExterna: [],
@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						// Se configura la opción del home
 						// getActions().activeOption("/dashboard/person");
-						getActions().activeOption("/dashboard");
+						getActions().activeOption("/dashboard/person");
 					})
 					.catch(error => {
 						ShowAlert(

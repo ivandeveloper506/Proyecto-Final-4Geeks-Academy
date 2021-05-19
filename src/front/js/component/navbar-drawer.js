@@ -282,7 +282,7 @@ export default function TemporaryDrawer() {
 				{list("left")}
 			</Drawer>
 
-			<div className="container">
+			{/* <div className="container">
 				<div className="row">
 					<div className="col-md-6">
 						<PersonDrawer />
@@ -291,7 +291,7 @@ export default function TemporaryDrawer() {
 						<MedicineDrawer />
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }

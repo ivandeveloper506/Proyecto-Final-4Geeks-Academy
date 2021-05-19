@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "../../store/appContext";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -53,10 +53,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
 	{
-		id: "full_name",
+		id: "description",
 		numeric: false,
 		disablePadding: false,
-		label: "Persona"
+		label: "Nombre"
 	},
 	{ id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
 ];
@@ -134,6 +134,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function EnhancedTable() {
+	const params = useParams();
+	const personIdParam = parseInt(params.personId);
+
 	const { store, actions } = useContext(Context);
 	const [searchPerson, setSearchPerson] = useState("");
 	const classes = useStyles();
@@ -144,6 +147,11 @@ export default function EnhancedTable() {
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+	console.log(" medicine-drawer [EnhancedTable] ");
+	console.log(store.persons);
+
+	const personId = store.persons[personIdParam].id;
+
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
 		setOrder(isAsc ? "desc" : "asc");
@@ -151,20 +159,34 @@ export default function EnhancedTable() {
 	};
 
 	const handleDelete = index => {
-		let personDelete = store.personMedicine[index];
+		let personMedicineDelete = store.personMedicine[index];
 
-		actions.handlePersonDelete(personDelete.id, store.userProfile.id);
+		const personBody = {
+			person_id: personId
+		};
+
+		actions.handlePersonMedicineDelete(personBody, personMedicineDelete.id, personIdParam);
 	};
 
-	const retrievePerson = () => {
-		// Se obtienen los datos de las personas asociadas al usuario.
-		actions.getPerson(store.userProfile.id);
+	const retrievePersonMedicine = () => {
+		const personBody = {
+			person_id: personId
+		};
 
-		// Se obtienen los datos de los medicamentos de una vez
-		// actions.getPersonMedicine(1);
+		actions.getPersonMedicine(personBody);
+		actions.activeOption(`/dashboard/person/medicine/${personIdParam}`);
 
-		// Se configura la opción del home
-		actions.activeOption("/dashboard/person");
+		console.log("*** retrievePersonMedicine - [store.personMedicine] ***");
+		console.log(store.personMedicine);
+		console.log(personId);
+
+		// store.personMedicine.filter(item => {
+		// 	console.log(item);
+		// 	console.log(item.person_id);
+		// 	console.log(personId);
+
+		// 	item.person_id === personId;
+		// });
 	};
 
 	const handleChangePage = (event, newPage) => {
@@ -185,7 +207,7 @@ export default function EnhancedTable() {
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, store.personMedicine.length - page * rowsPerPage);
 
 	useEffect(() => {
-		retrievePerson();
+		retrievePersonMedicine();
 	}, []);
 
 	return (
@@ -197,7 +219,7 @@ export default function EnhancedTable() {
 					</div>
 					<div className="col d-flex justify-content-end m-2">
 						<Tooltip title="Crear Medicamento" aria-label="Crear Medicamento">
-							<NavLink to={`/dashboard/person/detail/`}>
+							<NavLink to={`/dashboard/person/medicine/detail/${personIdParam}/-1`}>
 								<AddCircleIcon className="new-icon-person-class" />
 							</NavLink>
 						</Tooltip>
@@ -228,7 +250,7 @@ export default function EnhancedTable() {
 									return (
 										<TableRow hover tabIndex={-1} key={index}>
 											<TableCell component="th" id={labelId} scope="row" padding="20">
-												{row.full_name}
+												{row.description}
 											</TableCell>
 											<TableCell>
 												<Tooltip title="Editar registro">

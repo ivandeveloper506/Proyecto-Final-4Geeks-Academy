@@ -56,7 +56,7 @@ const headCells = [
 		id: "full_name",
 		numeric: false,
 		disablePadding: false,
-		label: "Persona"
+		label: "Nombre"
 	},
 	{ id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
 ];

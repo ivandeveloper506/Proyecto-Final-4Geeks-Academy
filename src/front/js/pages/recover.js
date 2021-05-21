@@ -5,58 +5,44 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/recover.scss";
 import PasswordResetValidate from "../component/password-reset-validate";
+import { useForm } from "react-hook-form";
 
 export default function Recover() {
 	const { store, actions } = useContext(Context);
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [passwordConfirm, setPasswordConfirm] = useState("");
-	const inputEmailRef = useRef("");
-	const inputPasswordRef = useRef("");
 
-	const handleRecover = e => {
-		e.preventDefault();
+	const {
+		register,
+		getValues,
+		formState: { errors },
+		handleSubmit
+	} = useForm({
+		mode: "onChange"
+	});
 
+	const handleRecover = data => {
 		const userBody = {
-			email: email
+			email: data.email
 		};
 
 		actions.forgot(userBody);
 	};
 
-	const handlePasswordReset = e => {
-		if (password != passwordConfirm) {
-			// Swal.fire({
-			// 	icon: "error",
-			// 	title: "Validando contraseña",
-			// 	text: "Las contraseñas no coinciden",
-			// 	allowOutsideClick: false,
-			// 	allowEscapeKey: false,
-			// 	closeOnClickOutside: false,
-			// 	showLoaderOnConfirm: true
-			// });
+	const handlePasswordReset = data => {
+		const userBody = {
+			email: store.userEmailPasswordReset,
+			password: data.password
+		};
 
-			actions.userPasswordValidate(false);
-			actions.userPasswordReset(true);
-
-			actions.activeOption("/recover");
-		} else {
-			const userBody = {
-				email: store.userEmailPasswordReset,
-				password: password
-			};
-
-			actions.passwordReset(userBody, store.passwordReset.token);
-		}
+		actions.passwordReset(userBody, store.passwordReset.token);
 	};
 
-	useEffect(() => {
-		if (store.userPasswordValidate) {
-			inputPasswordRef.current.focus();
-		} else {
-			inputEmailRef.current.focus();
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (store.userPasswordValidate) {
+	// 		inputPasswordRef.current.focus();
+	// 	} else {
+	// 		inputEmailRef.current.focus();
+	// 	}
+	// }, []);
 
 	useEffect(() => {
 		if (store.userPasswordReset) {
@@ -76,44 +62,48 @@ export default function Recover() {
 							</div>
 							<hr className="line-class" />
 							<div>
-								<form onSubmit={handlePasswordReset}>
+								<form onSubmit={handleSubmit(handlePasswordReset)}>
 									<div className="m-3">
 										<label className="form-label text-white">Contraseña</label>
 										<input
-											ref={inputPasswordRef}
 											type="password"
 											className="form-control"
-											id="inputPassword"
-											placeholder="Ingrese la nueva contraseña..."
-											required
-											value={password}
-											onChange={e => setPassword(e.target.value)}
+											id="password"
+											placeholder="Ingrese su contraseña..."
+											{...register("password", {
+												required: "La contraseña es requerida."
+											})}
 										/>
+										{errors.password && (
+											<p className="required-class1">{errors.password.message}</p>
+										)}
 									</div>
 									<div className="m-3">
 										<label className="form-label text-white">Confirmar contraseña</label>
 										<input
 											type="password"
 											className="form-control"
-											id="inputPasswordConfirm"
-											placeholder="Confirme la nueva contraseña..."
-											required
-											value={passwordConfirm}
-											onChange={e => setPasswordConfirm(e.target.value)}
+											id="passwordConfirmation"
+											placeholder="Confirme su contraseña..."
+											{...register("passwordConfirmation", {
+												required: "La confirmación de la contraseña es requerida.",
+												validate: {
+													matchesPreviousPassword: value => {
+														const { password } = getValues();
+														return password === value || "Las contraseñas no coinciden.";
+													}
+												}
+											})}
 										/>
+										{errors.passwordConfirmation && (
+											<p className="required-class1">{errors.passwordConfirmation.message}</p>
+										)}
 									</div>
 									<div className="m-3">
 										<button type="submit" className="btn btn-danger btn-block">
 											Actualizar contraseña
 										</button>
 									</div>
-									{/* <div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
-								<h6>
-									<span className="text-warning">
-										Digite el correo asociado a la cuenta para recibir su contraseña de recuperación
-									</span>
-								</h6>
-							</div> */}
 								</form>
 							</div>
 						</div>
@@ -130,20 +120,23 @@ export default function Recover() {
 							</div>
 							<hr className="line-class" />
 							<div>
-								<form onSubmit={handleRecover}>
+								<form onSubmit={handleSubmit(handleRecover)}>
 									<div className="m-3">
 										<label className="form-label text-white">Email</label>
 										<input
-											ref={inputEmailRef}
 											type="email"
 											className="form-control"
-											id="exampleInputEmail1"
-											aria-describedby="emailHelp"
-											placeholder="Email"
-											required
-											value={email}
-											onChange={e => setEmail(e.target.value)}
+											id="email"
+											placeholder="Ingrese su Email..."
+											{...register("email", {
+												required: "El email es requerido.",
+												pattern: {
+													value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+													message: "La dirección de email es inválida."
+												}
+											})}
 										/>
+										{errors.email && <p className="required-class1">{errors.email.message}</p>}
 									</div>
 									<div className="m-3">
 										<button type="submit" className="btn btn-danger btn-block">
@@ -166,48 +159,5 @@ export default function Recover() {
 				</div>
 			)}
 		</div>
-
-		// <div className="container-fluid container-recover-main-class">
-		// 	<div className="form-row d-flex flex-row align-items-center justify-content-center">
-		// 		<div className="col" />
-		// 		<div className="col-sm-9 col-md-6 recover-main-class">
-		// 			<div className="row d-flex flex-row align-items-center justify-content-center mt-3">
-		// 				<h2 className="text-white">Recuperar contraseña</h2>
-		// 			</div>
-		// 			<hr className="line-class" />
-		// 			<div>
-		// 				<form onSubmit={handleRecover}>
-		// 					<div className="m-3">
-		// 						<label className="form-label text-white">Email</label>
-		// 						<input
-		// 							ref={inputEmailRef}
-		// 							type="email"
-		// 							className="form-control"
-		// 							id="exampleInputEmail1"
-		// 							aria-describedby="emailHelp"
-		// 							placeholder="Email"
-		// 							required
-		// 							value={email}
-		// 							onChange={e => setEmail(e.target.value)}
-		// 						/>
-		// 					</div>
-		// 					<div className="m-3">
-		// 						<button type="submit" className="btn btn-danger btn-block">
-		// 							Recuperar contraseña
-		// 						</button>
-		// 					</div>
-		// 					<div className="mt-3 row d-flex flex-row align-items-center justify-content-center">
-		// 						<h6>
-		// 							<span className="text-warning">
-		// 								Digite el correo asociado a la cuenta para recibir su contraseña de recuperación
-		// 							</span>
-		// 						</h6>
-		// 					</div>
-		// 				</form>
-		// 			</div>
-		// 		</div>
-		// 		<div className="col" />
-		// 	</div>
-		// </div>
 	);
 }

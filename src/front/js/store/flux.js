@@ -175,7 +175,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						if (response.status === 200) {
-							ShowAlert("top-end", "success", "", "¡Contraseña actualizada!", false, true, 2000);
+							ShowAlert(
+								"top-end",
+								"success",
+								"",
+								"¡La contraseña ha sido actualizada exitosamente!",
+								false,
+								true,
+								2000
+							);
+
+							getActions().activeOption("/login");
 
 							return response.json();
 						} else {

@@ -115,7 +115,7 @@ export default function Register() {
 									type="email"
 									className="form-control"
 									id="email"
-									placeholder="Ingrese su Email..."
+									placeholder="Ingrese su email..."
 									{...register("email", {
 										required: "El email es requerido.",
 										pattern: {

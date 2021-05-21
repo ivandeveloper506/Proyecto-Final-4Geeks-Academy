@@ -6,36 +6,10 @@ import { useForm } from "react-hook-form";
 
 export default function Register() {
 	const { store, actions } = useContext(Context);
-	// const [name, setName] = useState("");
-	// const [firstSurname, setFirstSurname] = useState("");
-	// const [secondSurname, setSecondSurname] = useState("");
-	// const [birthDate, setBirthDate] = useState("");
-	// const [telephoneNumber, setTelephoneNumber] = useState("");
-	// const [email, setEmail] = useState("");
-	// const [password, setPassword] = useState("");
-	// const inputNameRef = useRef("");
-
-	// const handleRegister = e => {
-	// 	e.preventDefault();
-
-	// 	// Se manda a crear el usuario
-	// 	const userBody = {
-	// 		name: name,
-	// 		first_surname: firstSurname,
-	// 		second_surname: secondSurname,
-	// 		birth_date: birthDate,
-	// 		telephone_number: telephoneNumber,
-	// 		user_image: "",
-	// 		email: email,
-	// 		password: password,
-	// 		active: true
-	// 	};
-
-	// 	actions.register(userBody);
-	// };
 
 	const {
 		register,
+		getValues,
 		formState: { errors },
 		handleSubmit
 	} = useForm({
@@ -43,7 +17,7 @@ export default function Register() {
 	});
 
 	const onSubmit = data => {
-		// 	// Se manda a crear el usuario
+		// Se manda a crear el usuario
 		const userBody = {
 			name: data.name,
 			first_surname: data.firstSurname,
@@ -59,10 +33,6 @@ export default function Register() {
 		actions.register(userBody);
 	};
 
-	// useEffect(() => {
-	// 	inputNameRef.current.focus();
-	// }, []);
-
 	return (
 		<div className="container-fluid container-register-main-class">
 			<div className="row d-flex flex-row align-items-center justify-content-center">
@@ -73,7 +43,6 @@ export default function Register() {
 					</div>
 					<hr className="line-class" />
 					<div>
-						{/* <form onSubmit={handleRegister}> */}
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<div className="m-3">
 								<label className="form-label text-white">Nombre</label>
@@ -169,6 +138,27 @@ export default function Register() {
 									})}
 								/>
 								{errors.password && <p className="required-class1">{errors.password.message}</p>}
+							</div>
+							<div className="m-3">
+								<label className="form-label text-white">Confirmar contraseña</label>
+								<input
+									type="password"
+									className="form-control"
+									id="passwordConfirmation"
+									placeholder="Confirme su contraseña..."
+									{...register("passwordConfirmation", {
+										required: "La confirmación de la contraseña es requerida.",
+										validate: {
+											matchesPreviousPassword: value => {
+												const { password } = getValues();
+												return password === value || "Las contraseñas no coinciden.";
+											}
+										}
+									})}
+								/>
+								{errors.passwordConfirmation && (
+									<p className="required-class1">{errors.passwordConfirmation.message}</p>
+								)}
 							</div>
 							<div className="m-3">
 								<button type="submit" className="btn btn-danger btn-block">

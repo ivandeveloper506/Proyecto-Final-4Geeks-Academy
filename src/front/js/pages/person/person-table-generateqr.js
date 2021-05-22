@@ -22,6 +22,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Swal from "sweetalert2";
 import SearchBar from "material-ui-search-bar";
 import Divider from "@material-ui/core/Divider";
+import PersonGenerateQRDetail from "../person/person-table-generateqr-detail";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -55,8 +56,8 @@ const headCells = [
 		numeric: false,
 		disablePadding: false,
 		label: "Persona"
-	},
-	{ id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
+	}
+	// { id: "actions", numeric: false, disablePadding: false, label: "Acciones" }
 ];
 
 function EnhancedTableHead(props) {
@@ -107,7 +108,6 @@ EnhancedTableHead.propTypes = {
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100%"
-		// width: "max-content"
 	},
 	paper: {
 		width: "100%",
@@ -143,6 +143,24 @@ export default function EnhancedTable() {
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+	const handleClick = (event, name) => {
+		// const selectedIndex = selected.indexOf(name);
+		// let newSelected = [];
+
+		// if (selectedIndex === -1) {
+		// 	newSelected = newSelected.concat(selected, name);
+		// } else if (selectedIndex === 0) {
+		// 	newSelected = newSelected.concat(selected.slice(1));
+		// } else if (selectedIndex === selected.length - 1) {
+		// 	newSelected = newSelected.concat(selected.slice(0, -1));
+		// } else if (selectedIndex > 0) {
+		// 	newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+		// }
+
+		// setSelected(newSelected);
+		alert(name);
+	};
+
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
 		setOrder(isAsc ? "desc" : "asc");
@@ -158,9 +176,6 @@ export default function EnhancedTable() {
 	const retrievePerson = () => {
 		// Se obtienen los datos de las personas asociadas al usuario.
 		actions.getPerson(store.userProfile.id);
-
-		// Se obtienen los datos de los medicamentos de una vez
-		// actions.getPersonMedicine(1);
 
 		actions.activeOption("/dashboard/person/generateqr");
 	};
@@ -188,22 +203,10 @@ export default function EnhancedTable() {
 
 	return (
 		<div className="row container-fluid container-person-class">
-			<div className="col-md-3" />
+			{/* <div className="col-md-3" /> */}
 			<div className="col-md-6">
 				<div className={classes.root}>
 					<Paper className={classes.paper}>
-						{/* <div className="row container-fluid search-people-class">
-							<div className="col d-flex justify-content-center">
-								<Tooltip title="Crear Persona" aria-label="Crear Persona">
-									<NavLink to={`/dashboard/person/detail/`}>
-										<button className="mt-1 btn btn-success">
-											<i className="fas fa-plus"></i> Crear persona
-										</button>
-									</NavLink>
-								</Tooltip>
-							</div>
-						</div> */}
-
 						<TableContainer>
 							<Table
 								className={classes.table}
@@ -226,40 +229,13 @@ export default function EnhancedTable() {
 											const labelId = `enhanced-table-checkbox-${index}`;
 
 											return (
-												<TableRow hover tabIndex={-1} key={index}>
+												<TableRow
+													hover
+													onClick={event => handleClick(event, index)}
+													tabIndex={-1}
+													key={index}>
 													<TableCell component="th" id={labelId} scope="row" padding="20">
 														{row.full_name}
-													</TableCell>
-													<TableCell>
-														{/* <Tooltip title="Editar registro">
-															<NavLink to={`/dashboard/person/detail/${index}`}>
-																<button className="m-2 btn btn-warning button-table-class">
-																	<i className="fas fa-pen"></i>
-																</button>
-															</NavLink>
-														</Tooltip>
-														<Tooltip title="Eliminar registro">
-															<button
-																className="m-2 btn btn-danger button-table-class"
-																onClick={event => handleDelete(index)}>
-																<i className="fas fa-trash"></i>
-															</button>
-														</Tooltip>
-														<Tooltip title="Medicamentos">
-															<NavLink to={`/dashboard/person/medicine/${index}`}>
-																<button className="m-2 btn btn-primary button-table-class">
-																	<i className="fas fa-tablets"></i>
-																</button>
-															</NavLink>
-														</Tooltip> */}
-														<Tooltip title="Generar Código QR">
-															<NavLink
-																to={`/dashboard/person/generateqr/detail/${index}`}>
-																<button className="m-2 btn btn-success">
-																	<i className="fas fa-qrcode"></i>
-																</button>
-															</NavLink>
-														</Tooltip>
 													</TableCell>
 												</TableRow>
 											);
@@ -284,7 +260,9 @@ export default function EnhancedTable() {
 					</Paper>
 				</div>
 			</div>
-			<div className="col-md-3" />
+			<div className="col-md-6">
+				<PersonGenerateQRDetail />
+			</div>
 		</div>
 	);
 }

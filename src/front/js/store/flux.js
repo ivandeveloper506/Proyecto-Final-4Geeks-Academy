@@ -1,12 +1,12 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-apricot-bison-flakmaql.ws-us07.gitpod.io/api/";
+const baseURLApi = "https://3001-apricot-chinchilla-hgoylykf.ws-us07.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3000-apricot-bison-flakmaql.ws-us07.gitpod.io/person/infoqr/",
+			URLCodeQR: "https://3000-apricot-chinchilla-hgoylykf.ws-us07.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			PersonInfoQR: [],
 			infoAPIExterna: [],
@@ -22,7 +22,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userEmailPasswordReset: "",
 			activeOption: "",
 			infoQRActive: false,
-			personIDSelected: 0
+			personIDSelected: 0,
+			personQRGenerate: []
 		},
 		actions: {
 			login: async (email, password) => {
@@ -126,6 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => {
+
 						if (response.status === 200) {
 							// ShowAlert(
 							// 	"top-end",
@@ -679,16 +681,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => {
-						if (response.status === 201) {
-							ShowAlert(
-								"top-end",
-								"success",
-								"",
-								"¡El Código QR fue generado exitosamente!",
-								false,
-								true,
-								2000
-							);
+						// if (response.status === 201) {
+						// 	ShowAlert(
+						// 		"top-end",
+						// 		"success",
+						// 		"",
+						// 		"¡El Código QR fue generado exitosamente!",
+						// 		false,
+						// 		true,
+						// 		2000
+						// 	);
 
 							return response.json();
 						} else {
@@ -737,6 +739,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			personIDSelected: id => {
 				setStore({ personIDSelected: id });
+			},
+			personQRGenerate: person => {
+				setStore({ personQRGenerate: person });
 			},
 			logout: () => {
 				localStorage.setItem("x-access-token", null);

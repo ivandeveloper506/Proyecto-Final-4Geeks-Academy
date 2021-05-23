@@ -143,7 +143,35 @@ export default function EnhancedTable() {
 	const [dense, setDense] = React.useState(true);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-	const handleClick = (event, name) => {
+	const handleClick = (event, index) => {
+		actions.personIDSelected(index);
+
+		// Se obtiene el código recien generado
+		const personQRGetBody = {
+			person_id: store.persons[index].id
+		};
+
+		// Se valida si existe el código, se obtiene, de lo contrario se genera.
+		actions.getQRCodePerson(personQRGetBody);
+
+		actions.personQRGenerate(store.persons[index]);
+
+		if (store.QRCodePerson.length === 0) {
+			console.log("*** handleClick en Person [store.persons[index]] ***");
+			console.log(store.persons[index]);
+			console.log(store.persons[index].id);
+
+			const personQRGenerateBody = {
+				url: `${store.URLCodeQR}${store.persons[index].id}`,
+				person_id: store.persons[index].id,
+				user_creation_id: store.userProfile.id
+			};
+
+			actions.generateQR(personQRGenerateBody);
+
+			actions.getQRCodePerson(personQRGetBody);
+		}
+
 		// const selectedIndex = selected.indexOf(name);
 		// let newSelected = [];
 
@@ -158,7 +186,7 @@ export default function EnhancedTable() {
 		// }
 
 		// setSelected(newSelected);
-		alert(name);
+		// alert(name);
 	};
 
 	const handleRequestSort = (event, property) => {
@@ -199,6 +227,10 @@ export default function EnhancedTable() {
 
 	useEffect(() => {
 		retrievePerson();
+
+		if (store.persons.length > 0) {
+			handleClick(null, 0);
+		}
 	}, []);
 
 	return (

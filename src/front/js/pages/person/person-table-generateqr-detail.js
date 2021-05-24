@@ -138,6 +138,7 @@ import PrintIcon from "@material-ui/icons/Print";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import CodeQRPrint from "../person/codeqr-print";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -189,27 +190,24 @@ export default function PersonQRGenerate() {
 						/>
 						<div className="container">
 							<div className="row">
-								<div className="col">
-									<QRCode
-										className="col qr-info-cardL-class m-2"
-										value={store.QRCodePerson.url}
-										size="150"
-										ecLevel="H"
-										qrStyle="square"
-										fgColor="#003E7E"
-										bgColor="#C4F1FE"
-										enableCORS="true"
-									/>
-								</div>
-								{/* <div className="col"> */}
-
-								<div className="col qr-info-cardR-class">
-									<p className="mt-3">{store.personQRGenerate.full_name}</p>
-									{store.QRCodePerson.length === 0 ? "" : <h5>ESCANEA EL</h5>}
-									{store.QRCodePerson.length === 0 ? "" : <h5>CÓDIGO QR</h5>}
-								</div>
-
-								{/* </div> */}
+								{/* <div className="col">
+                                    <QRCode
+                                        className="col qr-info-cardL-class m-2"
+                                        value={store.QRCodePerson.url}
+                                        size="150"
+                                        ecLevel="H"
+                                        qrStyle="square"
+                                        fgColor="#003E7E"
+                                        bgColor="#C4F1FE"
+                                        enableCORS="true"
+                                    />
+                                </div>
+                                <div className="col qr-info-cardR-class">
+                                    <p className="mt-3">{store.personQRGenerate.full_name}</p>
+                                    {store.QRCodePerson.length === 0 ? "" : <h5>ESCANEA EL</h5>}
+                                    {store.QRCodePerson.length === 0 ? "" : <h5>CÓDIGO QR</h5>}
+                                </div> */}
+								<CodeQRPrint />
 							</div>
 						</div>
 
@@ -222,9 +220,9 @@ export default function PersonQRGenerate() {
 							<IconButton aria-label="Print QRCode">
 								<PrintIcon />
 							</IconButton>
-							<IconButton aria-label="Share QRCode">
+							{/* <IconButton aria-label="Share QRCode">
 								<ShareIcon />
-							</IconButton>
+							</IconButton> */}
 						</CardActions>
 					</Card>
 				</div>

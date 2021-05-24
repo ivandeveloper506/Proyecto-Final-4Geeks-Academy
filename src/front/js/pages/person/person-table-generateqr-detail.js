@@ -141,7 +141,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		maxWidth: 345
+		maxWidth: 400
 	},
 	media: {
 		height: 0,
@@ -185,20 +185,32 @@ export default function PersonQRGenerate() {
 							// 	</IconButton>
 							// }
 							title={store.personQRGenerate.full_name}
-							subheader="ESCANEA EL CÓDIGO QR"
+							// subheader="ESCANEA EL CÓDIGO QR"
 						/>
+						<div className="container">
+							<div className="row">
+								<div className="col">
+									<QRCode
+										className="col qr-info-cardL-class m-2"
+										value={store.QRCodePerson.url}
+										size="150"
+										ecLevel="H"
+										qrStyle="square"
+										fgColor="#003E7E"
+										bgColor="#C4F1FE"
+										enableCORS="true"
+									/>
+								</div>
+								{/* <div className="col"> */}
 
-						<div className="col">
-							<QRCode
-								className="col qr-info-cardL-class m-2"
-								value={store.QRCodePerson.url}
-								size="150"
-								ecLevel="H"
-								qrStyle="square"
-								fgColor="#003E7E"
-								bgColor="#C4F1FE"
-								enableCORS="true"
-							/>
+								<div className="col qr-info-cardR-class">
+									<p className="mt-3">{store.personQRGenerate.full_name}</p>
+									{store.QRCodePerson.length === 0 ? "" : <h5>ESCANEA EL</h5>}
+									{store.QRCodePerson.length === 0 ? "" : <h5>CÓDIGO QR</h5>}
+								</div>
+
+								{/* </div> */}
+							</div>
 						</div>
 
 						<CardContent>

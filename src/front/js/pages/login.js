@@ -2,21 +2,25 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/login.scss";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
 	const { store, actions } = useContext(Context);
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const inputEmailRef = useRef(null);
 
-	const handleLogin = e => {
-		e.preventDefault();
+	const {
+		register,
+		getValues,
+		formState: { errors },
+		handleSubmit
+	} = useForm({
+		mode: "onChange"
+	});
 
-		actions.login(email, password);
+	const handleLogin = data => {
+		actions.login(data.email, data.password);
 	};
 
 	useEffect(() => {
-		inputEmailRef.current.focus();
 		actions.userPasswordReset(false);
 		actions.userPasswordValidate(false);
 
@@ -33,32 +37,36 @@ export default function Login() {
 					</div>
 					<hr className="line-class" />
 					<div>
-						<form onSubmit={handleLogin}>
+						<form onSubmit={handleSubmit(handleLogin)}>
 							<div className="m-3">
 								<label className="form-label text-white">Email</label>
 								<input
-									ref={inputEmailRef}
 									type="email"
 									className="form-control"
-									id="exampleInputEmail1"
-									aria-describedby="emailHelp"
-									placeholder="Email"
-									required
-									value={email}
-									onChange={e => setEmail(e.target.value)}
+									id="email"
+									placeholder="Ingrese su email..."
+									{...register("email", {
+										required: "El email es requerido.",
+										pattern: {
+											value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+											message: "La dirección de email es inválida."
+										}
+									})}
 								/>
+								{errors.email && <p className="required-class1">{errors.email.message}</p>}
 							</div>
 							<div className="m-3">
 								<label className="form-label text-white">Contraseña</label>
 								<input
 									type="password"
 									className="form-control"
-									id="exampleInputPassword1"
-									placeholder="Contraseña"
-									required
-									value={password}
-									onChange={e => setPassword(e.target.value)}
+									id="password"
+									placeholder="Ingrese su contraseña..."
+									{...register("password", {
+										required: "La contraseña es requerida."
+									})}
 								/>
+								{errors.password && <p className="required-class1">{errors.password.message}</p>}
 							</div>
 							<div className="m-3">
 								<button type="submit" className="btn btn-danger btn-block">

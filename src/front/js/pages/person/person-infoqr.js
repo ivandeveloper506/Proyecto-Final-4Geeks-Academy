@@ -19,8 +19,6 @@ export default function PersonInfoQr() {
 	}, []);
 
 	if (store.PersonInfoQR.results != undefined) {
-		console.log("*** PersonInfoQr [store.PersonInfoQR] ***");
-		console.log(store.PersonInfoQR.results);
 		personData = store.PersonInfoQR.results;
 		personMedicine = store.PersonInfoQR.medicine;
 	}

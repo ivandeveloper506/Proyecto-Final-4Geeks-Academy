@@ -2,40 +2,36 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/register.scss";
+import { useForm } from "react-hook-form";
 
 export default function Register() {
 	const { store, actions } = useContext(Context);
-	const [name, setName] = useState("");
-	const [firstSurname, setFirstSurname] = useState("");
-	const [secondSurname, setSecondSurname] = useState("");
-	const [birthDate, setBirthDate] = useState("");
-	const [telephoneNumber, setTelephoneNumber] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const inputNameRef = useRef(null);
 
-	const handleRegister = e => {
-		e.preventDefault();
+	const {
+		register,
+		getValues,
+		formState: { errors },
+		handleSubmit
+	} = useForm({
+		mode: "onChange"
+	});
 
+	const onSubmit = data => {
 		// Se manda a crear el usuario
 		const userBody = {
-			name: name,
-			first_surname: firstSurname,
-			second_surname: secondSurname,
-			birth_date: birthDate,
-			telephone_number: telephoneNumber,
+			name: data.name,
+			first_surname: data.firstSurname,
+			second_surname: data.secondSurname,
+			birth_date: data.birthDate,
+			telephone_number: data.telephoneNumber,
 			user_image: "",
-			email: email,
-			password: password,
+			email: data.email,
+			password: data.password,
 			active: true
 		};
 
 		actions.register(userBody);
 	};
-
-	useEffect(() => {
-		inputNameRef.current.focus();
-	}, []);
 
 	return (
 		<div className="container-fluid container-register-main-class">
@@ -47,19 +43,19 @@ export default function Register() {
 					</div>
 					<hr className="line-class" />
 					<div>
-						<form onSubmit={handleRegister}>
+						<form onSubmit={handleSubmit(onSubmit)}>
 							<div className="m-3">
 								<label className="form-label text-white">Nombre</label>
 								<input
-									ref={inputNameRef}
 									type="text"
 									className="form-control"
-									id="inputName"
+									id="name"
 									placeholder="Ingrese su nombre..."
-									required
-									value={name}
-									onChange={e => setName(e.target.value)}
+									{...register("name", {
+										required: "El nombre es requerido."
+									})}
 								/>
+								{errors.name && <p className="required-class1">{errors.name.message}</p>}
 							</div>
 							<div className="m-3">
 								<label className="form-label text-white">Primer apellido</label>
@@ -68,10 +64,13 @@ export default function Register() {
 									className="form-control"
 									id="firstSurname"
 									placeholder="Ingrese su primer apellido..."
-									required
-									value={firstSurname}
-									onChange={e => setFirstSurname(e.target.value)}
+									{...register("firstSurname", {
+										required: "El primer apellido es requerido."
+									})}
 								/>
+								{errors.firstSurname && (
+									<p className="required-class1">{errors.firstSurname.message}</p>
+								)}
 							</div>
 							<div className="m-3">
 								<label className="form-label text-white">Segundo apellido</label>
@@ -80,55 +79,86 @@ export default function Register() {
 									className="form-control"
 									id="secondSurname"
 									placeholder="Ingrese su segundo apellido..."
-									value={secondSurname}
-									onChange={e => setSecondSurname(e.target.value)}
+									{...register("secondSurname")}
 								/>
 							</div>
 							<div className="m-3">
-								<label className="form-label text-white">Fecha nacimiento</label>
+								<label className="form-label text-white">Fecha de nacimiento</label>
 								<input
 									type="date"
 									className="form-control"
 									id="birthDate"
-									placeholder="Ingrese su fecha de nacimiento..."
-									value={birthDate}
-									onChange={e => setBirthDate(e.target.value)}
+									{...register("birthDate", {
+										required: "El fecha de nacimiento es requerida."
+									})}
 								/>
+								{errors.birthDate && <p className="required-class1">{errors.birthDate.message}</p>}
 							</div>
 							<div className="m-3">
-								<label className="form-label text-white">Número teléfono</label>
+								<label className="form-label text-white">Número de teléfono</label>
 								<input
 									type="number"
 									className="form-control"
 									id="telephoneNumber"
 									placeholder="Ingrese su número de teléfono..."
-									value={telephoneNumber}
-									onChange={e => setTelephoneNumber(e.target.value)}
+									{...register("telephoneNumber", {
+										required: "El número de teléfono es requerido."
+									})}
 								/>
+								{errors.telephoneNumber && (
+									<p className="required-class1">{errors.telephoneNumber.message}</p>
+								)}
 							</div>
 							<div className="m-3">
 								<label className="form-label text-white">Email</label>
 								<input
 									type="email"
 									className="form-control"
-									id="exampleInputEmail"
-									placeholder="Ingrese su Email..."
-									required
-									value={email}
-									onChange={e => setEmail(e.target.value)}
+									id="email"
+									placeholder="Ingrese su email..."
+									{...register("email", {
+										required: "El email es requerido.",
+										pattern: {
+											value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+											message: "La dirección de email es inválida."
+										}
+									})}
 								/>
+								{errors.email && <p className="required-class1">{errors.email.message}</p>}
 							</div>
 							<div className="m-3">
 								<label className="form-label text-white">Contraseña</label>
 								<input
 									type="password"
 									className="form-control"
-									id="exampleInputPassword1"
+									id="password"
 									placeholder="Ingrese su contraseña..."
-									required
-									value={password}
-									onChange={e => setPassword(e.target.value)}
+									{...register("password", {
+										required: "La contraseña es requerida."
+									})}
 								/>
+								{errors.password && <p className="required-class1">{errors.password.message}</p>}
+							</div>
+							<div className="m-3">
+								<label className="form-label text-white">Confirmar contraseña</label>
+								<input
+									type="password"
+									className="form-control"
+									id="passwordConfirmation"
+									placeholder="Confirme su contraseña..."
+									{...register("passwordConfirmation", {
+										required: "La confirmación de la contraseña es requerida.",
+										validate: {
+											matchesPreviousPassword: value => {
+												const { password } = getValues();
+												return password === value || "Las contraseñas no coinciden.";
+											}
+										}
+									})}
+								/>
+								{errors.passwordConfirmation && (
+									<p className="required-class1">{errors.passwordConfirmation.message}</p>
+								)}
 							</div>
 							<div className="m-3">
 								<button type="submit" className="btn btn-danger btn-block">

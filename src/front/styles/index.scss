@@ -165,18 +165,29 @@ body{
 .fa-syringe:before,
 .fa-qrcode:before,
 .fa-trash:before {
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .button-table-class {
-    height: 40px;
-    width: 45px;
+    height: 35px;
+    width: 40px;
 }
 
 .MuiInputBase-root {
     background: white;
     width: 800px;
     height: 45px;
+}
+
+.menu-drawer-class{
+    color: white;
+    font-size: 60px !important;
+    margin: 10px;
+}
+
+.new-icon-person-class{
+    color: rgb(76,175,80);
+    font-size: 70px !important;
 }
 
 // FIN - Clases tablas de mantenimiento y detalle

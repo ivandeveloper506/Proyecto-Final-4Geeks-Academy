@@ -1,12 +1,12 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-tan-woodpecker-jyl1s6rt.ws-us04.gitpod.io/api/";
+const baseURLApi = "https://3001-apricot-chinchilla-hgoylykf.ws-us07.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3000-tan-woodpecker-jyl1s6rt.ws-us04.gitpod.io/person/infoqr/",
+			URLCodeQR: "https://3000-apricot-chinchilla-hgoylykf.ws-us07.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			PersonInfoQR: [],
 			infoAPIExterna: [],
@@ -21,7 +21,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userPasswordValidate: false,
 			userEmailPasswordReset: "",
 			activeOption: "",
-			infoQRActive: false
+			infoQRActive: false,
+			personIDSelected: 0,
+			personQRGenerate: []
 		},
 		actions: {
 			login: async (email, password) => {
@@ -53,11 +55,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// Se obtienen los datos del usuario conectado.
 						getActions().getProfileUser(data.user_id);
 
+						getActions().getPerson(data.user_id);
+
 						// Se configuran el false las variables de recuperación de contraseña
 						getActions().userPasswordReset(false);
 						getActions().userPasswordValidate(false);
 
 						// Se configura la opción del home
+						// getActions().activeOption("/dashboard/person");
 						getActions().activeOption("/dashboard/person");
 					})
 					.catch(error => {
@@ -122,6 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => {
+
 						if (response.status === 200) {
 							// ShowAlert(
 							// 	"top-end",
@@ -146,9 +152,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						getActions().userEmailPasswordReset(userBody.email);
 
 						getActions().activeOption("/recover");
-
-						console.log("*** forgot password ***");
-						console.log(data.results);
 					})
 					.catch(error => {
 						alert("DANGER[error] - Ha ocurrido un error al tratar de recuperar la contraseña.");
@@ -174,7 +177,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => {
 						if (response.status === 200) {
-							ShowAlert("top-end", "success", "", "¡Contraseña actualizada!", false, true, 2000);
+							ShowAlert(
+								"top-end",
+								"success",
+								"",
+								"¡La contraseña ha sido actualizada exitosamente!",
+								false,
+								true,
+								2000
+							);
+
+							getActions().activeOption("/login");
 
 							return response.json();
 						} else {
@@ -290,9 +303,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.then(data => {
-						console.log("*** getPersonMedicine [then(data] ***");
-						console.log(data);
-
 						setStore({ personMedicine: data });
 					})
 					.catch(error => {
@@ -671,16 +681,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => {
-						if (response.status === 201) {
-							ShowAlert(
-								"top-end",
-								"success",
-								"",
-								"¡El Código QR fue generado exitosamente!",
-								false,
-								true,
-								2000
-							);
+						// if (response.status === 201) {
+						// 	ShowAlert(
+						// 		"top-end",
+						// 		"success",
+						// 		"",
+						// 		"¡El Código QR fue generado exitosamente!",
+						// 		false,
+						// 		true,
+						// 		2000
+						// 	);
 
 							return response.json();
 						} else {
@@ -727,6 +737,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			infoQRActive: active => {
 				setStore({ infoQRActive: active });
 			},
+			personIDSelected: id => {
+				setStore({ personIDSelected: id });
+			},
+			personQRGenerate: person => {
+				setStore({ personQRGenerate: person });
+			},
 			logout: () => {
 				localStorage.setItem("x-access-token", null);
 
@@ -750,9 +766,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(data => {
 						setStore({ infoAPIExterna: data.resultados });
-
-						console.log("*** getAPIExterna ***");
-						console.log(data.resultados);
 					})
 					.catch(error => {
 						alert("Error con API Externa");

@@ -64,11 +64,8 @@ export default function PersonQRGenerate() {
 							avatar={<Avatar aria-label="recipe" className={classes.avatar}></Avatar>}
 							title={store.personQRGenerate.full_name}
 						/>
-						<div className="container">
-							<div className="row">
-								<CodeQRPrint />
-							</div>
-						</div>
+
+						<CodeQRPrint />
 
 						<CardContent>
 							<Typography variant="body2" color="textSecondary" component="p">

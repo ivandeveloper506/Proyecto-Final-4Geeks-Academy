@@ -53,9 +53,9 @@ class ComponentToPrint extends React.Component {
 		return (
 			<div className="container qrprint-class">
 				<div className="row">
-					<div className="col">
+					<div className="col mt-2">
 						<QRCode
-							className="col qr-info-cardL-class m-2"
+							className="col qr-info-cardL-class"
 							value={QRCodePerson.url}
 							size="150"
 							ecLevel="H"

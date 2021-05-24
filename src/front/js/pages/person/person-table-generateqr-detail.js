@@ -173,41 +173,50 @@ export default function PersonQRGenerate() {
 	};
 
 	return (
-		<Card className={classes.root}>
-			<CardHeader
-				avatar={<Avatar aria-label="recipe" className={classes.avatar}></Avatar>}
-				// action={
-				// 	<IconButton aria-label="settings">
-				// 		<MoreVertIcon />
-				// 	</IconButton>
-				// }
-				title={store.personQRGenerate.full_name}
-				subheader="ESCANEA EL CÓDIGO QR"
-			/>
+		<div className="container d-flex justify-content-center">
+			<div className="row">
+				<div className="col">
+					<Card className={classes.root}>
+						<CardHeader
+							avatar={<Avatar aria-label="recipe" className={classes.avatar}></Avatar>}
+							// action={
+							// 	<IconButton aria-label="settings">
+							// 		<MoreVertIcon />
+							// 	</IconButton>
+							// }
+							title={store.personQRGenerate.full_name}
+							subheader="ESCANEA EL CÓDIGO QR"
+						/>
 
-			<QRCode
-				className="col qr-info-cardL-class m-2"
-				value={store.QRCodePerson.url}
-				size="150"
-				ecLevel="H"
-				qrStyle="square"
-				fgColor="#003E7E"
-				bgColor="#C4F1FE"
-				enableCORS="true"
-			/>
-			<CardContent>
-				<Typography variant="body2" color="textSecondary" component="p">
-					El Código QR contiene la información que sea desea compartir de la persona.
-				</Typography>
-			</CardContent>
-			<CardActions disableSpacing>
-				<IconButton aria-label="Print QRCode">
-					<PrintIcon />
-				</IconButton>
-				<IconButton aria-label="Share QRCode">
-					<ShareIcon />
-				</IconButton>
-			</CardActions>
-		</Card>
+						<div className="col">
+							<QRCode
+								className="col qr-info-cardL-class m-2"
+								value={store.QRCodePerson.url}
+								size="150"
+								ecLevel="H"
+								qrStyle="square"
+								fgColor="#003E7E"
+								bgColor="#C4F1FE"
+								enableCORS="true"
+							/>
+						</div>
+
+						<CardContent>
+							<Typography variant="body2" color="textSecondary" component="p">
+								El Código QR contiene la información que sea desea compartir de la persona.
+							</Typography>
+						</CardContent>
+						<CardActions disableSpacing>
+							<IconButton aria-label="Print QRCode">
+								<PrintIcon />
+							</IconButton>
+							<IconButton aria-label="Share QRCode">
+								<ShareIcon />
+							</IconButton>
+						</CardActions>
+					</Card>
+				</div>
+			</div>
+		</div>
 	);
 }

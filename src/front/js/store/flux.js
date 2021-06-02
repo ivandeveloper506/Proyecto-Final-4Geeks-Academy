@@ -1,12 +1,12 @@
 import { ShowAlert } from "../component/alert";
 import Swal from "sweetalert2";
 
-const baseURLApi = "https://3001-apricot-chinchilla-hgoylykf.ws-us07.gitpod.io/api/";
+const baseURLApi = "https://3001-beige-rat-vr1fj8us.ws-us07.gitpod.io/api/";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			URLCodeQR: "https://3000-apricot-chinchilla-hgoylykf.ws-us07.gitpod.io/person/infoqr/",
+			URLCodeQR: "https://3000-beige-rat-vr1fj8us.ws-us07.gitpod.io/person/infoqr/",
 			QRCodePerson: [],
 			PersonInfoQR: [],
 			infoAPIExterna: [],
@@ -127,7 +127,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => {
-
 						if (response.status === 200) {
 							// ShowAlert(
 							// 	"top-end",
@@ -681,16 +680,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(response => {
-						// if (response.status === 201) {
-						// 	ShowAlert(
-						// 		"top-end",
-						// 		"success",
-						// 		"",
-						// 		"¡El Código QR fue generado exitosamente!",
-						// 		false,
-						// 		true,
-						// 		2000
-						// 	);
+						if (response.status === 201) {
+							// ShowAlert(
+							// 	"top-end",
+							// 	"success",
+							// 	"",
+							// 	"¡El Código QR fue generado exitosamente!",
+							// 	false,
+							// 	true,
+							// 	2000
+							// );
 
 							return response.json();
 						} else {
